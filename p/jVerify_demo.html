@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="../lib/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../plugin/jVerify.js"></script>
+        <style>
+            body{font:12px/1.6 Arial,Helvetica,sans-serif;}
+            #wrapper{width:760px;border:1px solid #888;float:left;position:absolute;left:50%;margin-left:-380px;padding:5px 20px;}
+            .text_list{width:450px;margin-top:5px;float:left;}
+            .text_list span{
+                color: #6D6D6D; 
+                display: block; 
+                float: left; 
+                height: 30px; 
+                line-height: 30px; 
+                text-align: right; 
+                width: 65px;
+                clear:left;
+            }
+            .text_list input{
+                width:200px;
+                border: 1px solid #C9CBD0;
+                border-radius: 3px 3px 3px 3px;
+                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1) inset;
+                color: #6D6D6D;
+                float: left;
+                height: 30px;
+                line-height: 30px;
+                margin-right: 10px;
+                padding: 0 5px;
+            }
+            .text_list em{
+                display: inline-block;
+                font-style: normal;
+                line-height: 30px;
+                float: left;
+                position: relative;
+                width: auto;
+            }
+            .text_list button{
+                margin-left: 65px;
+                padding: 3px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="text_list">
+                <span>用户名：</span>
+                <input type="text" name="userid" id="userid" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
+                <span>邮箱：</span>
+                <input type="text" name="email" id="email" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
+                <span>密码：</span>
+                <input type="password" name="psw" id="psw" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
+                <span>手机号码：</span>
+                <input type="text" name="mobile" id="mobile" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
+                <span>年龄：</span>
+                <input type="text" name="age" id="age" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
+                <button id="submit">提交</button>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $(function(){
+            var userid = $('#userid').jVerify({
+                type : 'string'
+                ,emptyMsg : '不能为空'
+                ,emptyOk : false
+                ,tipMsg : '输入用户名'
+                ,warnMsg : '长度不符合'
+                ,maxLength: 16
+                ,vEvent : 'keyup'
+                ,warnElement : $('#userid').next()
+                ,tipMsgInit : false
+            });
+            var email = $('#email').jVerify({
+                type : 'email'
+                ,emptyMsg : '不能为空'
+                ,emptyOk : false
+                ,tipMsg : '输入邮箱'
+                ,warnMsg : '格式错误'
+                ,vEvent : 'keyup'
+                ,warnElement : $('#email').next()
+                ,tipMsgInit : false
+            });
+            var psw = $('#psw').jVerify({
+                type : 'string'
+                ,emptyMsg : '不能为空'
+                ,emptyOk : false
+                ,tipMsg : '输入密码，8-16个字符'
+                ,warnMsg : '长度不符合'
+                ,minLength: 8
+                ,maxLength: 16
+                ,vEvent : 'keyup'
+                ,warnElement : $('#psw').next()
+                ,tipMsgInit : false
+            });
+            var mobile = $('#mobile').jVerify({
+                type : 'mobile'
+                ,emptyMsg : '不能为空'
+                ,emptyOk : true
+                ,tipMsg : '输入手机号，可不填'
+                ,warnMsg : '格式错误'
+                ,vEvent : 'keyup'
+                ,warnElement : $('#mobile').next()
+                ,tipMsgInit : true
+            });
+            var age = $('#age').jVerify({
+                type : 'int'
+                ,emptyOk : true
+                ,tipMsg : '输入年龄，可不填'
+                ,warnMsg : '格式错误'
+                ,minValue : 1
+                ,maxValue : 150
+                ,vEvent : 'keyup'
+                ,warnElement : $('#age').next()
+                ,tipMsgInit : true
+            });
+            bindEvent();
+            function bindEvent(){
+                $('#submit').bind('click', function(){
+                    if(userid.data('status') == 'false' || email.data('status') == 'false' || psw.data('status') == 'false' || mobile.data('status') == 'false' || age.data('status') == 'false' ){
+                        userid.showMsg();
+                        email.showMsg();
+                        psw.showMsg();
+                        mobile.showMsg();
+                        age.showMsg();
+                    }else{
+                        alert('校验通过，可提交');
+                    }
+                });
+            }
+        });
+    </script>
+</html>
