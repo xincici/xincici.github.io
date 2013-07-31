@@ -30,6 +30,7 @@
             ,tipMsg : opts.tipMsg ? opts.tipMsg : ""
             ,emptyMsg : opts.emptyMsg ? opts.emptyMsg : ""
             ,warnMsg : opts.warnMsg ? opts.warnMsg : ""
+            ,warnMsg1 : opts.warnMsg1 ? opts.warnMsg1 : ""
             ,maxValue : opts.maxValue
             ,minValue : opts.minValue
             ,maxLength : opts.maxLength
@@ -90,9 +91,9 @@
                     break;
                 case 4:
                     if( _opt.warnElement ){
-                        _opt.warnElement.html( _opt.tipMsg ).css('color', '#999');
+                        _opt.warnElement.html( _opt.warnMsg1 ).css('color', '#f00');
                     }else{
-                        alert( _opt.tipMsg );
+                        alert( _opt.warnMsg1 );
                     }
                     self.data('status', 'false');
                     break;
@@ -132,9 +133,8 @@
                 case 'confirmpsw':
                     if(_opt.minLength && str.length < _opt.minLength) return 1;
                     if(_opt.maxLength && str.length > _opt.maxLength) return 2;
-                    if(_opt.relationElement && _opt.relationElement.val() !== '' && _opt.relationElement.val() !== str) return 3;
-                    if(_opt.relationElement && _opt.relationElement.val() === '') return 4;
-                    if(_opt.relationElement && _opt.relationElement.val() === str) return 100;
+                    if(_opt.relationElement && (_opt.relationElement.val() === '' || _opt.relationElement.val() === str)) return 100;
+                    if(_opt.relationElement && _opt.relationElement.val() !== '' && _opt.relationElement.val() !== str) return 4;
                     break;
             }
         }
