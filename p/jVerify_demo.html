@@ -4,7 +4,7 @@
         <title>test</title>
         <meta charset="utf-8" />
         <script type="text/javascript" src="../lib/jquery-1.7.2.js"></script>
-        <script type="text/javascript" src="../plugin/jVerify.js"></script>
+        <script type="text/javascript" src="../plugin/jVerify_new.js"></script>
         <style>
             body{font:12px/1.6 Arial,Helvetica,sans-serif;}
             #wrapper{width:760px;border:1px solid #888;float:left;position:absolute;left:50%;margin-left:-380px;padding:5px 20px;}
@@ -63,6 +63,11 @@
                 <em></em>
             </div>
             <div class="text_list">
+                <span>确认密码：</span>
+                <input type="password" name="psw1" id="psw1" value="">
+                <em></em>
+            </div>
+            <div class="text_list">
                 <span>手机号码：</span>
                 <input type="text" name="mobile" id="mobile" value="">
                 <em></em>
@@ -111,6 +116,20 @@
                 ,vEvent : 'keyup'
                 ,warnElement : $('#psw').next()
                 ,tipMsgInit : false
+                ,relationElement : $('#psw1')
+            });
+            var psw1 = $('#psw1').jVerify({
+                type : 'string'
+                ,emptyMsg : '不能为空'
+                ,emptyOk : false
+                ,tipMsg : '请输入确认密码'
+                ,warnMsg : '两次输入不一致'
+                ,minLength: 8
+                ,maxLength: 16
+                ,vEvent : 'keyup'
+                ,warnElement : $('#psw1').next()
+                ,tipMsgInit : false
+                ,relationElement : $('#psw')
             });
             var mobile = $('#mobile').jVerify({
                 type : 'mobile'
@@ -136,7 +155,7 @@
             bindEvent();
             function bindEvent(){
                 $('#submit').bind('click', function(){
-                    if(userid.data('status') == 'false' || email.data('status') == 'false' || psw.data('status') == 'false' || mobile.data('status') == 'false' || age.data('status') == 'false' ){
+                    if(userid.data('status') == 'false' || email.data('status') == 'false' || psw.data('status') == 'false' || psw1.data('status') == 'false' || mobile.data('status') == 'false' || age.data('status') == 'false' ){
                         userid.showMsg();
                         email.showMsg();
                         psw.showMsg();
