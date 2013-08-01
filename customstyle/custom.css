@@ -1,5 +1,7 @@
 .content{
+    height:70%;
     min-height:500px;
+    border-bottom: 1px dashed rgb(181, 232, 83);
 }
 footer{
     text-align:center;
