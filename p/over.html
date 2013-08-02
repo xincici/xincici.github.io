@@ -6,7 +6,8 @@
         <script type="text/javascript" src="../lib/jquery-1.7.2.js"></script>
         <style type="text/css">
             .wrapper{width:760px;min-height:400px;margin:0 auto;text-align:center;border:1px solid #888;border-radius:4px;box-shadow:3px 3px 5px #ACACAC}
-            .block{width:70px;height:70px;float:left;margin:15px;cursor:pointer;}
+            .block{width:70px;height:70px;float:left;margin:15px;cursor:pointer;transition:width 0.3s,height 0.3s,margin 0.3s;}
+            .block:hover{width:92px; height:92px; margin:4px; transition:width 0.3s,height 0.3s,margin 0.3s;}
             .c1{background-color:#002a4a;}
             .c2{background-color:#17607d;}
             .c3{background-color:#fff1ce;}
@@ -31,7 +32,9 @@
         </div>
         <script type="text/javascript">
             $(function(){
-                bindEvent();
+                if($.browser.msie && $.browser.version < 9){
+                    bindEvent();
+                }
                 function bindEvent(){
                     $('.wrapper .block').on('mouseover', function(e){
                         $(this).animate({
