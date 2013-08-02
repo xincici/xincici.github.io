@@ -7,3 +7,6 @@ footer{
     text-align:center;
     border-top: 1px dashed rgb(181, 232, 83);
 }
+a[href^="http://tongji.baidu.com"]{
+    display:none;
+}
