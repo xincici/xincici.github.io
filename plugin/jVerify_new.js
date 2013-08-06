@@ -39,6 +39,7 @@
             ,warnElement : opts.warnElement
             ,tipMsgInit : opts.tipMsgInit ? true : false
             ,relationElement : opts.relationElement
+            ,callback : opts.callback ? opts.callback : null
         };
         this.on('focus', function(){
         	self.attr("value",self.val().trim());
@@ -106,6 +107,10 @@
                     self.data('status', 'true');
                     break;
             }
+            if( self.data('status') == 'true' && e.type === 'blur' && typeof _opt.callback === 'function' ) {
+                _opt.warnElement.html('<img style="vertical-align:middle;" src="../images/loading.gif" />');
+                _opt.callback();
+            }
         }
         function _check(type, str){
             if(str === undefined || str.length === 0) return 0;
@@ -145,6 +150,7 @@
             self._val = $.trim( self.val() );
             var _checkVal = self.getResult();
             if( _checkVal === 100 || ( _checkVal === 0 && _opt.emptyOk ) ){
+                _opt.warnElement.html( '√' ).css('color', '#0c0');
                 self.data('status', 'true');
             }else if( _checkVal === 0 && !_opt.emptyOk ){
                 self.data('status', 'false');

@@ -94,6 +94,11 @@
                 ,vEvent : 'keyup'
                 ,warnElement : $('#userid').next()
                 ,tipMsgInit : false
+                ,callback : function(){
+                    setTimeout(function(){
+                        $('#userid').next().html('可以使用！');
+                    }, 3*1000);
+                }
             });
             var email = $('#email').jVerify({
                 type : 'email'
