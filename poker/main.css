@@ -112,7 +112,7 @@ body{
   float: left;
   font-size: 2em;
   height: 69px;
-  width: 320px;
+  width: 324px;
 }
 .judge-area .big,
 .judge-area .small{
@@ -120,7 +120,7 @@ body{
   height: 50px;
   line-height: 50px;
   margin-left: 10px;
-  margin-top: 5px;
+  margin-top: 4px;
   width: 60px;
 }
 .judge-area .result,
@@ -138,6 +138,6 @@ body{
 .control-area .get{
   height: 50px;
   line-height: 50px;
-  margin: 5px;
+  margin: 4px;
   width: 50px;
 }
