@@ -19,8 +19,14 @@ $(function(){
   };
   function _init(){
     var cookieValue = cookieObj.getCookie('sValues');
-    var _totalMoney = cookieValue ? cookieValue.split('|')[0] : 1000;
-    var _perMoney = cookieValue ? cookieValue.split('|')[1] : 20;
+    var _totalMoney, _perMoney;
+    if(/^\d+\|\d+$/.test(cookieValue)){
+      _totalMoney = cookieValue.split('|')[0];
+      _perMoney = cookieValue.split('|')[1];
+    }else{
+        _totalMoney = 1000;
+        _perMoney = 20;
+    }
     $('.total-num').html( _totalMoney );
     $('.down-num').html( _perMoney );
   }

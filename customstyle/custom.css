@@ -12,6 +12,11 @@ header h1{
     border-radius:10px;
     margin-bottom:10px;    
 }
+.note{
+    border-left:6px solid #e11;
+    background-color:#333;
+    padding:6px 8px 6px 10px;
+}
 footer{
     padding: 30px 0;
     text-align:center;
