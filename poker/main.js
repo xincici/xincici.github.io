@@ -1,4 +1,33 @@
-(function(){
+$(function(){
+  window['cookieObj'] = {
+    setCookie: function(name,value){
+      var Days = 365; //此 cookie 将被保存 1 天
+      var exp = new Date();
+      exp.setTime(exp.getTime() + Days*24*60*60*1000);
+      document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    },
+    getCookie: function(name){
+      var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+      if(arr != null) return unescape(arr[2]); return null;
+    },
+    delCookie: function(name){
+      var exp = new Date();
+      exp.setTime(exp.getTime() - 1); 
+      var cval = this.getCookie(name);
+      if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+    } 
+  };
+  function _init(){
+    var cookieValue = cookieObj.getCookie('sValues');
+    var _totalMoney = cookieValue ? cookieValue.split('|')[0] : 1000;
+    var _perMoney = cookieValue ? cookieValue.split('|')[1] : 20;
+    $('.total-num').html( _totalMoney );
+    $('.down-num').html( _perMoney );
+  }
+  function rc(val){
+    cookieObj.setCookie('sValues', val);
+  }
+  _init();
   var arr = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13',
         'r1','r2','r3','r4','r5','r6','r7','r8','r9','r10','r11','r12','r13',
         'm1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13',
@@ -35,6 +64,7 @@
             if(fnum < 1){
               var now = parseInt($('#main .money-area .total b').html()) - gum;
               $('#main .money-area .total b').html(now);
+              rc(now + '|' + gum);
               el.html('继续');
             }
             fnum ++;
@@ -64,28 +94,28 @@
                       _win = setInterval(function(){
                         switch (_gResult){
                           case 250:
-                            $('#list .tonghuashun').toggleClass('hide');
+                            $('#list .tonghuashun').toggleClass('hidden');
                             break;
                           case 60:
-                            $('#list .sitiao').toggleClass('hide');
+                            $('#list .sitiao').toggleClass('hidden');
                             break;
                           case 20:
-                            $('#list .hulu').toggleClass('hide');
+                            $('#list .hulu').toggleClass('hidden');
                             break;
                           case 10:
-                            $('#list .shunzi').toggleClass('hide');
+                            $('#list .shunzi').toggleClass('hidden');
                             break;
                           case 7:
-                            $('#list .tonghua').toggleClass('hide');
+                            $('#list .tonghua').toggleClass('hidden');
                             break;
                           case 5:
-                            $('#list .santiao').toggleClass('hide');
+                            $('#list .santiao').toggleClass('hidden');
                             break;
                           case 2:
-                            $('#list .liangdui').toggleClass('hide');
+                            $('#list .liangdui').toggleClass('hidden');
                             break;
                           case 1:
-                            $('#list .yidui').toggleClass('hide');
+                            $('#list .yidui').toggleClass('hidden');
                             break;
                         }
                       },400);
@@ -131,14 +161,15 @@
         var current = parseInt($('#main .money-area .total').find('b').html());
         var win = parseInt($('#main .money-area .money').find('b').html());
         $('#main .money-area .total').find('b').html(current + win);
+        rc((current + win) + '|' + parseInt($('#main .money-area .down').find('b').html()));
         $('#main .money-area .money').find('b').html('0');
         clearInterval(sti);  
         guess = false;
         game = false;
         fnum = 0;
         clearInterval(_win);
-        if($('#list .hide').length != 0){
-          $('#list .hide').removeClass('hide');
+        if($('#list .hidden').length != 0){
+          $('#list .hidden').removeClass('hidden');
         }
         $('#main .poker-area .win-result').fadeOut(50, function(){
           $('#main .poker-area .back').fadeIn(200);
@@ -391,8 +422,8 @@
     guess = false;
     game = false;
     clearInterval(_win);
-    if($('#list .hide').length != 0){
-      $('#list .hide').removeClass('hide');
+    if($('#list .hidden').length != 0){
+      $('#list .hidden').removeClass('hidden');
     }
     showBack();
     fnum = 0;
@@ -421,4 +452,4 @@
     }
     return out;
   }
-})();
+});

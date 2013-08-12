@@ -21,8 +21,8 @@ body{
   float:left;
   border-radius: 5px 0 0 5px;
 }
-#list .hide{
-  color: #eee;
+#list .hidden{
+  color: #ffe;
 }
 #list .tonghuashun,
 #list .sitiao,
@@ -112,7 +112,7 @@ body{
   float: left;
   font-size: 2em;
   height: 69px;
-  width: 324px;
+  width: 320px;
 }
 .judge-area .big,
 .judge-area .small{
