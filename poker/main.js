@@ -27,6 +27,11 @@ $(function(){
         _totalMoney = 1000;
         _perMoney = 20;
     }
+    if( _totalMoney <= 100){
+        alert('资产只剩'+ _totalMoney +'了，快破产了啊！重新来过吧！');
+        _totalMoney = 1000;
+        _perMoney = 20;
+    }
     $('.total-num').html( _totalMoney );
     $('.down-num').html( _perMoney );
   }
@@ -69,6 +74,10 @@ $(function(){
           if(!sback){
             if(fnum < 1){
               var now = parseInt($('#main .money-area .total b').html()) - gum;
+              if(now < 0){
+                alert('破产了啊！重新来过吧！');
+                now = 1000 - gum;
+              }
               $('#main .money-area .total b').html(now);
               rc(now + '|' + gum);
               el.html('继续');
