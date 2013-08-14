@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>看你运气</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../lib/sea.js"></script>
+    <script type="text/javascript" src="../lib/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+        seajs.use('../javascripts/game-main.js');
+    </script>
+  <style>
+    .poker{border:1px solid red;}
+  </style>
+  </head>
+  <body>
+    <div id="pokers">
+      <span>你随机得到的7张牌为</span>
+      <br />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+    </div>
+
+    <div id="results">
+      <span>其中最大的组合为 </span>
+      <span id="type"></span>
+      <br />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+      <img class="poker" src="../poker/images/back.png" />
+    </div>
+    <div>
+        <button onclick="window.location.reload()">重来</button>
+    </div>
+  </body>
+</html>
