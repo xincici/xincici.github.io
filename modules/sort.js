@@ -102,7 +102,7 @@ getMaxCards.prototype.lastResult = function(arr){
       obj[getNum(arr[i])].push( arr[i] );
     }
   }
-  for(key in obj){
+  for(var key in obj){
     if ( key == '1'){
       //1比较特殊，记录下来
       tmp = obj[key];
@@ -269,7 +269,7 @@ function getMostSameColor(arr){
       tmp[color].push( arr[i] );
     }
   }
-  for(c in tmp){
+  for(var c in tmp){
     if(tmp[c].length >= 5){
       _arr = tmp[c];
     }
