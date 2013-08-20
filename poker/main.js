@@ -19,7 +19,6 @@ $(function(){
   };
   preload();
   function preload(){
-    debugger
     var i = 0;
     var sti = setInterval(function(){
       if( i >= 52 ){
