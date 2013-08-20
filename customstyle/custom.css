@@ -24,8 +24,9 @@ header h1{
 }
 .note{
     border-left:6px solid #e11;
-    background-color:#333;
+    background-color:#FFF1CE;
     padding:6px 8px 6px 10px;
+    color:#aaa;
 }
 footer{
     height:50px;
