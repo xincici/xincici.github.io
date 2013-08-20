@@ -17,6 +17,20 @@ $(function(){
       if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
     } 
   };
+  preload();
+  function preload(){
+    debugger
+    var i = 0;
+    var sti = setInterval(function(){
+      if( i >= 52 ){
+        clearInterval(sti);
+        return;
+      }
+      var img = new Image();
+      img.src = 'images/' + arr[i] + '.png';
+      i++;
+    },100)
+  }
   function _init(){
     var cookieValue = cookieObj.getCookie('sValues');
     var _totalMoney, _perMoney;
