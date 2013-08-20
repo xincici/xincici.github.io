@@ -16,6 +16,7 @@ function getMaxCards(){
   this._arr = [];
   this.r_str = "";
   this.r_arr = [];
+  this.totalCards = arr;
   this.init();
 }
 getMaxCards.prototype.end = function(){
