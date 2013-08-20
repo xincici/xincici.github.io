@@ -33,10 +33,25 @@
         .link:hover{background-color:#FF9311;text-indent:15px;}
         .odd:hover{background-color:#d64700}
     </style>
+    <script type="text/javascript">
+        function changeSkin(){
+            var obj = document.getElementById('skin');
+            var nowSkin = obj.getAttribute('class');
+            if(nowSkin == 'skin1'){
+                document.body.style.backgroundColor = "#002A4A";
+                obj.setAttribute('class', 'skin2');
+                obj.style.backgroundColor = "#17607D";
+            }else{
+                document.body.style.backgroundColor = "#17607D";
+                obj.setAttribute('class', 'skin1');
+                obj.style.backgroundColor = "#002A4A";
+            }
+        }
+    </script>
   </head>
 
   <body>
-
+    <div id="skin" class="skin1" onclick="changeSkin()"></div>
     <div id="wrapper">
     <header>
       <div class="container">

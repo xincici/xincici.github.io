@@ -1,6 +1,16 @@
 html,body{
     height:100%;
 }
+#skin{
+    background-color: #002A4A;
+    cursor: pointer;
+    height: 20px;
+    margin: 20px 20px 0 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+}
 #wrapper{
     height:auto;
     min-height:100%;
