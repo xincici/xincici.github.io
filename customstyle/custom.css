@@ -23,6 +23,10 @@ header h1{
 }
 #downloads .btn{
     margin-bottom:10px;    
+    background-color: #276617;
+}
+#downloads .btn:hover{
+    background-color: #20A715;
 }
 .content{
     padding-top:30px;
