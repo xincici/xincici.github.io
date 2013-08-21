@@ -55,13 +55,12 @@
             var obj = document.getElementById('skin');
             var nowSkin = obj.getAttribute('class');
             if(nowSkin == 'skin1'){
-                document.body.style.backgroundColor = "#002A4A";
-                obj.setAttribute('class', 'skin2');
-                obj.style.backgroundColor = "#17607D";
-            }else{
+                document.body.style.backgroundImage = 'none';
                 document.body.style.backgroundColor = "#17607D";
+                obj.setAttribute('class', 'skin2');
+            }else{
+                document.body.style.background = 'url("bg.jpg") repeat 0 0 scroll transparent';
                 obj.setAttribute('class', 'skin1');
-                obj.style.backgroundColor = "#002A4A";
             }
         }
     </script>
@@ -90,8 +89,8 @@
         <a href="poker/poker.html" class="btn btn-github">Poker Game</a>
         -->
         <ul class="link_list">
-            <li class="link"><a href="p/jVerify_demo.html">jVerify demo</a></li>
-            <li class="link odd"><a href="p/stopwatch.html">Stop Watch</a></li>
+            <li class="link" onclick="ga('send', 'pageview', {'page': '/jVerify_demo','title': 'jVerify demo'});"><a href="p/jVerify_demo.html">jVerify demo</a></li>
+            <li class="link odd" onclick="_hmt.push(['_trackPageview', '/virtual/stopWatch']);"><a href="p/stopwatch.html">Stop Watch</a></li>
             <li class="link"><a href="p/over.html">mouse effect</a></li>
             <li class="link odd"><a href="p/game.html">Game</a></li>
             <li class="link"><a href="poker/poker.html">Poker Game</a></li>
