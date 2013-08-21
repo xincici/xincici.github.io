@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="customstyle/custom.css" />
 
     <title>some demos by xincici</title>
+    <script type="text/javascript" src="javascripts/domReady.js" charset="utf-8"></script>
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -51,23 +52,37 @@
         .odd:hover{background:url("pic_1.jpg") no-repeat scroll 0 0 transparent;background-color:#d64700;}
     </style>
     <script type="text/javascript">
-        function changeSkin(){
-            var obj = document.getElementById('skin');
-            var nowSkin = obj.getAttribute('class');
-            if(nowSkin == 'skin1'){
-                document.body.style.backgroundImage = 'none';
-                document.body.style.backgroundColor = "#17607D";
-                obj.setAttribute('class', 'skin2');
-            }else{
-                document.body.style.background = 'url("bg.jpg") repeat 0 0 scroll transparent';
-                obj.setAttribute('class', 'skin1');
+        document.ready(function(){
+            bindEvent();
+            preLoad();
+            function changeSkin(){
+                var obj = document.getElementById('skin');
+                var nowSkin = obj.getAttribute('class');
+                if(nowSkin == 'skin1'){
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = "#17607D";
+                    obj.setAttribute('class', 'skin2');
+                }else{
+                    document.body.style.background = 'url("bg.jpg") repeat 0 0 scroll transparent';
+                    obj.setAttribute('class', 'skin1');
+                }
             }
-        }
+            function preLoad(){
+                var arr = ['pic.jpg', 'pic_1.jpg', 'bg.jpg'];
+                for(var i=0,l=arr.length; i<l; i++){
+                    var img = new Image();
+                    img.src = arr[i];
+                }
+            }
+            function bindEvent(){
+                document.getElementById('skin').onclick = changeSkin;
+            }
+        });
     </script>
   </head>
 
   <body>
-    <div id="skin" class="skin1" onclick="changeSkin()"></div>
+    <div id="skin" class="skin1"></div>
     <div id="wrapper">
     <header>
       <div class="container">
