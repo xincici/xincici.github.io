@@ -59,11 +59,12 @@
                 var ele = e.target;
                 if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
                 var iss1 = ele.getAttribute('class').indexOf('s1_mini') >= 0;
+                var iss2 = ele.getAttribute('class').indexOf('s2_mini') >= 0;
                 if( iss1 ){
                     document.body.style.background = 'url("images/bg.jpg") repeat 0 0 scroll transparent';
                     document.getElementsByClassName('s2_mini')[0].setAttribute('class', 's2_mini');
                     document.getElementsByClassName('s1_mini')[0].setAttribute('class', 's1_mini current');
-                }else{
+                }else if(iss2){
                     document.body.style.backgroundImage = 'none';
                     document.body.style.backgroundColor = "#17607D";
                     document.getElementsByClassName('s1_mini')[0].setAttribute('class', 's1_mini');
