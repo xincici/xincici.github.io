@@ -48,8 +48,8 @@
         .link a{display:block;text-decoration:none;text-align:center;float:left;width:150px;height:80px;line-height:80px;color:#fff;}
         .odd{background-color:#FF9311;}
         /*.link:hover{background-color:#FF9311;text-indent:15px;}*/
-        .link:hover{background:url("pic.jpg") no-repeat scroll 0 0 transparent;background-color:#FF9311;text-indent:15px;animation:myfirst 1s;-webkit-animation:myfirst 1s;-o-animation:myfirst 1s;}
-        .odd:hover{background:url("pic_1.jpg") no-repeat scroll 0 0 transparent;background-color:#d64700;}
+        .link:hover{background:url("images/pic.jpg") no-repeat scroll 0 0 transparent;background-color:#FF9311;text-indent:15px;animation:myfirst 1s;-webkit-animation:myfirst 1s;-o-animation:myfirst 1s;}
+        .odd:hover{background:url("images/pic_1.jpg") no-repeat scroll 0 0 transparent;background-color:#d64700;}
     </style>
     <script type="text/javascript">
         document.ready(function(){
@@ -63,12 +63,12 @@
                     document.body.style.backgroundColor = "#17607D";
                     obj.setAttribute('class', 'skin2');
                 }else{
-                    document.body.style.background = 'url("bg.jpg") repeat 0 0 scroll transparent';
+                    document.body.style.background = 'url("images/bg.jpg") repeat 0 0 scroll transparent';
                     obj.setAttribute('class', 'skin1');
                 }
             }
             function preLoad(){
-                var arr = ['pic.jpg', 'pic_1.jpg', 'bg.jpg'];
+                var arr = ['images/pic.jpg', 'images/pic_1.jpg', 'images/bg.jpg'];
                 for(var i=0,l=arr.length; i<l; i++){
                     var img = new Image();
                     img.src = arr[i];
