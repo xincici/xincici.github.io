@@ -55,17 +55,26 @@
         document.ready(function(){
             bindEvent();
             preLoad();
-            function changeSkin(){
-                var obj = document.getElementById('skin');
-                var nowSkin = obj.getAttribute('class');
-                if(nowSkin == 'skin1'){
+            function changeSkin(e){
+                var ele = e.target;
+                if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
+                var iss1 = ele.getAttribute('class').indexOf('s1_mini') >= 0;
+                if( iss1 ){
+                    document.body.style.background = 'url("images/bg.jpg") repeat 0 0 scroll transparent';
+                    document.getElementsByClassName('s2_mini')[0].setAttribute('class', 's2_mini');
+                    document.getElementsByClassName('s1_mini')[0].setAttribute('class', 's1_mini current');
+                }else{
                     document.body.style.backgroundImage = 'none';
                     document.body.style.backgroundColor = "#17607D";
-                    obj.setAttribute('class', 'skin2');
-                }else{
-                    document.body.style.background = 'url("images/bg.jpg") repeat 0 0 scroll transparent';
-                    obj.setAttribute('class', 'skin1');
+                    document.getElementsByClassName('s1_mini')[0].setAttribute('class', 's1_mini');
+                    document.getElementsByClassName('s2_mini')[0].setAttribute('class', 's2_mini current');
                 }
+            }
+            function showBox(){
+                document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box');
+            }
+            function hideBox(){
+                document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box hidden');
             }
             function preLoad(){
                 var arr = ['images/pic.jpg', 'images/pic_1.jpg', 'images/bg.jpg'];
@@ -75,6 +84,12 @@
                 }
             }
             function bindEvent(){
+                if(document.getElmentsByClassName){
+                    document.getElementById('skin').setAttribute('class', 'hidden');
+                    return;
+                }
+                document.getElementById('skin').onmouseover = showBox;
+                document.getElementById('skin').onmouseout = hideBox;
                 document.getElementById('skin').onclick = changeSkin;
             }
         });
@@ -82,7 +97,12 @@
   </head>
 
   <body>
-    <div id="skin" class="skin1"></div>
+    <div id="skin" class="skin1">
+        <ul class="skin_box hidden">
+            <li class="s1_mini current"></li>
+            <li class="s2_mini"></li>
+        </ul>
+    </div>
     <div id="wrapper">
     <header>
       <div class="container">
