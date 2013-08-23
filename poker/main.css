@@ -89,7 +89,7 @@ body{
 .poker-area .back{
   width:59px;
   height:88px;
-  border:1px solid #eee;
+  border:1px solid #e22;
   border-radius:3px 3px 3px 3px;
   background-image:url("images/back.png");
   float:left;
@@ -98,7 +98,7 @@ body{
   cursor:pointer;
 }
 .poker-area .hold{
-  border:1px solid red;
+  border:1px solid #555;
 }
 .poker-area .win-result,
 .poker-area .lose-result{
