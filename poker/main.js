@@ -1,20 +1,20 @@
 $(function(){
   window['cookieObj'] = {
     setCookie: function(name,value){
-      var Days = 365; //此 cookie 将被保存 1 天
+      var Days = 365; //此 cookie 将被保存 365 天
       var exp = new Date();
       exp.setTime(exp.getTime() + Days*24*60*60*1000);
       document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
     },
     getCookie: function(name){
-      var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+      var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
       if(arr != null) return unescape(arr[2]); return null;
     },
     delCookie: function(name){
       var exp = new Date();
       exp.setTime(exp.getTime() - 1); 
       var cval = this.getCookie(name);
-      if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+      if(cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
     } 
   };
   preload();
@@ -47,15 +47,16 @@ $(function(){
     }
     $('.total-num').html( _totalMoney );
     $('.down-num').html( _perMoney );
+    rc(_totalMoney + '|' + _perMoney);
   }
   function rc(val){
     cookieObj.setCookie('sValues', val);
   }
   _init();
   var arr = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13',
-        'r1','r2','r3','r4','r5','r6','r7','r8','r9','r10','r11','r12','r13',
-        'm1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13',
-        'f1','f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','f13'];
+             'r1','r2','r3','r4','r5','r6','r7','r8','r9','r10','r11','r12','r13',
+             'm1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13',
+             'f1','f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','f13'];
   //是否正在游戏
   var game = false;
   //是否正在显示牌背面
