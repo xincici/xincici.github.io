@@ -72,9 +72,11 @@
                 }
             }
             function showBox(){
+                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
                 document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box');
             }
             function hideBox(){
+                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect hidden');
                 document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box hidden');
             }
             function preLoad(){
@@ -99,6 +101,7 @@
 
   <body>
     <div id="skin" class="skin1">
+        <div class="rect hidden"></div>
         <ul class="skin_box hidden">
             <li class="s1_mini current"></li>
             <li class="s2_mini"></li>
