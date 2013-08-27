@@ -113,12 +113,14 @@
             function showBox(){
                 //document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
                 //document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box');
-                document.getElementsByClassName('skin_slide')[0].setAttribute('class', 'skin_slide shown');
+                document.getElementsByClassName('skin_slide')[0].setAttribute('class', 'skin_slide ulshown');
+                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect rectshown');
             }
             function hideBox(){
                 //document.getElementsByClassName('rect')[0].setAttribute('class', 'rect hidden');
                 //document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box hidden');
                 document.getElementsByClassName('skin_slide')[0].setAttribute('class', 'skin_slide');
+                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
             }
             function preLoad(){
                 var arr = ['images/pic.jpg', 'images/pic_1.jpg', 'images/bg.jpg'];
@@ -141,8 +143,8 @@
     </script>
     <style>
         .skin_slide:before,.skin_slide li:before{content:"";}
-        .skin_slide{list-style:none;width:150px;position:absolute;right:-170px;top:10px;padding:0;background-color:#aaa;transition:right 0.5s ease 0s;}
-        .shown{right:-40px;transition:right 0.5s ease 0s;}
+        .skin_slide{list-style:none;width:150px;position:absolute;right:-170px;top:24px;padding:0;background-color:#aaa;transition:right 0.5s ease 0s;}
+        .ulshown{right:-40px;transition:right 0.5s ease 0s;}
         .skin_slide li{list-style:none;width:144px;height:50px;margin:3px auto;border:1px solid none;border-radius:3px;}
         .color0{background:url("images/bg.jpg") no-repeat 0 0 scroll transparent;}
         .color1{background-color:#9d2932;}
@@ -166,6 +168,7 @@
             <li class="s2_mini"></li>
         </ul>
         -->
+        <div class="rect"></div>
         <ul class="skin_slide">
             <li class="color0 current"></li>
             <li class="color1" bcolor="#9d2932"></li>

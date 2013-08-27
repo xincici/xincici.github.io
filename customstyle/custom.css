@@ -20,13 +20,18 @@ body{
     display:none;
 }
 .rect{
-    border-bottom: 10px solid #336633;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
+    border-bottom: 10px solid #aaa;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
     position: absolute;
-    right: 5px;
+    right: -135px;
     top: 30px;
     width: 0;
+    transition:right 0.5s ease 0s;
+}
+.rectshown{
+    right:-5px;
+    transition:right 0.5s ease 0s;
 }
 .skin_box{
     background-color: #336633;
