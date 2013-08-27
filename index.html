@@ -71,13 +71,54 @@
                     document.getElementsByClassName('s2_mini')[0].setAttribute('class', 's2_mini current');
                 }
             }
+            function toggleSkin(e){
+                var ele = e.target;
+                if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
+                var _parentEle = document.getElementsByClassName('skin_slide');
+                var _currentEle = document.getElementsByClassName('current', _parentEle);
+                rClass(_currentEle[0], 'current');
+                aClass(ele, 'current');
+                if( ele.getAttribute('class').indexOf('color0') >= 0 ){
+                    document.body.style.backgroundImage = 'url("images/bg.jpg")';
+                    return;
+                }
+                var color = ele.getAttribute('bcolor');
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = color;
+            }
+            function rClass(ele, cname){
+                if(!ele || !cname) return;
+                var oldClassArr = ele.getAttribute('class') ? ele.getAttribute('class').split(' ') : [];
+                for(var i=0,l=oldClassArr.length; i<l; i++){
+                    if(oldClassArr[i] === cname){
+                        oldClassArr.splice(i, 1);
+                        break;
+                    }
+                }
+                ele.setAttribute('class', oldClassArr.join(' '));
+            }
+            function aClass(ele, cname){
+                if(!ele || !cname) return;
+                var oldClassArr = ele.getAttribute('class') ? ele.getAttribute('class').split(' ') : [];
+                for(var i=0,l=oldClassArr.length; i<l; i++){
+                    if(oldClassArr[i] === cname){
+                        break;
+                    }
+                }
+                if( i === l){
+                    oldClassArr.push( cname );
+                }
+                ele.setAttribute('class', oldClassArr.join(' '));
+            }
             function showBox(){
-                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
-                document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box');
+                //document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
+                //document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box');
+                document.getElementsByClassName('skin_slide')[0].setAttribute('class', 'skin_slide shown');
             }
             function hideBox(){
-                document.getElementsByClassName('rect')[0].setAttribute('class', 'rect hidden');
-                document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box hidden');
+                //document.getElementsByClassName('rect')[0].setAttribute('class', 'rect hidden');
+                //document.getElementsByClassName('skin_box')[0].setAttribute('class', 'skin_box hidden');
+                document.getElementsByClassName('skin_slide')[0].setAttribute('class', 'skin_slide');
             }
             function preLoad(){
                 var arr = ['images/pic.jpg', 'images/pic_1.jpg', 'images/bg.jpg'];
@@ -93,18 +134,49 @@
                 }
                 document.getElementById('skin').onmouseover = showBox;
                 document.getElementById('skin').onmouseout = hideBox;
-                document.getElementById('skin').onclick = changeSkin;
+                //document.getElementById('skin').onclick = changeSkin;
+                document.getElementById('skin').onclick = toggleSkin;
             }
         });
     </script>
+    <style>
+        .skin_slide:before,.skin_slide li:before{content:"";}
+        .skin_slide{list-style:none;width:150px;position:absolute;right:-170px;top:10px;padding:0;background-color:#aaa;transition:right 0.5s ease 0s;}
+        .shown{right:-40px;transition:right 0.5s ease 0s;}
+        .skin_slide li{list-style:none;width:144px;height:50px;margin:3px auto;border:1px solid none;border-radius:3px;}
+        .color0{background:url("images/bg.jpg") no-repeat 0 0 scroll transparent;}
+        .color1{background-color:#9d2932;}
+        .color2{background-color:#f0c238;}
+        .color3{background-color:#5b5138;}
+        .color4{background-color:#cca4e3;}
+        .color5{background-color:#ed5736;}
+        .color6{background-color:#d9b610;}
+        .color7{background-color:#a98273;}
+        .color8{background-color:#f8906d;}
+        .color9{background-color:#494264;}
+    </style>
   </head>
 
   <body>
     <div id="skin" class="skin1">
+        <!--
         <div class="rect hidden"></div>
         <ul class="skin_box hidden">
             <li class="s1_mini current"></li>
             <li class="s2_mini"></li>
+        </ul>
+        -->
+        <ul class="skin_slide">
+            <li class="color0 current"></li>
+            <li class="color1" bcolor="#9d2932"></li>
+            <li class="color2" bcolor="#f0c238"></li>
+            <li class="color3" bcolor="#5b5138"></li>
+            <li class="color4" bcolor="#cca4e3"></li>
+            <li class="color5" bcolor="#ed5736"></li>
+            <li class="color6" bcolor="#d9b610"></li>
+            <li class="color7" bcolor="#a98273"></li>
+            <li class="color8" bcolor="#f8906d"></li>
+            <li class="color9" bcolor="#494264"></li>
         </ul>
     </div>
     <div id="wrapper">
@@ -183,7 +255,7 @@ $ git checkout gh-pages
     </div>
     <footer>
       <div class="container">
-      <span>Copyleft 2013 yelin <a href="mailto:linye1987@sina.com">linye1987@sina.com</a> </span> Powered by github
+      <span>Copyleft 2013 yelin <a href="mailto:linye1987@sina.com">linye1987@sina.com</a> </span> Powered by <a href="https://github.com/" target="_blank">github</a>
       <br />
       All source code can be copied and used freely, be my guest!
       </div>
