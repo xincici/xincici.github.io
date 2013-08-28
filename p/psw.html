@@ -14,7 +14,10 @@
         <script type="text/javascript">
             document.getElementById('button').onclick = function(){
                 var psw = document.getElementById('psw').value;
-                if(psw.length === 0) return;
+                if(psw.length < 6){
+                    alert('至少6位');
+                    return;
+                }
                 var re = pswCheck(psw);
                 var ele = document.createElement('div');
                 var restr = '';
@@ -30,13 +33,13 @@
                 document.getElementById('psw').value = "";
             }
             function pswCheck( str ){
-                if( typeof str !== 'string' || str.length === 0 ) return 0; 
-                var s1 = str.length <= 4 ? 5 : (str.length >= 8 ? 25 : 10); 
+                if( typeof str !== 'string' || str.length < 6 ) return 0; 
+                var s1 = str.length <= 7 ? 10 : 20; 
                 var s2 = /.*[a-zA-Z].*/.test(str) ? (/.*[a-z].*/.test(str) && /.*[A-Z].*/.test(str) ? 20 : 10 ) : 0;
-                var s3 = /.*[0-9].*/.test(str) ? (str.match(/[0-9]/g).length >= 3 ? 20 : 10) : 0; 
-                var s4 = /.*[^a-zA-Z0-9].*/.test(str) ? (str.match(/[^a-zA-Z0-9]/g).length > 1 ? 25 : 10) : 0;
+                var s3 = /.*[0-9].*/.test(str) ? 10 : 0; 
+                var s4 = /.*[^a-zA-Z0-9].*/.test(str) ? (str.match(/[^a-zA-Z0-9]/g).length > 1 ? 30 : 20) : 0;
                 var s = s1 + s2 + s3 + s4;
-                s += ( s2 === 20 && s3 && s4 ? 10 : ( s2 && s3 && s4 ? 5 : ( s2 && s3 ? 2 : 0 ) ) ); 
+                s += ( s2 === 20 && s3 && s4 ? 20 : ( s2 && s3 && s4 ? 15 : ( s2 && s3 ? 5 : 0 ) ) ); 
                 return s;
             }
         </script>
