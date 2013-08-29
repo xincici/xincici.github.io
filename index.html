@@ -55,6 +55,7 @@
         document.ready(function(){
             bindEvent();
             preLoad();
+            setTimeout(doConsole, 1000);
             function changeSkin(e){
                 var ele = e.target;
                 if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
@@ -138,6 +139,18 @@
                 document.getElementById('skin').onmouseout = hideBox;
                 //document.getElementById('skin').onclick = changeSkin;
                 document.getElementById('skin').onclick = toggleSkin;
+            }
+            function doConsole(){
+                if( !window.console || typeof window.console.log !== 'function' ) return;
+                var s = [
+                        '#        ###  #     #  #     #  #######  ',  
+                        '#         #   ##    #   #   #   #        ',
+                        '#         #   # #   #    # #    #        ',
+                        '#         #   #  #  #     #     #####    ',
+                        '#         #   #   # #     #     #        ',
+                        '#         #   #    ##     #     #        ',
+                        '#######  ###  #     #     #     #######  ',];
+                console.log('%c' + s.join('\r\n'), 'color:red;');
             }
         });
     </script>
