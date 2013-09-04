@@ -75,6 +75,7 @@
             function toggleSkin(e){
                 var ele = e.target;
                 if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
+                if( ele.getAttribute('class').indexOf('color') < 0 ) return;
                 var _parentEle = document.getElementsByClassName('skin_slide');
                 var _currentEle = document.getElementsByClassName('current', _parentEle);
                 rClass(_currentEle[0], 'current');
