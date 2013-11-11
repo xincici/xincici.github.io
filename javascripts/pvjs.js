@@ -8,22 +8,7 @@
  */
 ;(function(w,d){
     var protocol, pvCookieName, se, referObj;
-    if (document.attachEvent) {
-        (function(){
-            try {
-                document.documentElement.doScroll("left");
-            }
-            catch (e) {
-                setTimeout(arguments.callee, 200);
-                return;
-            }
-            init();
-        })();
-    }
-    // FireFox and Opera
-    else if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', function(){init();} ,false);
-    }
+    init();
     function init(){
         protocol = w.location.protocol;
         //cookie名称，这里统一定义以方便修改
