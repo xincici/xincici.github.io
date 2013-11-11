@@ -6,34 +6,9 @@
  * @usage sohuPv( arguments )
  * @make sohuPv a global object, take care
  */
-;(function (w, d) {
-    var ie = !! (w.attachEvent && !w.opera);
-    var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
-    var fn = [];
-    var run = function () {
-        for (var i = 0; i < fn.length; i++) fn[i]();
-    };
-    d.ready = function (f) {
-        if (!ie && !wk && d.addEventListener) return d.addEventListener('DOMContentLoaded', f, false);
-        if (fn.push(f) > 1) return;
-        if (ie)(function () {
-            try {
-                d.documentElement.doScroll('left');
-                run();
-            } catch (err) {
-                //当页面包含iframe时，IE这里要做特殊处理
-                setTimeout(arguments.callee, 0);
-            }
-        })();
-        else if (wk) var t = setInterval(function () {
-            if (/^(loaded|complete)$/.test(d.readyState)) clearInterval(t), run();
-        }, 0);
-    };
-})(window, document);
-
 ;(function(w,d){
     var protocol, pvCookieName, se, referObj;
-    d.ready( init );
+    init();
     function init(){
         protocol = w.location.protocol;
         //cookie名称，这里统一定义以方便修改

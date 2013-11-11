@@ -24,6 +24,26 @@
     <script type="text/javascript">
         var _hmt = _hmt || [];
     </script>
+    <script type="text/javascript">
+        (function (w, d, o, url, r, a, m) {
+            w['sohuPvObject'] = r;
+            w[r] = w[r] || function () {
+                (w[r].q = w[r].q || []).push(arguments)
+            };
+            a = d.createElement(o);
+            m = d.getElementsByTagName(o)[0];
+            a.type = 'text/javascript';
+            a.async = 'async';
+            a.src = url;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '/javascripts/pvjs.js', 'sohuPv');
+        /*
+         * 发送pv请求，方法参数可协商
+         */
+        sohuPv('_pageview', document.location.href);
+        sohuPv('_customEvent', 'asdf', 'asdff');
+    </script>
+
     <style>
         @keyframes myfirst{
             from {background-position: 150px 0px;}
@@ -297,25 +317,6 @@ $ git checkout gh-pages
     <script type="text/javascript">
       var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
       document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F69cfaba018bce9e84756f6c6c3a27fd0' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-        (function (w, d, o, url, r, a, m) {
-            w['sohuPvObject'] = r;
-            w[r] = w[r] || function () {
-                (w[r].q = w[r].q || []).push(arguments)
-            };
-            a = d.createElement(o);
-            m = d.getElementsByTagName(o)[0];
-            a.type = 'text/javascript';
-            a.async = 'async';
-            a.src = url;
-            m.parentNode.insertBefore(a, m);
-        })(window, document, 'script', '/javascripts/pvjs.js', 'sohuPv');
-        /*
-         * 发送pv请求，方法参数可协商
-         */
-        sohuPv('_pageview', document.location.href);
-        sohuPv('_customEvent', 'asdf', 'asdff');
     </script>
   </body>
 </html>
