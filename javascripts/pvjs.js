@@ -80,7 +80,7 @@
         return d.domain.split('.').slice(-2).join('.');
     }
     function setCookie(name, value, expireHours){
-        var cString = name + "=" + escape(value) + ";path=/;domain=." + getDomain() + ";";
+        var cString = name + "=" + escape(value) + ";path=/;";
         if( !expireHours || expireHours === -1 ){
             d.cookie = cString;
             return;
@@ -94,7 +94,7 @@
         var date = new Date();
         date.setTime( date.getTime() - 100000 );
         var cval = getCookie( name );
-        d.cookie = name + "=" + cval + ";expires=" + date.toGMTString() + ";path=/;domain=." + getDomain() + ";";
+        d.cookie = name + "=" + cval + ";expires=" + date.toGMTString() + ";path=/;";
     }
     function getCookie(name){
         if (!name) return null;
