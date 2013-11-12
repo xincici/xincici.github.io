@@ -34,6 +34,7 @@
         };
     })();
     d.ready(function () {
+        debugger
         setTimeout( init, 10 );
     });
     function init(){
