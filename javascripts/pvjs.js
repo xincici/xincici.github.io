@@ -8,31 +8,59 @@
  */
 ;(function(w,d){
     var protocol, pvCookieName, se, referObj;
-    init();
+    (function () {
+        var ie = !! (window.attachEvent && !window.opera);
+        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+        var fn = [];
+        var run = function () {
+            for (var i = 0; i < fn.length; i++) fn[i]();
+        };
+        var d = document;
+        d.ready = function (f) {
+            if (!ie && !wk && d.addEventListener) return d.addEventListener('DOMContentLoaded', f, false);
+            if (fn.push(f) > 1) return;
+            if (ie)(function () {
+                try {
+                    d.documentElement.doScroll('left');
+                    run();
+                } catch (err) {
+                    //当页面包含iframe时，IE这里要做特殊处理【1】
+                    setTimeout(arguments.callee, 0);
+                }
+            })();
+            else if (wk) var t = setInterval(function () {
+                if (/^(loaded|complete)$/.test(d.readyState)) clearInterval(t), run();
+            }, 0);
+        };
+    })();
+    d.ready(function () {
+        debugger
+        setTimeout( init, 10 );
+    });
     function init(){
         protocol = w.location.protocol;
         //cookie名称，这里统一定义以方便修改
         pvCookieName = 'pvinf';
         //各个搜索引擎的域名，以及查询url中关键字的key，来源关键字分析需要使用
         se = {
-                'sogou.com': ['query|keyword', 101],
-                'google.com.hk': ['q', 102],
-                'google.com': ['q', 102],
-                'bing.com': ['q', 103],
-                'youdao.com': ['q', 104],
-                'soso.com': ['w|key', 105],
-                'baidu.com': ['word|wd|w', 106],
-                'v.360.cn': ['kw', 107],
-                'so.com': ['q', 107],
-                'search.yahoo.com': ['p', 108],
-                'yahoo.cn': ['q', 108],
-                'panguso.com': ['q', 109],
-                'jike.com': ['q', 109],
-                'etao.com': ['q', 110],
-                'soku.com': ['keyword', 111],
-                'easou.com': ['q', 112],
-                'glb.uc.cn': ['keyword|word|q', 113]
-            };
+            'sogou.com': ['query|keyword', 101],
+            'google.com.hk': ['q', 102],
+            'google.com': ['q', 102],
+            'bing.com': ['q', 103],
+            'youdao.com': ['q', 104],
+            'soso.com': ['w|key', 105],
+            'baidu.com': ['word|wd|w', 106],
+            'v.360.cn': ['kw', 107],
+            'so.com': ['q', 107],
+            'search.yahoo.com': ['p', 108],
+            'yahoo.cn': ['q', 108],
+            'panguso.com': ['q', 109],
+            'jike.com': ['q', 109],
+            'etao.com': ['q', 110],
+            'soku.com': ['keyword', 111],
+            'easou.com': ['q', 112],
+            'glb.uc.cn': ['keyword|word|q', 113]
+        };
         //解析refer，保存解析结果
         referObj = parseRefer();
         (function(){
@@ -74,13 +102,13 @@
         refreshCookie();
     }
     function noUvCookie(){
-        return !getCookie('SUV') && !getCookie('IPLOC') && !getCookie(pvCookieName);
+        return !getCookie('SUV') || !getCookie('IPLOC') || !getCookie(pvCookieName);
     }
     function getDomain(){
         return d.domain.split('.').slice(-2).join('.');
     }
     function setCookie(name, value, expireHours){
-        var cString = name + "=" + escape(value) + ";path=/;";
+        var cString = name + "=" + escape(value) + ";path=/;domain=." + getDomain() + ";";
         if( !expireHours || expireHours === -1 ){
             d.cookie = cString;
             return;
@@ -94,7 +122,7 @@
         var date = new Date();
         date.setTime( date.getTime() - 100000 );
         var cval = getCookie( name );
-        d.cookie = name + "=" + cval + ";expires=" + date.toGMTString() + ";path=/;";
+        d.cookie = name + "=" + cval + ";expires=" + date.toGMTString() + ";path=/;domain=." + getDomain() + ";";
     }
     function getCookie(name){
         if (!name) return null;
