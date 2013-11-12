@@ -2,41 +2,13 @@
  * @author yelin yelin@sohu-inc.com
  * @date 2013-11-05 00:00:00
  * @brief sohu pv js file
- * @async support
+ * @async support !!!maybe has problem
  * @usage sohuPv( arguments )
  * @make sohuPv a global object, take care
  */
 ;(function(w,d){
     var protocol, pvCookieName, se, referObj;
-    (function () {
-        var ie = !! (window.attachEvent && !window.opera);
-        var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
-        var fn = [];
-        var run = function () {
-            for (var i = 0; i < fn.length; i++) fn[i]();
-        };
-        var d = document;
-        d.ready = function (f) {
-            if (!ie && !wk && d.addEventListener) return d.addEventListener('DOMContentLoaded', f, false);
-            if (fn.push(f) > 1) return;
-            if (ie)(function () {
-                try {
-                    d.documentElement.doScroll('left');
-                    run();
-                } catch (err) {
-                    //当页面包含iframe时，IE这里要做特殊处理【1】
-                    setTimeout(arguments.callee, 0);
-                }
-            })();
-            else if (wk) var t = setInterval(function () {
-                if (/^(loaded|complete)$/.test(d.readyState)) clearInterval(t), run();
-            }, 0);
-        };
-    })();
-    d.ready(function () {
-        debugger
-        setTimeout( init, 10 );
-    });
+    init();
     function init(){
         protocol = w.location.protocol;
         //cookie名称，这里统一定义以方便修改
