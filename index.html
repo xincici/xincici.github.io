@@ -83,7 +83,6 @@
                 if( color ){
                     document.body.style.backgroundImage = 'none';
                     document.body.style.backgroundColor = color;
-                }else{
                     var lis = document.getElementsByTagName('li', document.getElementsByClassName('skin_slide')[0]);
                     for(var i=0,l=lis.length; i<l; i++){
                         if( lis[i].getAttribute('bcolor') === color ){
@@ -92,7 +91,7 @@
                             rClass(lis[i], 'current');
                         }
                     }
-                }
+                }            
             }
             function changeSkin(e){
                 var ele = e.target;
