@@ -86,7 +86,7 @@
                 }else{
                     var lis = document.getElementsByTagName('li', document.getElementsByClassName('skin_slide')[0]);
                     for(var i=0,l=lis.length; i<l; i++){
-                        if( lis[0].getAttribute('bcolor') === color ){
+                        if( lis[i].getAttribute('bcolor') === color ){
                             aClass(lis[i], 'current');
                         }else{
                             rClass(lis[i], 'current');
