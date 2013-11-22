@@ -83,6 +83,15 @@
                 if( color ){
                     document.body.style.backgroundImage = 'none';
                     document.body.style.backgroundColor = color;
+                }else{
+                    var lis = document.getElementsByTagName('li', document.getElementsByClassName('skin_slide')[0]);
+                    for(var i=0,l=lis.length; i<l; i++){
+                        if( lis[0].getAttribute('bcolor') === color ){
+                            aClass(lis[i], 'current');
+                        }else{
+                            rClass(lis[i], 'current');
+                        }
+                    }
                 }
             }
             function changeSkin(e){
@@ -111,6 +120,7 @@
                 aClass(ele, 'current');
                 if( ele.getAttribute('class').indexOf('color0') >= 0 ){
                     document.body.style.backgroundImage = 'url("images/bg.jpg")';
+                    cookieObj.setCookie('bgcolor', '');
                     return;
                 }
                 var color = ele.getAttribute('bcolor');
