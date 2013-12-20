@@ -277,7 +277,7 @@ $(function(){
     }
     else{
       count = 0;
-      alert('乖老婆真听话，想我不？');
+      alert(decodeURIComponent("%E4%B9%96%E8%80%81%E5%A9%86%E7%9C%9F%E5%90%AC%E8%AF%9D%EF%BC%8C%E6%83%B3%E6%88%91%E4%B8%8D%EF%BC%9F"));
       $('#clear').fadeIn(8000,function(){
         $(this).bind('click', function(){
           clearInterval(ss_tt);
