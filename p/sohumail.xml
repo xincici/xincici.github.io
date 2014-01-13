@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="gbk" ?><!--xml 编码可以是gbk或者utf-8,但必须保证xml内容编码与头信息一致-->
+<!--xml文件头，文档需以gbk方式编码-->
+<DOCUMENT>
+<!--需要大写，标记整个文档的开头-->
+<item>
+<!--标记每个关键词所对应信息的开始和结束，不得嵌套出现。每个item对应一个关键词和该关键词对应的展现内容。当需要提交多个item时，可以在一个xml文件中填入多个item。同一份XML文档中item的个数上限为10000个-->
+	<key>搜狐 邮箱 登陆</key>
+	<!--关键词，目前一个key标签中只支持输入一个关键词，不支持罗列关键词。当用户在百度检索此关键词时，即可检索到item中指定的内容。每个key的长度限制为1－76字节-->
+	<display>
+	<!--表示该关键词要显示的搜索结果信息，包含以下的url、title等标签。display标签中的文本长度上限为2k-->
+		<url>http://mail.sohu.com/</url>
+		<!--url: 表示结果的标题链接地址，即title所指向的链接。url的长度限制为6－512字节;-->
+		<title>搜狐闪电邮箱</title>
+		<!--title: 表示结果的标题文字，即展示在百度搜索结果页中的主标题。长度限制为4－63字节;-->
+		<content1></content1>
+		<!--content为可选标签，当不填时，改区域不显示出来,为一段内容，会被动折行，文字长度限制为200字节，如果超过200字节，请截断，并增加省略符号“…”，且保证内容加上省略符号总长度不超过200字节-->
+		<smalltitle></smalltitle>
+		<!--smalltitle: 登陆提示小标题。长度限制为4－63字节;-->
+		<action>https://passport.sohu.com/act/loginjs</action>
+		<!-- 登录时表单的提交地址，6-512字节 -->
+		<usertext>帐　号:</usertext>
+		<!--usertext: 帐号输入框前显示的文字。长度限制为2-8字节; -->
+		<passtext>密　码:</passtext>
+		<!--passtext: 密码输入框前显示的文字。长度限制为2-8字节; -->
+		<username>userid</username>
+		<!-- 用户名文本框的name值 -->
+		<userdefault>搜狐邮箱账号</userdefault>
+		<!--userdefault: 用户名输入框中的文字提示,定义为可选标签，长度限制为0-24字节; -->
+		<usernametail>@sohu.com</usernametail>
+		<!--用户在提交数据的时候，附加在用户名后面的后缀-->
+		<password>password</password>
+		<!-- 密码文本框的name值 -->
+		<params para1name="appid" para1value="1136" para2name="ru" para2value="http://mail.sohu.com/" para3name="selfu"  para3value="http://tongji.baidu.com/hm-web/welcome/login" para4name="senderr" para4value="1" para5name="" para5value=""/>
+		<!-- 表单的隐藏参数，各个属性0-200字节 -->
+		<emailtail>@sohu.com</emailtail>
+		<!--在搜索框中对应的用户名后显示的附加在用户名后面的后缀，定义为可写，阈值为0-20-->
+		<buttontext>登录</buttontext>
+		<!--buttontext: 登录按钮中的文字，定义为可选标签，长度限制为2-8字节;  -->
+		<findpsw url="https://passport.sohu.com/web/recover.jsp" content="找回密码"/>
+		<!--忘记密码页的url，即用户在点击登录框中的“忘记密码”时跳转到相关页面的url。长度限制为4－34字节-->
+		<register url="https://passport.sohu.com/web/reguser" content="注册邮箱" />
+		<!--注册邮箱页的url，即用户在点击登录框中的“注册邮箱”时跳转到相关页面的url。长度限制为4－34字节-->
+		<showurl>mail.sohu.com/</showurl>
+		<!--用于显示在搜索结果的下方，请仅填写资源所属站点的一级域名，否则可能不能通过审核。不需要有”http://”的部分；Showurl的长度限制为2－42字节，如果超过42字节，请截断，并增加省略符号“…”，并保证截断后的showurl加上省略符号总长度不超过42字节-->
+	</display>
+</item>
+</DOCUMENT>
