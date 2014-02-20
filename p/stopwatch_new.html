@@ -26,7 +26,7 @@
                     <input type="radio" id="type2" name="select" value="type2" /><span>计圈</span>
                 </label>
             </div>
-            <div class="clock">00:00:0</div>
+            <div class="clock">00:00:00</div>
             <div class="button">
                 <button class="start">start</button>
                 <button class="record" disabled="disabled">record</button>
@@ -83,7 +83,7 @@
                         init = 0;
                         count = 1;
                         last = 0;
-                        clock.innerHTML = '00:00:0';
+                        clock.innerHTML = '00:00:00';
                         bstart.innerHTML = 'start';
                         if( recorded ){
                             brecord.innerHTML = 'clear';
@@ -112,13 +112,14 @@
                     recorded = false;
                     st = setInterval(function(){
                         init += 1;
-                        var m = Math.floor( init / 600 );
-                        var s = Math.floor( init / 10 ) - m * 60;
-                        var ms = init % 10;
+                        var m = Math.floor( init / 6000 );
+                        var s = Math.floor( init / 100 ) - m * 600;
+                        var ms = init % 100;
                         m = ('00' + m).slice(-2);
                         s = ('00' + s).slice(-2);
+                        ms = ('00' + ms).slice(-2);
                         clock.innerHTML = m + ':' + s + ':' + ms;
-                    },100);
+                    },10);
                 }
                 function stopFunc(){
                     var type = document.getElementById('type1').checked;
@@ -137,11 +138,12 @@
                         }
                         recorded = true;
 
-                        var m = Math.floor( (init-last) / 600 );
-                        var s = Math.floor( (init-last) / 10 ) - m * 60;
-                        var ms = (init-last) % 10;
+                        var m = Math.floor( (init-last) / 6000 );
+                        var s = Math.floor( (init-last) / 100 ) - m * 600;
+                        var ms = (init-last) % 100;
                         m = ('00' + m).slice(-2);
                         s = ('00' + s).slice(-2);
+                        ms = ('00' + ms).slice(-2);
                         var once = m + ':' + s + ':' + ms;
 
                         last = init;
