@@ -121,7 +121,7 @@
                         recorded = true;
                         var span = document.createElement('span');
                         span.innerHTML = clock.innerHTML;
-                        recorder.appendChild(span);
+                        recorder.insertBefore(span, recorder.children[0]);
                     }
                 }
                 if( bstart.addEventListener ){
