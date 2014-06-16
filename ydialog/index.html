@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="js/yelin-dialog.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/yelin-dialog.css" />
+        <style>
+            .wrapper{width: 1100px;margin: 50px auto;}
+            .dialog-button-wrapper{margin-bottom:20px;text-align: center;}
+            .tips-button-wrapper{text-align: center;}
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="dialog-button-wrapper">
+                <button id="button_1">default dialog</button>
+                <button id="button_2">simple warn dialog</button>
+                <button id="button_3">simple danger alert</button>
+                <button id="button_4">dialog with callbacks</button>
+                <button id="button_5">dialog with custom button text</button>
+            </div>
+            <div class="tips-button-wrapper">
+                <button id="button_00">default tips</button>
+                <button id="button_11">center tips</button>
+                <button id="button_22">right top tips</button>
+                <button id="button_33">tips last for 10s</button>
+                <button id="button_44">success tips</button>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $(function(){
+            $('#button_1').ydialog({});
+            $('#button_2').ydialog({
+                simple : true
+            });
+            $('#button_3').ydialog({
+                type : 'alert',
+                simple : true,
+                danger : true
+            });
+            $('#button_4').ydialog({
+                ok : function(){alert('you clicked confirm')},
+                cancel : function(){alert('you clicked cancel')},
+                close : function(){alert('dialog will closed')}
+            });
+            $('#button_5').ydialog({
+                title : '自定义按钮文字',
+                simple : true,
+                okText : 'Click to confirm',
+                cancelText : 'Click to cancel',
+                content : '这个弹窗拥有自定义按钮文字！'
+            });
+            $('.tips-button-wrapper').on('click', 'button', function(){
+                var el = $(this);
+                switch(el.attr('id')){
+                    case 'button_00':
+                        $.yfixtips();
+                        break;
+                    case 'button_11':
+                        $.yfixtips({position: 'center'});
+                        break;
+                    case 'button_22':
+                        $.yfixtips({position: 'right-top'});
+                        $.yfixtips
+                        break;
+                    case 'button_33':
+                        $.yfixtips({time:10, content: 'this tips will last for 10 seconds!'});
+                        break;
+                    case 'button_44':
+                        $.yfixtips({type:'success', content : 'this is a success tips!'});
+                        break;
+                }
+            })
+        });
+    </script>
+</html>

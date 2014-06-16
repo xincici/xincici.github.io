@@ -1,0 +1,38 @@
+body{background: #F8F8F8;}
+.reset{width: 700px; margin: 120px auto; border-top: 3px solid #3293F2; background: #FFF; padding-bottom: 50px;}
+.reset h2{height: 52px; line-height: 52px; font-size: 20px; padding-left: 35px; margin-bottom: 30px;}
+.reset .field{margin-bottom: 40px; color: #616161;}
+.reset .field .label{width: 220px; text-align: right; font-size: 14px; padding-top: 4px;}
+.reset .field .ipt-text{width: 250px;}
+/*.reset .code .ipt-text{width: 80px;}*/
+.reset .code img{vertical-align: middle;}
+.reset .option{margin-bottom: 20px;}
+.reset .option .ipt{width: 260px;}
+.reset .smt a{vertical-align: bottom; color: #616161; margin-left: 10px;}
+
+.mod-reset{border: 1px solid #D8D8D8; width: 690px;}
+.reset-type{height: 48px; line-height: 48px; background: #E2E2E2;padding-top: 20px;}
+.reset-type a{float: left; width: 335px; height: 45px; line-height: 45px; margin:0 5px; border-top: 3px solid #e2e2e2;text-align: center; font-size: 18px; font-family: Microsoft Yahei,"黑体"}
+.reset-type a.cur,
+.reset-type a:hover{border-top: 3px solid #3293F2; color: #1FBBA6; text-decoration: none;background-color: #ffffff;}
+.reset-fm{padding-top: 70px;}
+.reset-fm .desc{padding:0 40px 40px; font-size: 14px; line-height: 2.0; margin-top: -20px;}
+.reset-fm .desc strong{float: left; width: 80px;}
+.reset-fm .desc span{display: block; margin-left: 80px;}
+.reset-fm .field .label{width: 160px;}
+.reset-fm .field .ipt .tip{color: #777676; margin-top: 5px;}
+.reset-fm .field .ipt .tip b{color: #FF7200;font-weight: normal;}
+
+/*add by linye start*/
+.reset-fm .new-password{margin-bottom:20px;}
+.reset-fm .new-password .ipt p{margin:5px 0 0 165px;}
+.reset-fm .new-password .ipt p .low{color: #D26363;}
+.reset-fm .new-password .ipt p .middle{color: #FE7B07;}
+.reset-fm .new-password .ipt p .high{color: #1FBBA6;}
+/*add by linye end*/
+
+.reset-success{padding: 80px; text-align: center;}
+.reset-success h3{font-size: 18px; letter-spacing: .5em; margin-bottom: 40px;}
+.reset-success p{font-size: 14px;}
+.reset-success .exit{margin-top: 40px; }
+.reset-success .count{color:#e33;}
