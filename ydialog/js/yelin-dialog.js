@@ -131,6 +131,8 @@
                     }else{
                         typeof opt.close == 'function' && opt.close();
                     }
+                }else{
+                    return;
                 }
                 //dialogElement && dialogElement.remove();
                 if( el.hasClass('yconfirm') && !opt.okDelete ){
