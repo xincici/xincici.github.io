@@ -91,65 +91,51 @@
         $(function(){
             var userid = $('#userid').jVerify({
                 type : 'string'
-                ,emptyMsg : '不能为空'
-                ,emptyOk : false
                 ,tipMsg : '输入用户名'
                 ,warnMsg : '长度不符合'
                 ,maxLength: 16
-                ,vEvent : 'keyup'
                 ,warnElement : $('#userid').next()
-                ,tipMsgInit : false
+                ,tipMsgInit : true
                 ,callback : function(){
                     setTimeout(function(){
-                        $('#userid').next().html('可以使用！');
+                        $('#userid').next().html('可以使用！').css('color', '#383');
                     }, 3*1000);
                 }
             });
             var email = $('#email').jVerify({
                 type : 'email'
-                ,emptyMsg : '不能为空'
-                ,emptyOk : false
                 ,tipMsg : '输入邮箱'
-                ,warnMsg : '格式错误'
-                ,vEvent : 'keyup'
+                ,warnMsg : '邮箱格式错误'
                 ,warnElement : $('#email').next()
-                ,tipMsgInit : false
+                ,tipMsgInit : true
             });
             var psw = $('#psw').jVerify({
                 type : 'psw'
-                ,emptyMsg : '不能为空'
-                ,emptyOk : false
-                ,tipMsg : '输入密码，8-16个字符'
+                ,tipMsg : '输入密码，6-16个字符'
                 ,warnMsg : '长度不符合'
                 ,warnMsg1 : '两次输入不一致'
-                ,minLength: 8
+                ,minLength: 6
                 ,maxLength: 16
-                ,vEvent : 'keyup'
                 ,warnElement : $('#psw').next()
-                ,tipMsgInit : false
+                ,tipMsgInit : true
                 ,relationElement : $('#psw1')
             });
             var psw1 = $('#psw1').jVerify({
                 type : 'confirmpsw'
-                ,emptyMsg : '不能为空'
-                ,emptyOk : false
                 ,tipMsg : '请输入确认密码'
                 ,warnMsg : '长度不符合'
                 ,warnMsg1 : '两次输入不一致'
-                ,minLength: 8
+                ,minLength: 6
                 ,maxLength: 16
-                ,vEvent : 'keyup'
                 ,warnElement : $('#psw1').next()
-                ,tipMsgInit : false
+                ,tipMsgInit : true
                 ,relationElement : $('#psw')
             });
             var mobile = $('#mobile').jVerify({
                 type : 'mobile'
-                ,emptyMsg : '不能为空'
                 ,emptyOk : true
                 ,tipMsg : '输入手机号，可不填'
                 ,warnMsg : '格式错误'
-                ,vEvent : 'keyup'
                 ,warnElement : $('#mobile').next()
                 ,tipMsgInit : true
             });
@@ -160,17 +146,17 @@
                 ,warnMsg : '格式错误'
                 ,minValue : 1
                 ,maxValue : 150
-                ,vEvent : 'keyup'
                 ,warnElement : $('#age').next()
                 ,tipMsgInit : true
             });
             bindEvent();
             function bindEvent(){
                 $('#submit').bind('click', function(){
-                    if(userid.data('status') == 'false' || email.data('status') == 'false' || psw.data('status') == 'false' || psw1.data('status') == 'false' || mobile.data('status') == 'false' || age.data('status') == 'false' ){
+                    if(!userid.data('status') || !email.data('status') || !psw.data('status') || !psw1.data('status') || !mobile.data('status') || !age.data('status')){
                         userid.showMsg();
                         email.showMsg();
                         psw.showMsg();
+                        psw1.showMsg();
                         mobile.showMsg();
                         age.showMsg();
                     }else{

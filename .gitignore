@@ -1,1 +1,7 @@
 /test/
+/Gemfile
+/Gemfile.lock
+/GruntFile.js
+/dist/
+/node_modules/
+/package.json
