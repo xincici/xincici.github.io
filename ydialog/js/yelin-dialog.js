@@ -12,6 +12,7 @@
     $.fn.ydialog = function(opts){
         var defaultSettings = {
             type : 'confirm'
+            ,vEvent : 'click'
             ,simple : false
             ,danger : false
             ,title : '提示消息'
@@ -31,6 +32,7 @@
             ,waitMsg : '操作进行中，请稍候...'
         };
         var opt = $.extend( {}, defaultSettings, opts );
+
         var ran = Math.floor( Math.random() * 100000000 );
         function getRandomValue(){
             for(;;){
@@ -42,14 +44,15 @@
                 }
             }
         }
-        var self = this;
+
         if( document === this[0] ){
             getRandomValue();
             showDialog();
             return this;
         }
 
-        self.on('click', function(){
+        var self = this;
+        this.on(opt.vEvent, function(){
             getRandomValue();
             showDialog();
         });
@@ -148,6 +151,9 @@
         }
         return this;
     };
+    $.ydialog = function(){
+        $(document).ydialog(arguments[0]);
+    }
 
     $.yfixtips = function( opts ){
         $.yfixtipstimer && clearTimeout($.yfixtipstimer);
