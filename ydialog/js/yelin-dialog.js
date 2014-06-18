@@ -200,6 +200,7 @@
                 } catch (e) {}
             }
         }
+        //not for quirks mode page
         function getInfo(){
             var obj = {};
             obj.bodyWidth       = document.body.clientWidth;
