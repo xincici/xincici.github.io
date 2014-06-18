@@ -6,7 +6,6 @@
                      fn.yfixtips and fn.ytips has no dependencies except jquery and can be used freely
 */
 ;(function($){
-    $.ydialograndomvalue = [];
     $.yzindex = 2014;
     $.yfixtipstimer = null;
     $.fn.ydialog = function(opts){
@@ -15,12 +14,16 @@
             ,vEvent : 'click'
             ,simple : false
             ,danger : false
+            ,dragable : true
+            ,position : 'fixed'
             ,title : '提示消息'
             ,okText : '确定'
             ,cancelText : '取消'
             ,content : '确定要这么做吗？'
             ,lock : true
+            ,quickClose : true
             ,id : ''
+            ,time : 0
             ,width : 560
             ,maxHeight : 300
             ,init : function(){}
@@ -33,45 +36,33 @@
         };
         var opt = $.extend( {}, defaultSettings, opts );
 
-        var ran = Math.floor( Math.random() * 100000000 );
-        function getRandomValue(){
-            for(;;){
-                if( $.inArray(ran, $.ydialograndomvalue) >= 0 ){
-                    ran = Math.floor( Math.random() * 100000000 );
-                }else{
-                    $.ydialograndomvalue.push( ran );
-                    break;
-                }
-            }
-        }
-
         if( document === this[0] ){
-            getRandomValue();
             showDialog();
             return this;
         }
 
         var self = this;
         this.on(opt.vEvent, function(){
-            getRandomValue();
             showDialog();
         });
 
         function showDialog(){
-            var overlayHTML  = [
-                            '<div class="yoverlay ydialog-element" style="z-index: '+ ($.yzindex++) +';">',
-                                '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>',
-                                '<div></div>',
-                            '</div>'
-                            ].join('');
+            function createOverlay(){
+                var str = '';
+                str += '<div class="yoverlay ydialog-element" style="z-index: '+ ($.yzindex++) +';">'
+                            + '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>'
+                            + '<div></div>'
+                        + '</div>';
+                return str;
+            }
             function createElement( opt ){
                 var str = '';
-                str += '<div id="'+ opt.id +'" class="ydialog ydialog-element" style="z-index: '+ ($.yzindex++) +'; width: '+ (opt.simple ? 450 : opt.width) +'px; height: auto; left: 50%; margin-left: -'+ (opt.simple ? 225 : opt.width/2) +'px; top: 33.3%; margin-top: -'+ (opt.maxHeight/2-70) +'px;">'
+                str += '<div id="'+ opt.id +'" class="ydialog ydialog-element" style="z-index: '+ ($.yzindex++) +';">'
                         + '<table class="pop_dialog_table">'
                             + '<tr>'
                                 + '<td class="pop_content" colspan="3">'
-                                    + '<div class="dialog_header">'
-                                        + '<div class="dialog_title">'+ opt.title +'</div>'
+                                    + '<div class="dialog_header '+ (opt.dragable ? 'dialog_header_drag':'') +'">'
+                                        + '<i></i><div class="dialog_title">'+ opt.title +'</div>'
                                         + '<a class="dialog_minimize" href="javascript:;" style="display: none;">最小化</a>'
                                         + '<a class="dialog_close yclose" href="javascript:;" title="关闭">关闭</a>'
                                     + '</div>'
@@ -89,20 +80,35 @@
                     + '</div>';
                 return str;
             }
-            var dialogHTML = createElement( opt );
-            var overlayElement = opt.lock ? $(overlayHTML) : '';
-            
-            var waitOverlayHTML = [
-                            '<div class="yoverlay wait-element ydialog-element" style="z-index: '+ ($.yzindex++) +';">',
-                                '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>',
-                                '<div></div>',
-                            '</div>'
-                            ].join('');
-            var waitHTML = '<div class="wait-element ydialog-element" style="z-index: '+ ($.yzindex++) +'; left: 50%; width: 300px; margin: 0 0 0 -150px; color: rgb(255, 255, 255); font-size: 14px;position: fixed; top: 45%;"><img src="img/loading.gif" style="vertical-align:middle;" /><span style="vertical-align:middle;">'+ opt.waitMsg +'</span></div>';
-            var waitElement;
-            var dialogElement = $(dialogHTML);
+            function createWaitOverlay(){
+                var str = '';
+                    str += '<div class="yoverlay wait-element ydialog-element" style="z-index: '+ ($.yzindex++) +';">'
+                                + '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>'
+                                + '<div></div>'
+                            + '</div>'
+                return str;
+            }
+            function createWaitElement( opt ){
+                var str = '';
+                str += '<div class="wait-element ydialog-element" style="z-index: '+ ($.yzindex++) +'; left: 50%; width: 300px; margin: 0 0 0 -150px; color: rgb(255, 255, 255); font-size: 14px;position: fixed; top: 45%;"><img src="img/loading.gif" style="vertical-align:middle;" />'
+                            + '<span style="vertical-align:middle;">'+ opt.waitMsg +'</span>'
+                        + '</div>';
+                return str;
+            }
+
+            var overlayElement = opt.lock ? $( createOverlay() ) : '';
+
+            var dialogElement = $( createElement(opt) );
+
             $(document.body).append( overlayElement ).append( dialogElement );
 
+            //make the elements right position
+            positionElement( dialogElement );
+            
+            //clear selection in case of some bugs
+            clsSelect();
+
+            // do the init function after dialog elements are append to the document
             typeof opt.init === 'function' && opt.init();
 
             dialogElement.on('click', function(e){
@@ -139,15 +145,92 @@
                 }
                 //dialogElement && dialogElement.remove();
                 if( el.hasClass('yconfirm') && !opt.okDelete ){
-                    waitElement = $(waitOverlayHTML + waitHTML)
-                    $(document.body).append( waitElement );
+                    $(document.body).append( $( createWaitOverlay() ) ).append( $( createWaitElement(opt) ));
                 }else{
-                    dialogElement && dialogElement.remove();
-                    overlayElement && overlayElement.remove();
+                    destroyDialog();
                 }
-                var index = $.inArray( ran, $.ydialograndomvalue );
-                $.ydialograndomvalue.splice( index, 1 );
             });
+            if( opt.lock && opt.quickClose ){
+                overlayElement.on('dblclick', function(){
+                    destroyDialog();
+                });
+            }
+            if( opt.dragable ){
+                var _left,_top;
+                var startLeft,startTop;
+                var $header = dialogElement.find('.dialog_header');
+                $header.on('mousedown', function(e){
+                    $header.addClass('dialog_header_move');
+                    _left = parseInt(dialogElement.css('left').slice(0, -2));
+                    _top = parseInt(dialogElement.css('top').slice(0, -2));
+                    startLeft = e.pageX;
+                    startTop = e.pageY;
+                    if( !$(e.target).hasClass('yclose') ){
+                        $(document).on('mousemove', doDrag);
+                    }
+                }).on('mouseup', function(e){
+                    $header.removeClass('dialog_header_move');
+                    $(document).off('mousemove', doDrag);
+                });
+                function doDrag(e){
+                    //clear select when mouse move
+                    clsSelect();
+                    var left = e.pageX;
+                    var top = e.pageY;
+                    dialogElement.css('left', (_left+left-startLeft)+'px' );
+                    dialogElement.css('top', (_top+top-startTop)+'px' );
+                }
+            }
+            if( opt.time != 0 && $.isNumeric(opt.time) ){
+                setTimeout(function(){
+                    destroyDialog();
+                }, parseInt(opt.time, 10)*1000);
+            }
+            function destroyDialog(){
+                dialogElement && dialogElement.remove();
+                overlayElement && overlayElement.remove();
+            }
+        }
+        function clsSelect(){
+            if( 'getSelection' in window ){
+                window.getSelection().removeAllRanges();
+            }else{
+                try {
+                    document.selection.empty();
+                } catch (e) {}
+            }
+        }
+        function getInfo(){
+            var obj = {};
+            obj.bodyWidth       = document.body.clientWidth;
+            obj.bodyHeight      = document.body.clientHeight;
+            obj.visibleWidth    = document.documentElement.clientWidth;
+            obj.visibleHeight   = document.documentElement.clientHeight;
+            obj.scrollTop       = document.documentElement.scrollTop;
+            obj.scrollLeft      = document.documentElement.scrollLeft;
+            return obj;
+        }
+        function positionElement(el){
+            var info = getInfo();
+            if( opt.position == 'fixed' ){
+                el.css({
+                    position : 'fixed',
+                    width : opt.simple ? '450px' : opt.width+'px'
+                });
+                el.css({
+                    left : ( info.visibleWidth - parseInt(el.css('width').slice(0,-2)) )/2 + 'px',
+                    top : ( info.visibleHeight*0.8 - parseInt(el.css('height').slice(0,-2)) )/2 + 'px'
+                });
+            }else{
+                el.css({
+                    position : 'absolute',
+                    width : opt.simple ? '450px' : opt.width+'px'
+                });
+                el.css({
+                    left : ( info.visibleWidth - parseInt(el.css('width').slice(0,-2)) )/2 + 'px',
+                    top : ( ( info.visibleHeight*0.8 - parseInt(el.css('height').slice(0,-2)) )/2 + info.scrollTop ) + 'px'
+                });
+            }
         }
         return this;
     };

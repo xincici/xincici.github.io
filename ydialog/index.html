@@ -38,12 +38,12 @@ $('#button_1').ydialog();
 <pre>
     <code>
 $('#button_2').ydialog({
-    vEvent : 'mouseover',
+    vEvent : 'dblclick',
     simple: true
 });
     </code>
 </pre>
-<button id="button_2">simple warn dialog appear when mouseout</button>
+<button id="button_2">simple warn dialog appear when dobule click</button>
 </div>
 
 <div class="example-block">
@@ -53,11 +53,12 @@ $('#button_3').ydialog({
     type : 'alert',
     simple : true,
     danger : true,
+    dragable : false,
     lock : false
 });
     </code>
 </pre>
-<button id="button_3">simple danger alert no lock</button>
+<button id="button_3">simple danger alert no lock undragable</button>
 </div>
 
 <div class="example-block">
@@ -92,9 +93,11 @@ $('#button_4').ydialog({
 $('#button_5').ydialog({
     title : '自定义按钮文字',
     simple : true,
+    time : 5,
+    position : 'absolute',
     okText : 'Click to confirm',
     cancelText : 'Click to cancel',
-    content : '这个弹窗拥有自定义按钮文字！'
+    content : '这个弹窗拥有自定义按钮文字，并且是绝对定位的，5秒后会自动关闭！'
 });
     </code>
 </pre>
@@ -153,13 +156,14 @@ $('.tips-button-wrapper').on('click', 'button', function(){
         $(function(){
             $('#button_1').ydialog();
             $('#button_2').ydialog({
-                vEvent : 'mouseover',
+                vEvent : 'dblclick',
                 simple : true
             });
             $('#button_3').ydialog({
                 type : 'alert',
                 simple : true,
                 danger : true,
+                dragable : false,
                 lock : false
             });
             $('#button_4').ydialog({
@@ -180,9 +184,11 @@ $('.tips-button-wrapper').on('click', 'button', function(){
             $('#button_5').ydialog({
                 title : '自定义按钮文字',
                 simple : true,
+                time : 5,
+                position : 'absolute',
                 okText : 'Click to confirm',
                 cancelText : 'Click to cancel',
-                content : '这个弹窗拥有自定义按钮文字！'
+                content : '这个弹窗拥有自定义按钮文字，并且是绝对定位的，5秒后会自动关闭！'
             });
             $('.tips-button-wrapper').on('click', 'button', function(){
                 var el = $(this);
