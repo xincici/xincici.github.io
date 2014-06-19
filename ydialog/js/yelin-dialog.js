@@ -1,9 +1,9 @@
 /*
     @author yelin yelin@sohu-inc.com
     @brief : this plugin is based on jquery, inject the jquery namespace with 
-            5 veriable : ydialograndomvalue, yfixtipstimer, fn.ydialog, fn.yfixtips, fn.ytips
-            notice : fn.ydialog needs the outer css support, specified in sohu cloudscape project. 
-                     fn.yfixtips and fn.ytips has no dependencies except jquery and can be used freely
+            5 veriable : $.yfixtipstimer, $.ydialog, $.fn.ydialog, $.fn.yfixtips, $.fn.ytips
+            notice : $.ydialog, $.fn.ydialog, $.fn.yfixtips  needs the outer css support, see yelin-dialog.css
+                     and $.fn.ytips has no dependencies except jquery and can be used freely
 */
 ;(function($){
     $.yzindex = 2014;
@@ -155,10 +155,11 @@
                     destroyDialog();
                 });
             }
+
+            var _left,_top;
+            var startLeft,startTop;
+            var $header = dialogElement.find('.dialog_header');
             if( opt.dragable ){
-                var _left,_top;
-                var startLeft,startTop;
-                var $header = dialogElement.find('.dialog_header');
                 $header.on('mousedown', function(e){
                     $header.addClass('dialog_header_move');
                     _left = parseInt(dialogElement.css('left').slice(0, -2));
@@ -172,14 +173,14 @@
                     $header.removeClass('dialog_header_move');
                     $(document).off('mousemove', doDrag);
                 });
-                function doDrag(e){
-                    //clear select when mouse move
-                    clsSelect();
-                    var left = e.pageX;
-                    var top = e.pageY;
-                    dialogElement.css('left', (_left+left-startLeft)+'px' );
-                    dialogElement.css('top', (_top+top-startTop)+'px' );
-                }
+            }
+            function doDrag(e){
+                //clear select when mouse move
+                clsSelect();
+                var left = e.pageX;
+                var top = e.pageY;
+                dialogElement.css('left', (_left+left-startLeft)+'px' );
+                dialogElement.css('top', (_top+top-startTop)+'px' );
             }
             if( opt.time != 0 && $.isNumeric(opt.time) ){
                 setTimeout(function(){
@@ -189,6 +190,7 @@
             function destroyDialog(){
                 dialogElement && dialogElement.remove();
                 overlayElement && overlayElement.remove();
+                $(document).off('mousemove', doDrag);
             }
         }
         function clsSelect(){
@@ -240,8 +242,12 @@
     }
 
     $.yfixtips = function( opts ){
-        $.yfixtipstimer && clearTimeout($.yfixtipstimer);
-        $('.yfixtips-element').remove();
+        if( $.yfixtipstimer ){
+            clearTimeout($.yfixtipstimer);
+            $.yfixtipstimer = null;
+            $('.yfixtips-element').remove();
+        }
+
         var opt;
         var defaultSettings = {
             title : '提示消息'
@@ -293,12 +299,14 @@
                     + '</div>'
             return str;
         }
-        var overlayHTML  = [
-                            '<div class="yoverlay yfixtips-element" style="z-index: '+ ($.yzindex++) +';">',
-                                '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>',
-                                '<div></div>',
-                            '</div>'
-                            ].join('');
+        function createOverlay(){
+            var str = '';
+            str += '<div class="yoverlay yfixtips-element" style="z-index: '+ ($.yzindex++) +';">'
+                        + '<iframe width="100%" height="100%" frameborder="0" src="javascript:;"></iframe>'
+                        + '<div></div>'
+                    + '</div>';
+            return str;
+        }
         function getColor(){
             var color = '#900';
             switch(opt.type){
@@ -317,32 +325,36 @@
             }
             return color;
         }
-        var elHTML = createHTML();
-        var el = $( elHTML );
-        var overlayElement = opt.lock ? $(overlayHTML) : '';
-        $.yfixtipstimer && clearTimeout($.yfixtipstimer);
-        $('.yfixtips-element').remove();
+
+        var el = $( createHTML() );
+        var overlayElement = opt.lock ? $( createOverlay() ) : $('');
+
+        var fixtipsElement = overlayElement.add( el );
+
         $(document.body).append(overlayElement).append(el);
+
         el.slideDown(600);
         $('.yfixtips-close').on('click', function(){
             $.yfixtipstimer && clearTimeout($.yfixtipstimer);
             el.slideUp(600, function(){
-                $('.yfixtips-element').remove();
+                fixtipsElement.remove();
             });
         });
+
         $.yfixtipstimer = setTimeout(function(){
             $.yfixtipstimer && clearTimeout($.yfixtipstimer);
             el.slideUp(600, function(){
-                $('.yfixtips-element').remove();
+                fixtipsElement.remove();
             });
         }, opt.time * 1000);
+
         el.on('mouseenter', function(){
             $.yfixtipstimer && clearTimeout($.yfixtipstimer);
         }).on('mouseleave', function(){
             $.yfixtipstimer = setTimeout(function(){
                 $.yfixtipstimer && clearTimeout($.yfixtipstimer);
                 el.slideUp(600, function(){
-                    $('.yfixtips-element').remove();
+                    fixtipsElement.remove();
                 });
             }, opt.time * 1000);
         });
