@@ -16,6 +16,7 @@
             ,danger : false
             ,dragable : true
             ,position : 'fixed'
+            ,animate : true
             ,title : '提示消息'
             ,okText : '确定'
             ,cancelText : '取消'
@@ -35,6 +36,8 @@
             ,waitMsg : '操作进行中，请稍候...'
         };
         var opt = $.extend( {}, defaultSettings, opts );
+
+        var yallElement;
 
         if( document === this[0] ){
             showDialog();
@@ -96,11 +99,13 @@
                 return str;
             }
 
-            var overlayElement = opt.lock ? $( createOverlay() ) : '';
+            var overlayElement = opt.lock ? $( createOverlay() ) : $('');
 
             var dialogElement = $( createElement(opt) );
 
-            $(document.body).append( overlayElement ).append( dialogElement );
+            yallElement = overlayElement.add( dialogElement );
+
+            $(document.body).append( yallElement );
 
             //make the elements right position
             positionElement( dialogElement );
@@ -234,6 +239,36 @@
                     top : ( ( info.visibleHeight*0.8 - parseInt(el.css('height').slice(0,-2)) )/2 + info.scrollTop ) + 'px'
                 });
             }
+            if( opt.animate ){
+                animateElement(el);
+            }
+        }
+        function animateElement(el){
+            var lastStyle = {
+                width : el.css('width'),
+                height : el.css('height'),
+                left : el.css('left'),
+                top : el.css('top')
+            }
+            el.css({
+                width : '1px',
+                height : '1px',
+                left : '50%',
+                top : parseInt( lastStyle.top.slice(0,-2) ) + parseInt(lastStyle.height.slice(0,-2))/2
+            });
+            el.animate( lastStyle, 300);
+        }
+        this.yremove = function(){
+            yallElement.remove();
+        }
+        this.yhide = function(){
+            yallElement.hide();
+        }
+        this.yshow = function(){
+            yallElement.show();
+        }
+        this.yget = function(){
+            return yallElement;
         }
         return this;
     };
