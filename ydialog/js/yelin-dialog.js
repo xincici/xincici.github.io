@@ -193,8 +193,16 @@
                 }, parseInt(opt.time, 10)*1000);
             }
             function destroyDialog(){
-                dialogElement && dialogElement.remove();
-                overlayElement && overlayElement.remove();
+                // dialogElement && dialogElement.remove();
+                // overlayElement && overlayElement.remove();
+                // yallElement && yallElement.remove();
+                if( opt.animate ){
+                    animateElement( dialogElement , true, function(){
+                        yallElement && yallElement.remove();
+                    });
+                }else{
+                    yallElement && yallElement.remove();
+                }
                 $(document).off('mousemove', doDrag);
             }
         }
@@ -243,20 +251,34 @@
                 animateElement(el);
             }
         }
-        function animateElement(el){
+        function animateElement(el, flag, callback){
             var lastStyle = {
                 width : el.css('width'),
                 height : el.css('height'),
                 left : el.css('left'),
-                top : el.css('top')
+                top : el.css('top'),
+                opacity : 1
             }
-            el.css({
-                width : '1px',
-                height : '1px',
-                left : '50%',
-                top : parseInt( lastStyle.top.slice(0,-2) ) + parseInt(lastStyle.height.slice(0,-2))/2
-            });
-            el.animate( lastStyle, 300);
+            if(flag){
+                el.animate({
+                    width : '1px',
+                    height : '1px',
+                    left : '50%',
+                    top : parseInt( lastStyle.top.slice(0,-2) ) + parseInt(lastStyle.height.slice(0,-2))/2,
+                    opacity : 0.1
+                }, 250, function(){
+                    typeof callback == 'function' && callback();
+                });
+            }else{
+                el.css({
+                    width : '1px',
+                    height : '1px',
+                    left : '50%',
+                    top : parseInt( lastStyle.top.slice(0,-2) ) + parseInt(lastStyle.height.slice(0,-2))/2,
+                    opacity : 0.1
+                });
+                el.animate( lastStyle, 250);
+            }
         }
         this.yremove = function(){
             yallElement.remove();
