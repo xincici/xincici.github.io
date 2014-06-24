@@ -172,19 +172,19 @@ $('.tips-button-wrapper').on('click', 'button', function(){
     </body>
     <script type="text/javascript">
         $(function(){
-            $('#button_1').ydialog();
-            $('#button_2').ydialog({
+            window.d1 = $('#button_1').ydialog();
+            window.d2 = $('#button_2').ydialog({
                 vEvent : 'dblclick',
                 simple : true
             });
-            var aa = $('#button_3').ydialog({
+            window.d3 = $('#button_3').ydialog({
                 type : 'alert',
                 simple : true,
                 danger : true,
                 dragable : false,
                 lock : false
             });
-            $('#button_4').ydialog({
+            window.d4 = $('#button_4').ydialog({
                 title : '加入回调的弹窗',
                 content : '<div style="padding:10px 30px;"><ul style="list-style:disc inside none;"><li>确定按钮按下执行ok与close回调，返回false阻止弹窗关闭</li><li>取消按钮按下执行cancel与close回调，返回false阻止弹窗关闭</li><li>右上角的X按下执行close回调，返回false阻止弹窗关闭</li></ul></div>',
                 ok : function(){

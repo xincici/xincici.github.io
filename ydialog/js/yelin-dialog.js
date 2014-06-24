@@ -37,7 +37,10 @@
         };
         var opt = $.extend( {}, defaultSettings, opts );
 
+        var overlayElement, dialogElement;
         var yallElement;
+
+        var closeTimeout;
 
         if( document === this[0] ){
             showDialog();
@@ -99,9 +102,9 @@
                 return str;
             }
 
-            var overlayElement = opt.lock ? $( createOverlay() ) : $('');
+            overlayElement = opt.lock ? $( createOverlay() ) : $('');
 
-            var dialogElement = $( createElement(opt) );
+            dialogElement = $( createElement(opt) );
 
             yallElement = overlayElement.add( dialogElement );
 
@@ -188,7 +191,8 @@
                 dialogElement.css('top', (_top+top-startTop)+'px' );
             }
             if( opt.time != 0 && $.isNumeric(opt.time) ){
-                setTimeout(function(){
+                closeTimeout = setTimeout(function(){
+                    clearTimeout( closeTimeout );
                     destroyDialog();
                 }, parseInt(opt.time, 10)*1000);
             }
@@ -204,6 +208,7 @@
                     yallElement && yallElement.remove();
                 }
                 $(document).off('mousemove', doDrag);
+                closeTimeout && clearTimeout( closeTimeout );
             }
         }
         function clsSelect(){
@@ -289,8 +294,23 @@
         this.yshow = function(){
             yallElement.show();
         }
-        this.yget = function(){
+        this.element = function(){
             return yallElement;
+        }
+        this.ytitle = function(){
+            if( arguments.length == 0 || typeof arguments[0] != 'string' ){
+                return dialogElement.find('.dialog_title').html();
+            }else{
+                dialogElement.find('.dialog_title').html( arguments[0] );
+            }
+        }
+        this.ycontent = function(){
+            if( arguments.length == 0 || typeof arguments[0] != 'string' ){
+                return dialogElement.find('.dialog_body').html();
+            }else{
+                dialogElement.find('.dialog_body').html( arguments[0] );
+                dialogElement.css('height', 'auto');
+            }
         }
         return this;
     };
