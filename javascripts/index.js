@@ -24,7 +24,7 @@ document.ready(function(){
         var iss1 = ele.getAttribute('class').indexOf('s1_mini') >= 0;
         var iss2 = ele.getAttribute('class').indexOf('s2_mini') >= 0;
         if( iss1 ){
-            document.body.style.background = 'url("images/bg.jpg") repeat 0 0 scroll transparent';
+            document.body.style.background = 'url("/images/bg.jpg") repeat 0 0 scroll transparent';
             document.getElementsByClassName('s2_mini')[0].setAttribute('class', 's2_mini');
             document.getElementsByClassName('s1_mini')[0].setAttribute('class', 's1_mini current');
         }else if(iss2){
@@ -43,7 +43,7 @@ document.ready(function(){
         rClass(_currentEle[0], 'current');
         aClass(ele, 'current');
         if( ele.getAttribute('class').indexOf('color0') >= 0 ){
-            document.body.style.backgroundImage = 'url("images/bg.jpg")';
+            document.body.style.backgroundImage = 'url("/images/bg.jpg")';
             cookieObj.setCookie('bgcolor', '');
             return;
         }
@@ -89,7 +89,7 @@ document.ready(function(){
         document.getElementsByClassName('rect')[0].setAttribute('class', 'rect');
     }
     function preLoad(){
-        var arr = ['images/pic.jpg', 'images/pic_1.jpg', 'images/bg.jpg'];
+        var arr = ['/images/pic.jpg', '/images/pic_1.jpg', '/images/bg.jpg'];
         for(var i=0,l=arr.length; i<l; i++){
             var img = new Image();
             img.src = arr[i];
