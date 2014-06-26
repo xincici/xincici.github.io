@@ -3,7 +3,6 @@ html,body{
 }
 body{
     background: url("../images/bg.jpg") repeat 0 0 scroll transparent;
-    overflow-x:hidden;
 }
 #skin{
     background: url("../images/skin.png") no-repeat scroll 0 0 transparent;
@@ -12,7 +11,7 @@ body{
     width: 30px;
     height: 30px;
     margin: 20px 20px 0 0;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
 }

@@ -8,12 +8,20 @@ body {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 }
 
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    visibility:hidden;
+    clear:both;
+}
+
 /* General & 'Reset' Stuff */
 
 .container {
-  width: 90%;
-  max-width: 600px;
+  width: 1000px;
   margin: 0 auto;
+  position: relative;
 }
 
 section {
@@ -131,16 +139,6 @@ dt {
 
 ul li {
   list-style: none;
-}
-
-ul li:before {
-  content: ">>";
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  font-size: 13px;
-  color: #b5e853;
-  margin-left: -37px;
-  margin-right: 21px;
-  line-height: 16px;
 }
 
 blockquote {

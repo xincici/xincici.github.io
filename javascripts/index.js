@@ -18,6 +18,34 @@ document.ready(function(){
             }
         }            
     }
+    
+    var offsetTop = getPosition(document.getElementsByClassName('left-content')[0], 'offsetTop') + 10;
+    window.addEventListener('scroll', function(e){
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if( scrollTop > offsetTop ){
+            aClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }else{
+            rClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }
+    }, false);
+    (function(){
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if( scrollTop > offsetTop ){
+            aClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }else{
+            rClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }
+    }())
+
+    function getPosition(ele, name) {
+        var pos = 0;
+        while (ele) {
+            pos += ele[name];
+            ele = ele.offsetParent;
+        }
+        return pos;
+    }
+
     function changeSkin(e){
         var ele = e.target;
         if( ele.getAttribute('class').indexOf('current') >= 0 ) return;
