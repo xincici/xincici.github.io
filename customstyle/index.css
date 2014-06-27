@@ -25,7 +25,13 @@
 .left-content .left-inner-2 li{float : left; margin: 0 8px;}
 .left-content .left-inner-2 li a{display : inline-block;}
 .left-content .left-inner-2 li img{transition: all .5s ease-in 0s;}
-.left-content .left-inner-2 li img:hover{transform: rotate(405deg);}
+.left-content .left-inner-2 li img:hover{
+	-moz-transform: rotate(405deg);
+	-webkit-transform : rotate(405deg);
+	-o-transform : rotate(405deg);
+	-ms-transform : rotate(405deg);
+	transform : rotate(405deg);
+}
 
 .right-content{width:650px;margin:10px 0px 20px 350px;padding:10px 0 0; background:none scroll 0 0 rgba(0,0,0,.6);box-shadow: 1px 1px 4px #e2e2e2;border-radius:10px;}
 .right-content .link-list{list-style:none; padding:0px 10px;width:630px;}
