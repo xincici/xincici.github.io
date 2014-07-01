@@ -68,6 +68,7 @@ body{
 }
 header{
     margin-bottom:0;
+    min-width:1000px;
 }
 header h1{
     text-shadow: 5px 5px 5px rgb(255, 0, 0);
@@ -100,6 +101,7 @@ footer{
     text-align:center;
     border-top: 1px dashed rgb(181, 232, 83);
     width:100%;
+    min-width:1000px;
     font-size:14px;
 }
 footer a:hover{
