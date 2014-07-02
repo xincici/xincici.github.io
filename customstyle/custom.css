@@ -11,7 +11,7 @@ body{
     cursor: pointer;
     width: 30px;
     height: 30px;
-    margin: 20px 20px 0 0;
+    margin: 8px 10px 0 0;
     position: fixed;
     right: 0;
     top: 0;
@@ -70,10 +70,24 @@ header{
     margin-bottom:0;
     min-width:1000px;
     padding-bottom: 0px;
+    background:#333;
+    border-bottom:1px solid #3a3a3a;
 }
-header h1{
+header .h-title{
     text-shadow: 2px 2px 8px rgb(255, 255, 0);
     margin: 0 0 20px -20px;
+}
+header .h-title-fixed{
+    background: none repeat scroll 0 0 #333;
+    height: 45px;
+    left: 0;
+    line-height: 45px;
+    margin: 0;
+    position: fixed;
+    text-indent: 2em;
+    top: 0;
+    width: 100%;
+    z-index: 5;
 }
 #downloads .btn{
     background-color: #276617;

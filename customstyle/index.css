@@ -15,7 +15,7 @@
     to {background-position: 0px 0px;}
 }
 .left-content{width:340px;float:left; margin-right:10px;}
-.left-content-fixed{position:fixed;top:10px;}
+.left-content-fixed{position:fixed;top:55px;}
 .left-content .left-inner{background: none scroll 0 0 rgba(0,0,0,.75); box-shadow: 1px 1px 4px #e2e2e2;padding:20px 0; border-radius:10px;}
 .left-content .left-inner .face{width:120px; height:120px; border-radius:50%; overflow: hidden; float:left;}
 .left-content .left-inner ul{padding:0px 10px; float:left; width:200px;}

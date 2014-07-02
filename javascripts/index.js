@@ -22,10 +22,16 @@ document.ready(function(){
     var offsetTop = getPosition(document.getElementsByClassName('left-content')[0], 'offsetTop') + 10;
     window.addEventListener('scroll', function(e){
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        if( scrollTop > offsetTop ){
+        offsetTop = getPosition(document.getElementsByClassName('left-content')[0], 'offsetTop') + 10;
+        if( scrollTop > offsetTop-45 ){
             aClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
         }else{
             rClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }
+        if( scrollTop > 45 ){
+            aClass(document.getElementsByClassName('h-title')[0], 'h-title-fixed');
+        }else{
+            rClass(document.getElementsByClassName('h-title')[0], 'h-title-fixed');
         }
     }, false);
     (function(){
@@ -34,6 +40,11 @@ document.ready(function(){
             aClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
         }else{
             rClass(document.getElementsByClassName('left-content')[0], 'left-content-fixed');
+        }
+        if( scrollTop > 45 ){
+            aClass(document.getElementsByClassName('h-title')[0], 'h-title-fixed');
+        }else{
+            rClass(document.getElementsByClassName('h-title')[0], 'h-title-fixed');
         }
     }())
 
