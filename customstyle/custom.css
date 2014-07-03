@@ -75,8 +75,9 @@ header{
 }
 header .h-title{
     text-shadow: 2px 2px 8px rgb(255, 255, 0);
-    margin: 0 0 20px -20px;
+    margin: 0 0 20px 0;
     transition: all .3s ease 0s;
+    border-bottom: 1px dotted #6a6a6a;
 }
 header .h-title-fixed{
     background: none repeat scroll 0 0 #333;
@@ -85,10 +86,13 @@ header .h-title-fixed{
     line-height: 45px;
     margin: 0;
     position: fixed;
-    text-indent: 2em;
+    text-indent: 4em;
     top: 0;
     width: 100%;
     z-index: 5;
+}
+header .h-title h1{
+    float: left;
 }
 #downloads .btn{
     background-color: #276617;
