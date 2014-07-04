@@ -121,6 +121,7 @@ header .h-title .title-nav a{
     padding: 0 20px;
     color: #8a8a8a;
     font-size:18px;
+    outline: 0 none;
 }
 header .h-title .title-nav .cur a,
 header .h-title .title-nav a:hover{
