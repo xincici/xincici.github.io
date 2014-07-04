@@ -74,7 +74,6 @@ header{
     border-bottom:1px solid #3a3a3a;
 }
 header .h-title{
-    text-shadow: 2px 2px 8px rgb(255, 255, 0);
     margin: 0 0 20px 0;
     transition: all .3s ease 0s;
     border-bottom: 1px dotted #6a6a6a;
@@ -92,7 +91,40 @@ header .h-title-fixed{
     z-index: 5;
 }
 header .h-title h1{
+    text-shadow: 1px 1px 10px rgb(255, 255, 0);
     float: left;
+}
+header .h-title .title-nav ul{
+    list-style:none;
+    padding-top:9px;
+}
+header .h-title .title-nav ul li{
+    float:left;
+    text-indent:0;
+}
+header .h-title .title-nav ul li.sep{
+    background: none repeat scroll 0 0 #6a6a6a;
+    display: inline-block;
+    height: 16px;
+    margin: 10px 0;
+    width: 2px;
+}
+header .h-title .title-nav{
+    float:left;
+    margin-left:100px;
+}
+header .h-title .title-nav a{
+    display: inline-block;
+    text-decoration: none;
+    height:36px;
+    line-height:36px;
+    padding: 0 20px;
+    color: #8a8a8a;
+    font-size:18px;
+}
+header .h-title .title-nav .cur a,
+header .h-title .title-nav a:hover{
+    color : #aa0;
 }
 #downloads .btn{
     background-color: #276617;
