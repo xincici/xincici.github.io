@@ -10,7 +10,7 @@ $(function(){
 				title : 'download resume',
 				simple : true,
 				type : 'alert',
-				content : '<a target="blank" href="/staff/resume.pdf">download resume</a>'
+				content : '<a target="blank" href="/staff/resume.pdf">click here to download resume</a>'
 			});
 			everFalse = true;
 		}else if(pressed.length > keystr.length){
