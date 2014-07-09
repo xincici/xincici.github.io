@@ -34,6 +34,7 @@
 }
 .left-content .left-inner-2 .btn-github{background: none repeat scroll 0 0 #262;border: 0 none;margin-bottom: 0;margin-top: 23px;padding: 8px 4px;}
 .left-content .left-inner-2 .btn-github:hover{background: none repeat scroll 0 0 #383;}
+.left-content .left-inner-2 .btn-github span.icon{margin: 0 4px 0 0;}
 
 .right-content{width:650px;margin:10px 0px 20px 350px;padding:10px 0 0; background:none scroll 0 0 rgba(0,0,0,.6);box-shadow: 1px 1px 4px #e2e2e2;border-radius:10px;}
 .right-content .link-list{list-style:none; padding:0px 10px;width:630px;}
