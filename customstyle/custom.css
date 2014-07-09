@@ -69,12 +69,13 @@ body{
 header{
     margin-bottom:0;
     min-width:1000px;
+    padding-top: 10px;
     padding-bottom: 0px;
     background:#333;
     border-bottom:1px solid #3a3a3a;
 }
 header .h-title{
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     transition: text-indent .3s ease 0s;
     border-bottom: 1px dotted #6a6a6a;
 }
@@ -126,6 +127,14 @@ header .h-title .title-nav a{
 header .h-title .title-nav .cur a,
 header .h-title .title-nav a:hover{
     color : #aa0;
+}
+header section{
+    margin-bottom:10px;
+}
+header .h-sub-title h3{
+    font-size: 16px;
+    font-style : italic;
+    margin-bottom: 10px;
 }
 #downloads .btn{
     background-color: #276617;
