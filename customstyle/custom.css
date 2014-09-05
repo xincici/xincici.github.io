@@ -90,6 +90,8 @@ header .h-title-fixed{
     top: 0;
     width: 100%;
     z-index: 5;
+    box-shadow: 0 3px 8px #000;
+    border-bottom: 0 none;
 }
 header .h-title h1{
     text-shadow: 1px 1px 10px rgb(255, 255, 0);
