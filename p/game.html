@@ -8,34 +8,39 @@
         seajs.use('../javascripts/game-main.js');
     </script>
   <style>
+    body{ font-size:14px; line-height:1.8;}
+    .wrapper{width:1000px; margin:30px auto 0; text-align:center;}
     .poker{border:1px solid red;}
+    button{padding:4px 10px;}
   </style>
   </head>
   <body>
-    <div id="pokers">
-      <span>你随机得到的7张牌为</span>
-      <br />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-    </div>
+    <div class="wrapper">
+      <div id="pokers">
+        <span>你随机得到的7张牌为</span>
+        <br />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+      </div>
 
-    <div id="results">
-      <span>其中最大的组合为 </span>
-      <span id="type"></span>
-      <br />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-      <img class="poker" src="../poker/images/back.png" />
-    </div>
-    <div>
-        <button id="again">重来</button>
+      <div id="results">
+        <span>其中最大的组合为 </span>
+        <span id="type"></span>
+        <br />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+        <img class="poker" src="../poker/images/back.png" />
+      </div>
+      <div>
+          <button id="again">重来</button>
+      </div>
     </div>
   </body>
 </html>
