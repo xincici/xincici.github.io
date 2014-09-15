@@ -89,7 +89,6 @@ define(function(require, exports, module) {
         console.log("time use:" + (etime - stime));
     }
 
-    //function lastResult(arr){
     getMaxCards.prototype.lastResult = function(arr) {
         var obj = {};
         var _arr = [];
