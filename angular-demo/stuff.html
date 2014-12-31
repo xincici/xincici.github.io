@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>angular tasklist</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
+    <script src="/lib/angular.js"></script>
+    <script src="/lib/angular-animate.js"></script>
+    <style>
+        .wrapper{width:960px;margin:40px auto 0; text-align:center;}
+        ul,li{list-style:none;}
+        ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
+        li{display:block;line-height:32px; padding:0px; margin:0px;text-align:left;text-indent:1em;}
+        li + li{border-top:1px solid #d1d1d1;}
+        .li-even{background:#f1f1f1;}
+        .task-content{display:inline-block;vertical-align:top;text-indent:0; max-width:180px; white-space:nowrap; text-overflow: ellipsis; overflow:hidden;}
+        .dead{background-color: #1aa;color:#fff;}
+        .dead .task-content{text-decoration: line-through;}
+        .create-time{font-size:12px;opacity:0.4;margin-left:8px;}
+        .delete-task,
+        .undo-task{margin-right:10px;cursor:pointer;float:right;}
+        .undo-task{margin-right:0px;}
+
+        .task-no{background:#aa0; color:#ff4;}
+        .task-li.ng-enter,
+        .task-li.ng-leave{
+            transition : all 0.5s ease-in-out 0s;
+        }
+        .task-li.ng-enter{
+            opacity : 0;
+            height : 0;
+            overflow : hidden;
+        }
+        .task-li.ng-enter.ng-enter-active{
+            opacity : 1;
+            height : 32px;
+        }
+        .task-li.ng-leave{
+            opacity : 1;
+            height : 32px;
+            overflow : hidden;
+        }
+        .task-li.ng-leave.ng-leave-active{
+            opacity : 0;
+            height : 0px;
+            overflow : hidden;
+        }
+
+        .input-area{width: 400px; text-indent: 10px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
+        button{outline: 0 none;}
+        button:disabled{opacity:0.4;}
+        .control-area{width:400px; margin:0 auto; font-size:0;}
+        .control-area button{border:0 none; line-height:28px; font-size:14px;}
+        .control-area .add-button{display:block; width: 100%; margin-bottom:10px; background:#4a4; color:#fff;}
+        .control-area .add-button:hover:enabled{background:#5b5;}
+        .control-area .delete-button{width:198px; background:#a44;color:#fff; margin-left:4px;}
+        .control-area .delete-button:hover:enabled{background:#b55;}
+        .control-area .load-button{width:198px; background:#44a;color:#fff;}
+        .control-area .load-button:hover:enabled{background:#55b;}
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div ng-app="testApp">
+            <h2>Tasklist with localStorage</h2>
+            <div ng-controller="myCtrl">
+                <ul>
+                    <li ng-repeat="task in taskList" class="task-li" ng-class-even="'li-even'" ng-class="{dead: !task.alive}">
+                        {{$index + 1}}. 
+                        <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
+                        <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
+                        <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}">{{task.alive?'&radic;':'&times;'}}</span>
+                        <span class="undo-task" ng-click="undoTask($index)" ng-show="!task.alive" title="重新打开">&larr;</span>
+                    </li>
+                    <li class="task-li task-no" ng-if="taskList.length==0">No task now, add task or load default tasks first.</li>
+                </ul>
+                <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
+                <div class="control-area">
+                    <button class="add-button" ng-click="addTask()" ng-disabled="content==''">{{"add task" | capFirst}}</button>
+                    <button class="load-button" ng-click="loadDefaultTask()">{{"load default tasks" | capFirst}}</button>
+                    <button class="delete-button" ng-click="deleteAllTask($event)" ng-disabled="taskList.length==0">{{deleteText | capFirst}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function(){
+        var app = angular.module('testApp', ['taskAnimations', 'capFirstFilter']);
+        angular.module('taskAnimations', ['ngAnimate']);
+        var myCtrl = app.controller('myCtrl', function($scope, $http, $document) {
+            initTaskList();
+            $scope.deleteClicked = false;
+            $scope.deleteText = 'delete all tasks';
+            $document.on('click', function(){
+                $scope.$apply(function(){
+                    $scope.deleteClicked = false;
+                    $scope.deleteText = 'delete all tasks';
+                });
+            });
+            function initTaskList(){
+                var str = localStorage.getItem('task');
+                if( str ){
+                    $scope.taskList = JSON.parse( str );
+                }else{
+                    $scope.taskList  = [];
+                }
+            }
+            $scope.inputKeyup = function(e){
+                if( e.keyCode == 13 ){
+                    $scope.addTask();
+                }
+            };
+            $scope.addTask = function(){
+                if( $scope.content === '' ) return;
+                $scope.taskList.push({
+                    content : $scope.content,
+                    alive : true,
+                    ctime : +new Date()
+                });
+                $scope.content = '';
+                refreshList();
+            };
+            $scope.deleteAllTask = function(e){
+                e.stopPropagation();
+                if( !$scope.deleteClicked ){
+                    $scope.deleteClicked = true;
+                    $scope.deleteText = 'click again to delete';
+                }else{
+                    $scope.deleteClicked = false;
+                    $scope.deleteText = 'delete all tasks';
+                    $scope.taskList = [];
+                    refreshList();
+                }
+            };
+            $scope.deleteTask = function(index){
+                var tmp = $scope.taskList[index];
+                if( tmp.alive ){
+                    tmp.alive = false;
+                }else{
+                    $scope.taskList.splice(index, 1);
+                }
+                refreshList();
+            };
+            $scope.undoTask = function(index){
+                var tmp = $scope.taskList[index];
+                tmp.alive = true;
+                refreshList();
+            };
+            $scope.loadDefaultTask = function(){
+                $http.get('stuff.json').success(function(data){
+                    $scope.taskList = data;
+                    refreshList();
+                }).error(function(){
+                    $scope.taskList = [];
+                    refreshList();
+                });
+            };
+            function refreshList(){
+                localStorage.setItem('task', JSON.stringify( $scope.taskList ));
+            }
+        });
+        angular.module('capFirstFilter', []).filter("capFirst", function(){
+            return function(input){
+                return input.replace(/(\b)(\w)/g, function(match, m1, m2){
+                    return m1 + m2.toUpperCase();
+                });
+            }
+        });
+        myCtrl.$inject = ['$scope', '$http', '$document'];
+    }());
+    </script>
+</body>
+</html>

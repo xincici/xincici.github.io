@@ -96,9 +96,11 @@ body{
   margin-top:30px;
   margin-left:30px;
   cursor:pointer;
+  opacity : 0.5;
 }
 .poker-area .hold{
   border:2px solid #555;
+  opacity : 1;
 }
 .poker-area .win-result,
 .poker-area .lose-result{
