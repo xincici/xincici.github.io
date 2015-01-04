@@ -7,6 +7,7 @@
     <script src="/lib/angular.js"></script>
     <script src="/lib/angular-animate.js"></script>
     <style>
+        html,body{font-size:13px;}
         .wrapper{width:960px;margin:40px auto 0; text-align:center;}
         ul,li{list-style:none;}
         ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
@@ -46,10 +47,10 @@
             overflow : hidden;
         }
 
-        .input-area{width: 390px; text-indent: 10px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
+        .input-area{width: 400px; text-indent: 10px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
         button{outline: 0 none;}
         button:disabled{opacity:0.4;}
-        .control-area{width:400px; margin:0 auto; font-size:0;}
+        .control-area{width:400px; margin:0 auto 10px; font-size:0;}
         .control-area button{border:0 none; line-height:28px; font-size:14px;}
         .control-area .add-button{display:block; width: 100%; margin-bottom:10px; background:#4a4; color:#fff;}
         .control-area .add-button:hover:enabled{background:#5b5;}
@@ -57,6 +58,7 @@
         .control-area .delete-button:hover:enabled{background:#b55;}
         .control-area .load-button{width:198px; background:#44a;color:#fff;}
         .control-area .load-button:hover:enabled{background:#55b;}
+        .tips-area{width:400px; margin: 0 auto; font-size:14px; color:#aa0;}
     </style>
 </head>
 <body>
@@ -78,8 +80,11 @@
                 <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
                 <div class="control-area">
                     <button class="add-button" ng-click="addTask()" ng-disabled="content==''">{{"add task" | capFirst}}</button>
-                    <button class="load-button" ng-click="loadDefaultTask()">{{"load default tasks" | capFirst}}</button>
+                    <button class="load-button" ng-click="loadDefaultTask()">{{loadText | capFirst}}</button>
                     <button class="delete-button" ng-click="deleteAllTask($event)" ng-disabled="taskList.length==0">{{deleteText | capFirst}}</button>
+                </div>
+                <div class="tips-area" ng-show="loadClicked">
+                    <p>Load default tasks will override current tasks, please confirm!</p>
                 </div>
             </div>
         </div>
@@ -92,11 +97,22 @@
             initTaskList();
             $scope.deleteClicked = false;
             $scope.deleteText = 'delete all tasks';
-            $document.on('click', function(){
-                $scope.$apply(function(){
-                    $scope.deleteClicked = false;
-                    $scope.deleteText = 'delete all tasks';
-                });
+            $scope.loadClicked = false;
+            $scope.loadText = 'load default tasks';
+            $document.on('click', function(e){
+                var target = angular.element( e.target );
+                if( !target.hasClass('delete-button') ){
+                    $scope.$apply(function(){
+                        $scope.deleteClicked = false;
+                        $scope.deleteText = 'delete all tasks';
+                    });
+                }
+                if( !target.hasClass('load-button') ){
+                    $scope.$apply(function(){
+                        $scope.loadClicked = false;
+                        $scope.loadText = 'load default tasks';
+                    });
+                }
             });
             function initTaskList(){
                 var str = localStorage.getItem('task');
@@ -122,7 +138,7 @@
                 refreshList();
             };
             $scope.deleteAllTask = function(e){
-                e.stopPropagation();
+                //e.stopPropagation();
                 if( !$scope.deleteClicked ){
                     $scope.deleteClicked = true;
                     $scope.deleteText = 'click again to delete';
@@ -148,13 +164,22 @@
                 refreshList();
             };
             $scope.loadDefaultTask = function(){
-                $http.get('stuff.json').success(function(data){
-                    $scope.taskList = data;
-                    refreshList();
-                }).error(function(){
-                    $scope.taskList = [];
-                    refreshList();
-                });
+                if( $scope.loadClicked || $scope.taskList.length === 0 ){
+                    $http.get('stuff.json').success(function(data){
+                        $scope.loadClicked = false;
+                        $scope.loadText = 'load default tasks';
+                        $scope.taskList = data;
+                        refreshList();
+                    }).error(function(){
+                        $scope.loadClicked = false;
+                        $scope.loadText = 'load default tasks';
+                        $scope.taskList = [];
+                        refreshList();
+                    });
+                }else{
+                    $scope.loadClicked = true;
+                    $scope.loadText = 'click again to confirm';
+                }
             };
             function refreshList(){
                 localStorage.setItem('task', JSON.stringify( $scope.taskList ));
