@@ -83,8 +83,9 @@
                     <button class="load-button" ng-click="loadDefaultTask()">{{loadText | capFirst}}</button>
                     <button class="delete-button" ng-click="deleteAllTask($event)" ng-disabled="taskList.length==0">{{deleteText | capFirst}}</button>
                 </div>
-                <div class="tips-area" ng-show="loadClicked">
-                    <p>Load default tasks will override current tasks, please confirm!</p>
+                <div class="tips-area">
+                    <p ng-show="loadClicked">Load default tasks will override current tasks, please confirm!</p>
+                    <p ng-show="deleteClicked">Are you sure to delete all tasks? please confirm!</p>
                 </div>
             </div>
         </div>
@@ -141,7 +142,7 @@
                 //e.stopPropagation();
                 if( !$scope.deleteClicked ){
                     $scope.deleteClicked = true;
-                    $scope.deleteText = 'click again to delete';
+                    $scope.deleteText = 'click again to confirm';
                 }else{
                     $scope.deleteClicked = false;
                     $scope.deleteText = 'delete all tasks';
