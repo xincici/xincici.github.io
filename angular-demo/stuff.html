@@ -69,7 +69,7 @@
             <div ng-controller="myCtrl">
                 <ul>
                     <li ng-repeat="task in taskList" class="task-li" ng-class-even="'li-even'" ng-class="{dead: !task.alive}">
-                        {{$index + 1}}. 
+                        {{$index + 1 | transferToLetter}}. 
                         <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
                         <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
                         <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}">{{task.alive?'&radic;':'&times;'}}</span>
@@ -79,7 +79,7 @@
                 </ul>
                 <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
                 <div class="control-area">
-                    <button class="add-button" ng-click="addTask()" ng-disabled="content==''">{{"add task" | capFirst}}</button>
+                    <button class="add-button" ng-click="addTask()" ng-disabled="content==''||taskList.length>=26">{{"add task" | capFirst}}</button>
                     <button class="load-button" ng-click="loadDefaultTask()">{{loadText | capFirst}}</button>
                     <button class="delete-button" ng-click="deleteAllTask($event)" ng-disabled="taskList.length==0">{{deleteText | capFirst}}</button>
                 </div>
@@ -92,9 +92,9 @@
     </div>
     <script>
     (function(){
-        var app = angular.module('testApp', ['taskAnimations', 'capFirstFilter']);
+        var app = angular.module('testApp', ['taskAnimations', 'filtersModule']);
         angular.module('taskAnimations', ['ngAnimate']);
-        var myCtrl = app.controller('myCtrl', function($scope, $http, $document) {
+        var myCtrl = app.controller('myCtrl', function($scope, $http, $document, $timeout) {
             initTaskList();
             $scope.deleteClicked = false;
             $scope.deleteText = 'delete all tasks';
@@ -130,13 +130,14 @@
             };
             $scope.addTask = function(){
                 if( $scope.content === '' ) return;
+                if( $scope.taskList.length >= 26 ) return;
                 $scope.taskList.push({
                     content : $scope.content,
                     alive : true,
                     ctime : +new Date()
                 });
                 $scope.content = '';
-                refreshList();
+                $timeout(refreshList, 0);
             };
             $scope.deleteAllTask = function(e){
                 //e.stopPropagation();
@@ -186,14 +187,21 @@
                 localStorage.setItem('task', JSON.stringify( $scope.taskList ));
             }
         });
-        angular.module('capFirstFilter', []).filter("capFirst", function(){
+        var filtersModule = angular.module('filtersModule', []);
+        filtersModule.filter('capFirst', function(){
             return function(input){
                 return input.replace(/(\b)(\w)/g, function(match, m1, m2){
                     return m1 + m2.toUpperCase();
                 });
             }
         });
-        myCtrl.$inject = ['$scope', '$http', '$document'];
+        filtersModule.filter('transferToLetter', function(){
+            var arr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            return function(input){
+                return arr[input-1];
+            }
+        });
+        myCtrl.$inject = ['$scope', '$http', '$document', '$timeout'];
     }());
     </script>
 </body>
