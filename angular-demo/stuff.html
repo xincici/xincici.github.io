@@ -152,8 +152,12 @@
             };
             $scope.deleteTask = function(index){
                 var tmp = $scope.taskList[index];
+                var copy;
                 if( tmp.alive ){
-                    tmp.alive = false;
+                    //tmp.alive = false;
+                    copy = angular.copy(tmp);
+                    copy.alive = false;
+                    $scope.taskList.splice(index, 1, copy);
                 }else{
                     $scope.taskList.splice(index, 1);
                 }
@@ -161,7 +165,10 @@
             };
             $scope.undoTask = function(index){
                 var tmp = $scope.taskList[index];
-                tmp.alive = true;
+                //tmp.alive = true;
+                var copy = angular.copy(tmp);
+                copy.alive = true;
+                $scope.taskList.splice(index, 1, copy);
                 refreshList();
             };
             $scope.loadDefaultTask = function(){
