@@ -47,7 +47,7 @@
             overflow : hidden;
         }
 
-        .input-area{width: 390px; text-indent: 10px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
+        .input-area{width: 388px; text-indent: 4px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
         button{outline: 0 none;}
         button:disabled{opacity:0.4;}
         .control-area{width:400px; margin:0 auto 10px; font-size:0;}
@@ -84,8 +84,8 @@
                     <button class="delete-button" ng-click="deleteAllTask($event)" ng-disabled="taskList.length==0">{{deleteText | capFirst}}</button>
                 </div>
                 <div class="tips-area">
-                    <p ng-show="loadClicked">Load default tasks will override current tasks, please confirm!</p>
-                    <p ng-show="deleteClicked">Are you sure to delete all tasks? please confirm!</p>
+                    <p ng-show="loadClicked">Load default tasks will override current tasks, Please confirm!</p>
+                    <p ng-show="deleteClicked">Are you sure to delete all the above tasks? Please confirm!</p>
                 </div>
             </div>
         </div>
@@ -102,13 +102,13 @@
             $scope.loadText = 'load default tasks';
             $document.on('click', function(e){
                 var target = angular.element( e.target );
-                if( !target.hasClass('delete-button') ){
+                if( $scope.deleteClicked && !target.hasClass('delete-button') ){
                     $scope.$apply(function(){
                         $scope.deleteClicked = false;
                         $scope.deleteText = 'delete all tasks';
                     });
                 }
-                if( !target.hasClass('load-button') ){
+                if( $scope.loadClicked && !target.hasClass('load-button') ){
                     $scope.$apply(function(){
                         $scope.loadClicked = false;
                         $scope.loadText = 'load default tasks';
