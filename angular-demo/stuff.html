@@ -94,7 +94,7 @@
     (function(){
         var app = angular.module('testApp', ['taskAnimations', 'filtersModule']);
         angular.module('taskAnimations', ['ngAnimate']);
-        var myCtrl = app.controller('myCtrl', function($scope, $http, $document, $timeout) {
+        var myCtrl = app.controller('myCtrl', function($scope, $http, $document) {
             initTaskList();
             $scope.deleteClicked = false;
             $scope.deleteText = 'delete all tasks';
@@ -118,7 +118,7 @@
             function initTaskList(){
                 var str = localStorage.getItem('task');
                 if( str ){
-                    $scope.taskList = JSON.parse( str );
+                    $scope.taskList = angular.fromJson( str );
                 }else{
                     $scope.taskList  = [];
                 }
@@ -137,10 +137,9 @@
                     ctime : +new Date()
                 });
                 $scope.content = '';
-                $timeout(refreshList, 0);
+                refreshList();
             };
             $scope.deleteAllTask = function(e){
-                //e.stopPropagation();
                 if( !$scope.deleteClicked ){
                     $scope.deleteClicked = true;
                     $scope.deleteText = 'click again to confirm';
@@ -184,7 +183,7 @@
                 }
             };
             function refreshList(){
-                localStorage.setItem('task', JSON.stringify( $scope.taskList ));
+                localStorage.setItem('task', angular.toJson( $scope.taskList ));
             }
         });
         var filtersModule = angular.module('filtersModule', []);
@@ -201,7 +200,7 @@
                 return arr[input-1];
             }
         });
-        myCtrl.$inject = ['$scope', '$http', '$document', '$timeout'];
+        myCtrl.$inject = ['$scope', '$http', '$document'];
     }());
     </script>
 </body>
