@@ -22,8 +22,8 @@
         .create-time{font-size:12px;opacity:0.4;margin-left:8px;}
         .delete-task,
         .undo-task{margin-right:5px;cursor:pointer;float:right;text-indent:0px;width:20px; text-align:center;}
-        .delete-task:hover,
-        .undo-task:hover{font-size:18px;}
+        .delete-task:hover{font-size:18px; color:#e00;}
+        .undo-task:hover{font-size:18px; color:#0e0;}
         .undo-task{margin-right:0px;}
 
         .task-no{background:#aa0; color:#ff4;}
@@ -73,7 +73,7 @@
             <div ng-controller="myCtrl">
                 <ul>
                     <li ng-repeat="task in taskList" class="task-li" ng-class-even="'li-even'" ng-class="{dead: !task.alive}">
-                        {{$index + 1 | transferToLetter}}. 
+                        {{$index | transferToLetter}}. 
                         <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
                         <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
                         <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
@@ -208,7 +208,7 @@
         filtersModule.filter('transferToLetter', function(){
             var arr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
             return function(input){
-                return arr[input-1];
+                return arr[input];
             }
         });
         myCtrl.$inject = ['$scope', '$http', '$document'];
