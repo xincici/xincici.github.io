@@ -4,6 +4,7 @@
     <title>angular tasklist</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
     <script src="/lib/angular.js"></script>
     <script src="/lib/angular-animate.js"></script>
     <style>
@@ -20,7 +21,9 @@
         .dead .task-content{text-decoration: line-through;}
         .create-time{font-size:12px;opacity:0.4;margin-left:8px;}
         .delete-task,
-        .undo-task{margin-right:10px;cursor:pointer;float:right;}
+        .undo-task{margin-right:5px;cursor:pointer;float:right;text-indent:0px;width:20px; text-align:center;}
+        .delete-task:hover,
+        .undo-task:hover{font-size:18px;}
         .undo-task{margin-right:0px;}
 
         .task-no{background:#aa0; color:#ff4;}
@@ -73,8 +76,8 @@
                         {{$index + 1 | transferToLetter}}. 
                         <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
                         <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
-                        <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}">{{task.alive?'&radic;':'&times;'}}</span>
-                        <span class="undo-task" ng-click="undoTask($index)" ng-show="!task.alive" title="重新打开">&larr;</span>
+                        <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
+                        <span class="undo-task" ng-click="undoTask($index)" ng-show="!task.alive" title="重新打开"><i class="icon-refresh"></i></span>
                     </li>
                     <li class="task-li task-no" ng-if="taskList.length==0">No task now, add task or load default tasks first.</li>
                 </ul>
