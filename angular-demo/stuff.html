@@ -11,6 +11,11 @@
         html,body{font-size:13px;}
         body{background:url("bg.png");}
         .wrapper{width:960px;margin:40px auto 0; text-align:center;}
+    
+        .filter-area{width:400px; margin:0 auto 10px;font-size:0px;}
+        .filter-area .filter-input{width:200px;text-indent:4px;margin-bottom:0px;}
+        .filter-area .filter-select{width:182px; margin-left:4px;margin-bottom:0px;}
+
         ul,li{list-style:none;}
         ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
         li{display:block;line-height:32px; padding:0px; margin:0px;text-align:left;text-indent:1em;}
@@ -71,15 +76,24 @@
         <div ng-app="testApp">
             <h2>Tasklist with localStorage</h2>
             <div ng-controller="myCtrl">
+                <div class="filter-area">
+                    <input class="filter-input" type="text" ng-model="qq" placeholder="{{'filter tasks' | capFirst}}" />
+                    <select class="filter-select" ng-model="type">
+                        <option value="all">All tasks...</option>
+                        <option value="completed">Completed tasks...</option>
+                        <option value="alive">Wait to be done...</option>
+                    </select>
+                </div>
                 <ul>
-                    <li ng-repeat="task in taskList" class="task-li" ng-class-even="'li-even'" ng-class="{dead: !task.alive}">
+                    <li ng-repeat="task in taskList | filter:filterFn as results" class="task-li" ng-class-even="'li-even'" ng-class="{dead: !task.alive}">
                         {{$index | transferToLetter}}. 
                         <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
                         <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
-                        <span class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
-                        <span class="undo-task" ng-click="undoTask($index)" ng-show="!task.alive" title="重新打开"><i class="icon-refresh"></i></span>
+                        <span ng-show="type=='all'" class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
+                        <span ng-show="type=='all' && !task.alive" class="undo-task" ng-click="undoTask($index)" title="重新打开"><i class="icon-refresh"></i></span>
                     </li>
                     <li class="task-li task-no" ng-if="taskList.length==0">No task now, add task or load default tasks first.</li>
+                    <li class="task-li task-no" ng-if="results.length==0 && taskList.length!=0">No such task found!</li>
                 </ul>
                 <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
                 <div class="control-area">
@@ -100,10 +114,22 @@
         angular.module('taskAnimations', ['ngAnimate']);
         var myCtrl = app.controller('myCtrl', function($scope, $http, $document) {
             initTaskList();
+            $scope.qq = '';
+            $scope.type = 'all';
             $scope.deleteClicked = false;
             $scope.deleteText = 'delete all tasks';
             $scope.loadClicked = false;
             $scope.loadText = 'load default tasks';
+            $scope.filterFn = function(item, index){
+                switch($scope.type){
+                    case 'all':
+                        return item.content.indexOf( $scope.qq ) >= 0;
+                    case 'completed':
+                        return !item.alive && item.content.indexOf( $scope.qq ) >= 0;
+                    case 'alive':
+                        return item.alive && item.content.indexOf( $scope.qq ) >= 0;
+                }
+            };
             $document.on('click', function(e){
                 var target = angular.element( e.target );
                 if( $scope.deleteClicked && !target.hasClass('delete-button') ){
