@@ -167,7 +167,6 @@
                     ctime : +new Date()
                 });
                 $scope.content = '';
-                refreshList();
             };
             $scope.deleteAllTask = function(e){
                 if( !$scope.deleteClicked ){
@@ -177,7 +176,6 @@
                     $scope.deleteClicked = false;
                     $scope.deleteText = 'delete all tasks';
                     $scope.taskList = [];
-                    refreshList();
                 }
             };
             $scope.deleteTask = function(task){
@@ -190,14 +188,12 @@
                 }else{
                     $scope.taskList.splice(index, 1);
                 }
-                refreshList();
             };
             $scope.undoTask = function(task){
                 var index = $scope.taskList.indexOf(task);
                 var copy = angular.copy(task);
                 copy.alive = true;
                 $scope.taskList.splice(index, 1, copy);
-                refreshList();
             };
             $scope.loadDefaultTask = function(){
                 if( $scope.loadClicked || $scope.taskList.length === 0 ){
@@ -205,18 +201,18 @@
                         $scope.loadClicked = false;
                         $scope.loadText = 'load default tasks';
                         $scope.taskList = data;
-                        refreshList();
                     }).error(function(){
                         $scope.loadClicked = false;
                         $scope.loadText = 'load default tasks';
                         $scope.taskList = [];
-                        refreshList();
                     });
                 }else{
                     $scope.loadClicked = true;
                     $scope.loadText = 'click again to confirm';
                 }
             };
+            //use $watch to refresh data in localStorage
+            $scope.$watch('taskList', refreshList, true);
             function refreshList(){
                 localStorage.setItem('task', angular.toJson( $scope.taskList ));
             }
