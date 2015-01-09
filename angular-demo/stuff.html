@@ -14,7 +14,7 @@
     
         .filter-area{width:400px; margin:0 auto 10px;font-size:0px;}
         .filter-area .filter-input{width:200px;text-indent:4px;margin-bottom:0px;}
-        .filter-area .filter-select{width:182px; margin-left:4px;margin-bottom:0px;}
+        .filter-area .filter-select{width:182px; margin-left:4px;margin-bottom:0px; outline:0 none;}
 
         ul,li{list-style:none;}
         ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
@@ -89,8 +89,8 @@
                         {{$index | transferToLetter}}. 
                         <span class="task-content" title="{{task.content}}">{{ task.content }}</span>
                         <span class="create-time">{{task.ctime | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
-                        <span ng-show="type=='all'" class="delete-task" ng-click="deleteTask($index)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
-                        <span ng-show="type=='all' && !task.alive" class="undo-task" ng-click="undoTask($index)" title="重新打开"><i class="icon-refresh"></i></span>
+                        <span class="delete-task" ng-click="deleteTask(task)" title="{{task.alive?'标记已完成':'删除' }}"><i class="{{task.alive?'icon-ok':'icon-remove'}}"></i></span>
+                        <span ng-if="!task.alive" class="undo-task" ng-click="undoTask(task)" title="重新打开"><i class="icon-refresh"></i></span>
                     </li>
                     <li class="task-li task-no" ng-if="taskList.length==0">No task now, add task or load default tasks first.</li>
                     <li class="task-li task-no" ng-if="results.length==0 && taskList.length!=0">No such task found!</li>
@@ -180,12 +180,11 @@
                     refreshList();
                 }
             };
-            $scope.deleteTask = function(index){
-                var tmp = $scope.taskList[index];
+            $scope.deleteTask = function(task){
+                var index = $scope.taskList.indexOf(task);
                 var copy;
-                if( tmp.alive ){
-                    //tmp.alive = false;
-                    copy = angular.copy(tmp);
+                if( task.alive ){
+                    copy = angular.copy(task);
                     copy.alive = false;
                     $scope.taskList.splice(index, 1, copy);
                 }else{
@@ -193,10 +192,9 @@
                 }
                 refreshList();
             };
-            $scope.undoTask = function(index){
-                var tmp = $scope.taskList[index];
-                //tmp.alive = true;
-                var copy = angular.copy(tmp);
+            $scope.undoTask = function(task){
+                var index = $scope.taskList.indexOf(task);
+                var copy = angular.copy(task);
                 copy.alive = true;
                 $scope.taskList.splice(index, 1, copy);
                 refreshList();
