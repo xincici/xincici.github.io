@@ -85,7 +85,7 @@
                 <div class="filter-area">
                     <div class="filter-wrapper">
                         <input class="filter-input" type="text" ng-model="qq" placeholder="Filter tasks by content..." />
-                        <em class="delete-icon" ng-click="qq=''"></em>
+                        <em class="delete-icon" ng-click="qq=''" ng-hide="qq==''"></em>
                     </div>
                     <select class="filter-select" ng-model="type">
                         <option value="all">All tasks...</option>
@@ -106,7 +106,7 @@
                 </ul>
                 <div class="content-wrapper">
                     <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
-                    <em class="delete-icon" ng-click="content=''"></em>
+                    <em class="delete-icon" ng-click="content=''" ng-hide="content==''"></em>
                 </div>
                 <div class="control-area">
                     <button class="add-button" ng-click="addTask()" ng-disabled="content==''||taskList.length>=26">{{"add task" | capFirst}}</button>
