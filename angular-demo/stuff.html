@@ -56,9 +56,15 @@
             overflow : hidden;
         }
 
-        .input-area{width: 388px; text-indent: 4px; display: block; margin: 0 auto 10px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
+        .filter-wrapper{display:inline-block; position:relative;}
+        .filter-wrapper .delete-icon,
+        .content-wrapper .delete-icon{display:inline-block; cursor:pointer; height:20px; width:20px; position:absolute; top:5px; right:5px; background:url("./delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
+        .content-wrapper .input-area{width: 388px; text-indent: 4px; display: block; margin-bottom: 0px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
         button{outline: 0 none;}
         button:disabled{opacity:0.4;}
+
+        .content-wrapper{width:400px; margin:0 auto 10px; position:relative;}
+
         .control-area{width:400px; margin:0 auto 10px; font-size:0;}
         .control-area button{border:0 none; line-height:28px; font-size:14px;}
         .control-area .add-button{display:block; width: 100%; margin-bottom:10px; background:#4a4; color:#fff;}
@@ -77,7 +83,10 @@
             <h2>Tasklist with localStorage</h2>
             <div ng-controller="myCtrl">
                 <div class="filter-area">
-                    <input class="filter-input" type="text" ng-model="qq" placeholder="Filter tasks by content..." />
+                    <div class="filter-wrapper">
+                        <input class="filter-input" type="text" ng-model="qq" placeholder="Filter tasks by content..." />
+                        <em class="delete-icon" ng-click="qq=''"></em>
+                    </div>
                     <select class="filter-select" ng-model="type">
                         <option value="all">All tasks...</option>
                         <option value="completed">Completed tasks...</option>
@@ -95,7 +104,10 @@
                     <li class="task-li task-no" ng-if="taskList.length==0">No task now, add task or load default tasks first.</li>
                     <li class="task-li task-no" ng-if="results.length==0 && taskList.length!=0">No such task found!</li>
                 </ul>
-                <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
+                <div class="content-wrapper">
+                    <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
+                    <em class="delete-icon" ng-click="content=''"></em>
+                </div>
                 <div class="control-area">
                     <button class="add-button" ng-click="addTask()" ng-disabled="content==''||taskList.length>=26">{{"add task" | capFirst}}</button>
                     <button class="load-button" ng-click="loadDefaultTask()">{{loadText | capFirst}}</button>
