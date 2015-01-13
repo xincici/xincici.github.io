@@ -84,10 +84,10 @@
             <div ng-controller="myCtrl">
                 <div class="filter-area">
                     <div class="filter-wrapper">
-                        <input class="filter-input" type="text" ng-model="qq" placeholder="Filter tasks by content..." />
+                        <input class="filter-input" type="text" ng-init="qq=''" ng-model="qq" placeholder="Filter tasks by content..." />
                         <em class="delete-icon" ng-click="qq=''" ng-hide="qq==''"></em>
                     </div>
-                    <select class="filter-select" ng-model="type">
+                    <select class="filter-select" ng-model="type" ng-init="type='all'">
                         <option value="all">All tasks...</option>
                         <option value="completed">Completed tasks...</option>
                         <option value="alive">Wait to be done...</option>
@@ -126,8 +126,6 @@
         angular.module('taskAnimations', ['ngAnimate']);
         var myCtrl = app.controller('myCtrl', function($scope, $http, $document) {
             initTaskList();
-            $scope.qq = '';
-            $scope.type = 'all';
             $scope.deleteClicked = false;
             $scope.deleteText = 'delete all tasks';
             $scope.loadClicked = false;
