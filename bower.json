@@ -1,0 +1,17 @@
+{
+  "name": "xincici.github.io",
+  "version": "0.0.1",
+  "homepage": "http://xincici.github.io",
+  "authors": [
+    "linye <linye@meituan.com>"
+  ],
+  "description": "my github pages",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

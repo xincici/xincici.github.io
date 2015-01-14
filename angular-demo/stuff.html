@@ -4,7 +4,7 @@
     <title>angular tasklist</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css" />
     <script src="/lib/angular.js"></script>
     <script src="/lib/angular-animate.js"></script>
     <style>
@@ -58,7 +58,9 @@
 
         .filter-wrapper{display:inline-block; position:relative;}
         .filter-wrapper .delete-icon,
-        .content-wrapper .delete-icon{display:inline-block; cursor:pointer; height:20px; width:20px; position:absolute; top:5px; right:5px; background:url("./delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
+        .content-wrapper .delete-icon{display:inline-block; cursor:pointer; height:20px; width:20px; position:absolute; top:5px; right:5px; background:url("./delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0); opacity:0.6;}
+        .filter-wrapper .delete-icon:hover,
+        .content-wrapper .delete-icon:hover{opacity:1;}
         .content-wrapper .input-area{width: 388px; text-indent: 4px; display: block; margin-bottom: 0px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
         button{outline: 0 none;}
         button:disabled{opacity:0.4;}

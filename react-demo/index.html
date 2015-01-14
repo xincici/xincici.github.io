@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+    <title>react tasklist</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css" />
+    <script src="/bower_components/react/JSXTransformer.js"></script>
+    <script src="/bower_components/react/react.js"></script>
+    <style>
+        html,body{font-size:13px;}
+        body{background:url("bg.png");}
+        .wrapper{width:960px;margin:40px auto 0; text-align:center;}
+    
+        .filter-area{width:400px; margin:0 auto 10px;font-size:0px;}
+        .filter-area .filter-input{width:200px;text-indent:4px;margin-bottom:0px;}
+        .filter-area .filter-select{width:182px; margin-left:4px;margin-bottom:0px; outline:0 none;}
+
+        ul,li{list-style:none;}
+        ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
+        li{display:block;line-height:32px; padding:0px; margin:0px;text-align:left;text-indent:1em;}
+        li + li{border-top:1px solid #d1d1d1;}
+        .li-even{background:#f1f1f1;}
+        .task-content{display:inline-block;vertical-align:top;text-indent:0; max-width:180px; white-space:nowrap; text-overflow: ellipsis; overflow:hidden;}
+        .dead{background-color: #1aa;color:#fff;}
+        .dead .task-content{text-decoration: line-through;}
+        .create-time{font-size:12px;opacity:0.4;margin-left:8px;}
+        .delete-task,
+        .undo-task{margin-right:5px;cursor:pointer;float:right;text-indent:0px;width:20px; text-align:center;}
+        .delete-task:hover{font-size:18px; color:#e00;}
+        .undo-task:hover{font-size:18px; color:#0e0;}
+        .undo-task{margin-right:0px;}
+
+        .task-no{background:#aa0; color:#ff4;}
+
+        .filter-wrapper{display:inline-block; position:relative;}
+        .filter-wrapper .delete-icon,
+        .content-wrapper .delete-icon{display:inline-block; cursor:pointer; height:20px; width:20px; position:absolute; top:5px; right:5px; background:url("./delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0); opacity:0.6;}
+        .filter-wrapper .delete-icon:hover,
+        .content-wrapper .delete-icon:hover{opacity:1;}
+        .content-wrapper .input-area{width: 388px; text-indent: 4px; display: block; margin-bottom: 0px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
+        button{outline: 0 none;}
+        button:disabled{opacity:0.4;}
+
+        .content-wrapper{width:400px; margin:0 auto 10px; position:relative;}
+
+        .control-area{width:400px; margin:0 auto 10px; font-size:0;}
+        .control-area button{border:0 none; line-height:28px; font-size:14px;}
+        .control-area .add-button{display:block; width: 100%; margin-bottom:10px; background:#4a4; color:#fff;}
+        .control-area .add-button:hover:enabled{background:#5b5;}
+        .control-area .delete-button{width:198px; background:#a44;color:#fff; margin-left:4px;}
+        .control-area .delete-button:hover:enabled{background:#b55;}
+        .control-area .load-button{width:198px; background:#44a;color:#fff;}
+        .control-area .load-button:hover:enabled{background:#55b;}
+        .tips-area{width:400px; margin: 0 auto; font-size:14px; color:#aa0;}
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div id="demo_wrapper">
+        </div>
+    </div>
+    <script>var globalIndex = 1;</script>
+    <script type="text/jsx">
+        var FilterArea = React.createClass({
+            handleChange: function(){
+                this.props.onUserAction(
+                    this.refs.filterTextInput.getDOMNode().value,
+                    this.refs.filterTypeSelect.getDOMNode().value
+                );
+            },
+            render: function(){
+                return (
+                    <div className="filter-area">
+                        <div className="filter-wrapper">
+                            <input
+                                type="text"
+                                className="filter-input"
+                                placeholder="Filter tasks by content..."
+                                value={this.props.filterText}
+                                ref="filterTextInput"
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <select 
+                            className="filter-select"
+                            value={this.props.filterType}
+                            ref="filterTypeSelect"
+                            onChange={this.handleChange}
+                        >
+                            <option value="all">All tasks...</option>
+                            <option value="completed">Completed tasks...</option>
+                            <option value="alive">Wati to be done...</option>
+                        </select>
+                    </div>
+                );
+            }
+        });
+        var TaskLine = React.createClass({
+            fomatTime: function(ts){
+                var d = new Date(ts),
+                    year = d.getFullYear(),
+                    month = ('00' + (d.getMonth() + 1)).slice(-2),
+                    day = ('00' + d.getDate()).slice(-2),
+                    hour = ('00' + d.getHours()).slice(-2),
+                    minute = ('00' + d.getMinutes()).slice(-2),
+                    second = ('00' + d.getSeconds()).slice(-2);
+                return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            },
+            transferIndex: function(index){
+                var arr = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');
+                return arr[index];
+            },
+            render: function(){
+                return (
+                    <li
+                        className={"task-li " + (!this.props.task.alive?"dead ":"" ) + (this.props.index%2!=0?"li-even":"") }
+                    >
+                        {this.transferIndex(this.props.index) + ". "}
+                        <span className="task-content" title={this.props.task.content}>
+                            {this.props.task.content}
+                        </span>
+                        <span className="create-time">
+                            {this.fomatTime(this.props.task.ctime)}
+                        </span>
+                        <span
+                            className="delete-task"
+                            title={this.props.task.alive?"标记已完成":"删除"}
+                        >
+                            <i className={this.props.task.alive?"icon-ok":"icon-remove"}></i>
+                        </span>
+                        {
+                            !this.props.task.alive?
+                            <span className="undo-task" title="重新打开">
+                                <i className="icon-refresh"></i>
+                            </span>
+                            : '' 
+                        }
+                    </li>
+                );
+            }
+        });
+        var TaskUl = React.createClass({
+            filterTask: function(task){
+                switch(this.props.filterType){
+                    case 'all':
+                        break;
+                    case 'completed':
+                        if( task.alive ){
+                            return false;
+                        }
+                        break;
+                    case 'alive':
+                        if( !task.alive ){
+                            return false;
+                        }
+                        break;
+                }
+                if(task.content.indexOf(this.props.filterText) >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            render: function(){
+                var arr = [];
+                var index = 0;
+                this.props.taskList.forEach(function(task){
+                    if( this.filterTask(task) ){
+                        arr.push(
+                                <TaskLine 
+                                    task={task}
+                                    index={index}
+                                    key={index}
+                                 />
+                                 );
+                        index++;
+                    }
+                }.bind(this));
+                return (
+                    <ul>
+                        {
+                            arr.length != 0?
+                            arr : 
+                            (
+                                this.props.filterText == '' && this.props.filterType == 'all'?
+                                <li className="task-li task-no">No task now, add task or load default tasks first.</li> :
+                                <li className="task-li task-no">No such task found!</li>
+                            )
+                        }
+                    </ul>
+                );
+            }
+        });
+        var TaskListDemo = React.createClass({
+            getInitialState: function(){
+                return {
+                    filterObj : {
+                        filterText: '',
+                        filterType: 'all'
+                    }
+                };
+            },
+            handleUserAction: function(filterText, filterType){
+                this.setState({
+                    filterObj: {
+                        filterText: filterText,
+                        filterType: filterType
+                    }
+                });
+            },
+            render: function(){
+                return (
+                    <div>
+                        <h2>Tasklist with React</h2>
+                        <div>
+                            <FilterArea 
+                                filterText={this.state.filterObj.filterText}
+                                filterType={this.state.filterObj.filterType}
+                                onUserAction={this.handleUserAction}
+                            />
+                        </div>
+                        <TaskUl 
+                            taskList={this.props.taskList}
+                            filterText={this.state.filterObj.filterText}
+                            filterType={this.state.filterObj.filterType} 
+                        />
+                    </div>
+                );
+            }
+        });
+        var list = (function(){
+            var arr = [];
+            var str = localStorage.getItem('task');
+            if( str ){
+                arr = JSON.parse( str );
+            }
+            return arr;
+        }());
+        React.render(<TaskListDemo taskList={list} />, document.getElementById('demo_wrapper'));
+    </script>
+</body>
+</html>
