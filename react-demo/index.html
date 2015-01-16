@@ -65,10 +65,7 @@
     <script type="text/jsx">
         var FilterArea = React.createClass({
             handleChange: function(){
-                this.props.onUserAction(
-                    this.refs.filterTextInput.getDOMNode().value,
-                    this.refs.filterTypeSelect.getDOMNode().value
-                );
+                this.props.onUserAction(this.refs.filterTextInput.getDOMNode().value, this.refs.filterTypeSelect.getDOMNode().value);
             },
             render: function(){
                 return (
@@ -78,14 +75,14 @@
                                 type="text"
                                 className="filter-input"
                                 placeholder="Filter tasks by content..."
-                                value={this.props.filterText}
+                                value={this.props.filterObj.filterText}
                                 ref="filterTextInput"
                                 onChange={this.handleChange}
                             />
                         </div>
                         <select 
                             className="filter-select"
-                            value={this.props.filterType}
+                            value={this.props.filterObj.filterType}
                             ref="filterTypeSelect"
                             onChange={this.handleChange}
                         >
@@ -98,6 +95,15 @@
             }
         });
         var TaskLine = React.createClass({
+            doComplete: function(){
+                this.props.onTaskComplete( this.props.index );
+            },
+            doDelete: function(){
+                this.props.onTaskDelete( this.props.index );
+            },
+            doUndo: function(){
+                this.props.onTaskUndo( this.props.index );
+            },
             fomatTime: function(ts){
                 var d = new Date(ts),
                     year = d.getFullYear(),
@@ -114,9 +120,7 @@
             },
             render: function(){
                 return (
-                    <li
-                        className={"task-li " + (!this.props.task.alive?"dead ":"" ) + (this.props.index%2!=0?"li-even":"") }
-                    >
+                    <li className={"task-li " + (!this.props.task.alive?"dead ":"" ) + (this.props.index%2!=0?"li-even":"") }>
                         {this.transferIndex(this.props.index) + ". "}
                         <span className="task-content" title={this.props.task.content}>
                             {this.props.task.content}
@@ -124,15 +128,19 @@
                         <span className="create-time">
                             {this.fomatTime(this.props.task.ctime)}
                         </span>
-                        <span
-                            className="delete-task"
-                            title={this.props.task.alive?"标记已完成":"删除"}
-                        >
-                            <i className={this.props.task.alive?"icon-ok":"icon-remove"}></i>
-                        </span>
+                        {
+                            this.props.task.alive?
+                            <span className="delete-task" title="标记已完成" onClick={this.doComplete}>
+                                <i className="icon-ok"></i>
+                            </span>
+                            :
+                            <span className="delete-task" title="删除" onClick={this.doDelete}>
+                                <i className="icon-remove"></i>
+                            </span>
+                        }
                         {
                             !this.props.task.alive?
-                            <span className="undo-task" title="重新打开">
+                            <span className="undo-task" title="重新打开" onClick={this.doUndo}>
                                 <i className="icon-refresh"></i>
                             </span>
                             : '' 
@@ -142,8 +150,41 @@
             }
         });
         var TaskUl = React.createClass({
+            getInitialState: function(){
+                return {
+                    taskList: this.props.taskList
+                }
+            },
+            handleDelete: function(index){
+                var tasks = this.state.taskList;
+                tasks.splice(index, 1);
+                this.setState({
+                    taskList: tasks
+                });
+                this.refreshLocalStorage();
+            },
+            handleComplete: function(index){
+                var tasks = this.state.taskList;
+                tasks[index].alive = false;
+                this.setState({
+                    taskList: tasks
+                });
+                this.refreshLocalStorage();
+            },
+            handleUndo: function(index){
+                var tasks = this.state.taskList;
+                tasks[index].alive = true;
+                this.setState({
+                    taskList: tasks
+                });
+                this.refreshLocalStorage();
+            },
+            refreshLocalStorage: function(){
+                var str = JSON.stringify(this.state.taskList);
+                localStorage.setItem('task', str);
+            },
             filterTask: function(task){
-                switch(this.props.filterType){
+                switch(this.props.filterObj.filterType){
                     case 'all':
                         break;
                     case 'completed':
@@ -157,7 +198,7 @@
                         }
                         break;
                 }
-                if(task.content.indexOf(this.props.filterText) >= 0){
+                if(task.content.indexOf(this.props.filterObj.filterText) >= 0){
                     return true;
                 }else{
                     return false;
@@ -166,13 +207,16 @@
             render: function(){
                 var arr = [];
                 var index = 0;
-                this.props.taskList.forEach(function(task){
+                this.state.taskList.forEach(function(task){
                     if( this.filterTask(task) ){
                         arr.push(
-                                <TaskLine 
+                                <TaskLine
                                     task={task}
                                     index={index}
                                     key={index}
+                                    onTaskDelete={this.handleDelete}
+                                    onTaskComplete={this.handleComplete}
+                                    onTaskUndo={this.handleUndo}
                                  />
                                  );
                         index++;
@@ -183,11 +227,9 @@
                         {
                             arr.length != 0?
                             arr : 
-                            (
-                                this.props.filterText == '' && this.props.filterType == 'all'?
+                                this.props.filterObj.filterText == '' && this.props.filterObj.filterType == 'all'?
                                 <li className="task-li task-no">No task now, add task or load default tasks first.</li> :
                                 <li className="task-li task-no">No such task found!</li>
-                            )
                         }
                     </ul>
                 );
@@ -216,15 +258,13 @@
                         <h2>Tasklist with React</h2>
                         <div>
                             <FilterArea 
-                                filterText={this.state.filterObj.filterText}
-                                filterType={this.state.filterObj.filterType}
+                                filterObj={this.state.filterObj}
                                 onUserAction={this.handleUserAction}
                             />
                         </div>
                         <TaskUl 
                             taskList={this.props.taskList}
-                            filterText={this.state.filterObj.filterText}
-                            filterType={this.state.filterObj.filterType} 
+                            filterObj={this.state.filterObj}
                         />
                     </div>
                 );
