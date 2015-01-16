@@ -255,15 +255,15 @@
             },
             handleLoadClick: function(){
                 var self = this;
-                if( !this.state.loadClicked ){
-                    this.setState({
-                        loadClicked : true
-                    });
-                }else{
+                if( this.state.loadClicked || this.props.taskList.length === 0 ){
                     this.doLoadTasks(function(){
                         self.setState({
                             loadClicked : false
                         });
+                    });
+                }else{
+                    this.setState({
+                        loadClicked : true
                     });
                 }
             },
@@ -288,6 +288,7 @@
             },
             render: function(){
                 var addButtonDisabled = this.state.content.trim() === '' ? true : false;
+                var delButtonDisabled = this.props.taskList.length === 0 ? true : false;
                 var loadStyle = this.state.loadClicked? {}: {display: "none"};
                 var deleteStyle = this.state.deleteClicked? {}: {display: "none"};
                 return (
@@ -317,6 +318,7 @@
                             </button>
                             <button
                                 className="delete-button"
+                                disabled={delButtonDisabled}
                                 onClick={this.handleDeleteClick}
                             >
                             {this.state.deleteClicked? "Click Again To Confirm":"Delete All Tasks"}
@@ -377,10 +379,11 @@
                 this.refreshLocalStorage();
             },
             deleteAllTask: function(){
+                var tasks = [];
                 this.setState({
-                    taskList: []
+                    taskList: tasks
                 });
-                this.refreshLocalStorage();
+                localStorage.setItem('task', '');
             },
             loadDefaultTask: function(arr){
                 this.setState({
@@ -414,6 +417,7 @@
                             onTaskUndo={this.handleUndo}
                         />
                         <ControlArea
+                            taskList={this.state.taskList}
                             addOneTask={this.addOneTask}
                             deleteAllTask={this.deleteAllTask}
                             loadDefaultTask={this.loadDefaultTask}
