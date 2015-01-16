@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css" />
+    <script src="/lib/jquery-2.1.3.min.js"></script>
     <script src="/bower_components/react/JSXTransformer.js"></script>
     <script src="/bower_components/react/react.js"></script>
     <style>
@@ -150,9 +151,193 @@
             }
         });
         var TaskUl = React.createClass({
+            filterTask: function(task){
+                switch(this.props.filterObj.filterType){
+                    case 'all':
+                        break;
+                    case 'completed':
+                        if( task.alive ){
+                            return false;
+                        }
+                        break;
+                    case 'alive':
+                        if( !task.alive ){
+                            return false;
+                        }
+                        break;
+                }
+                if(task.content.indexOf(this.props.filterObj.filterText) >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            },
+            render: function(){
+                var arr = [];
+                var index = 0;
+                this.props.taskList.forEach(function(task){
+                    if( this.filterTask(task) ){
+                        arr.push(
+                                <TaskLine
+                                    task={task}
+                                    index={index}
+                                    key={index}
+                                    onTaskDelete={this.props.onTaskDelete}
+                                    onTaskComplete={this.props.onTaskComplete}
+                                    onTaskUndo={this.props.onTaskUndo}
+                                 />
+                                 );
+                        index++;
+                    }
+                }.bind(this));
+                return (
+                    <ul>
+                        {
+                            arr.length != 0?
+                            arr : 
+                                this.props.filterObj.filterText == '' && this.props.filterObj.filterType == 'all'?
+                                <li className="task-li task-no">No task now, add task or load default tasks first.</li> :
+                                <li className="task-li task-no">No such task found!</li>
+                        }
+                    </ul>
+                );
+            }
+        });
+        var ControlArea = React.createClass({
+            getInitialState: function(){
+                return{
+                    content: '',
+                    loadClicked: false,
+                    deleteClicked: false
+                };
+            },
+            componentDidMount: function(){
+                this.loadButton = document.querySelector('.control-area .load-button');
+                this.deleteButton = document.querySelector('.control-area .delete-button');
+                document.addEventListener('click', this.docClick, false);
+            },
+            docClick: function(e){
+                var target = e.target;
+                if( this.state.loadClicked && target != this.loadButton ){
+                    this.setState({
+                        loadClicked: false
+                    });
+                }
+                if( this.state.deleteClicked && target != this.deleteButton ){
+                    this.setState({
+                        deleteClicked: false
+                    });
+                }
+            },
+            handleContent: function(){
+                var val = this.refs.contentInput.getDOMNode().value;
+                this.setState({
+                    content: val
+                });
+            },
+            handleKeyup: function(e){
+                if(e.keyCode === 13){
+                    this.doAddTask();
+                }
+            },
+            doAddTask: function(){
+                if(this.state.content.trim() !== ''){
+                    console.log('add task goes here');
+                    this.props.addOneTask({
+                        content: this.state.content,
+                        ctime: +new Date(),
+                        alive: true
+                    });
+                    this.setState({
+                        content: ''
+                    });
+                }
+            },
+            handleLoadClick: function(){
+                var self = this;
+                if( !this.state.loadClicked ){
+                    this.setState({
+                        loadClicked : true
+                    });
+                }else{
+                    this.doLoadTasks(function(){
+                        self.setState({
+                            loadClicked : false
+                        });
+                    });
+                }
+            },
+            doLoadTasks: function( callback ){
+                var self = this;
+                $.getJSON('stuff.json', function(data){
+                    self.props.loadDefaultTask(data);
+                    callback();
+                });
+            },
+            handleDeleteClick: function(){
+                if( !this.state.deleteClicked ){
+                    this.setState({
+                        deleteClicked : true
+                    });
+                }else{
+                    this.props.deleteAllTask();
+                    this.setState({
+                        deleteClicked : false
+                    });
+                }
+            },
+            render: function(){
+                var addButtonDisabled = this.state.content.trim() === '' ? true : false;
+                var loadStyle = this.state.loadClicked? {}: {display: "none"};
+                var deleteStyle = this.state.deleteClicked? {}: {display: "none"};
+                return (
+                    <div>
+                        <div className="content-wrapper">
+                            <input
+                                type="text"
+                                className="input-area"
+                                value={this.state.content}
+                                onChange={this.handleContent}
+                                onKeyUp={this.handleKeyup}
+                                ref="contentInput"
+                                placeholder="Enter Task Content..."
+                            />
+                        </div>
+                        <div className="control-area">
+                            <button
+                                className="add-button"
+                                disabled={addButtonDisabled}
+                                onClick={this.doAddTask}
+                            >Add Task</button>
+                            <button
+                                className="load-button"
+                                onClick={this.handleLoadClick}
+                            >
+                            {this.state.loadClicked? "Click Again To Confirm":"Load Default Tasks"}
+                            </button>
+                            <button
+                                className="delete-button"
+                                onClick={this.handleDeleteClick}
+                            >
+                            {this.state.deleteClicked? "Click Again To Confirm":"Delete All Tasks"}
+                            </button>
+                        </div>
+                        <div className="tips-area">
+                            <p style={loadStyle}>Load default tasks will override current tasks, Please confirm!</p>
+                            <p style={deleteStyle}>Are you sure to delete all the above tasks? Please confirm!</p>
+                        </div>
+                    </div>
+                );
+            }
+        });
+        var TaskListDemo = React.createClass({
             getInitialState: function(){
                 return {
-                    taskList: this.props.taskList
+                    taskList: this.props.taskList,
+                    filterObj : {
+                        filterText: '',
+                        filterType: 'all'
+                    }
                 }
             },
             handleDelete: function(index){
@@ -183,66 +368,25 @@
                 var str = JSON.stringify(this.state.taskList);
                 localStorage.setItem('task', str);
             },
-            filterTask: function(task){
-                switch(this.props.filterObj.filterType){
-                    case 'all':
-                        break;
-                    case 'completed':
-                        if( task.alive ){
-                            return false;
-                        }
-                        break;
-                    case 'alive':
-                        if( !task.alive ){
-                            return false;
-                        }
-                        break;
-                }
-                if(task.content.indexOf(this.props.filterObj.filterText) >= 0){
-                    return true;
-                }else{
-                    return false;
-                }
+            addOneTask: function(obj){
+                var tasks = this.state.taskList;
+                tasks.push(obj);
+                this.setState({
+                    taskList: tasks
+                });
+                this.refreshLocalStorage();
             },
-            render: function(){
-                var arr = [];
-                var index = 0;
-                this.state.taskList.forEach(function(task){
-                    if( this.filterTask(task) ){
-                        arr.push(
-                                <TaskLine
-                                    task={task}
-                                    index={index}
-                                    key={index}
-                                    onTaskDelete={this.handleDelete}
-                                    onTaskComplete={this.handleComplete}
-                                    onTaskUndo={this.handleUndo}
-                                 />
-                                 );
-                        index++;
-                    }
-                }.bind(this));
-                return (
-                    <ul>
-                        {
-                            arr.length != 0?
-                            arr : 
-                                this.props.filterObj.filterText == '' && this.props.filterObj.filterType == 'all'?
-                                <li className="task-li task-no">No task now, add task or load default tasks first.</li> :
-                                <li className="task-li task-no">No such task found!</li>
-                        }
-                    </ul>
-                );
-            }
-        });
-        var TaskListDemo = React.createClass({
-            getInitialState: function(){
-                return {
-                    filterObj : {
-                        filterText: '',
-                        filterType: 'all'
-                    }
-                };
+            deleteAllTask: function(){
+                this.setState({
+                    taskList: []
+                });
+                this.refreshLocalStorage();
+            },
+            loadDefaultTask: function(arr){
+                this.setState({
+                    taskList: arr
+                });
+                this.refreshLocalStorage();
             },
             handleUserAction: function(filterText, filterType){
                 this.setState({
@@ -263,8 +407,16 @@
                             />
                         </div>
                         <TaskUl 
-                            taskList={this.props.taskList}
+                            taskList={this.state.taskList}
                             filterObj={this.state.filterObj}
+                            onTaskComplete={this.handleComplete}
+                            onTaskDelete={this.handleDelete}
+                            onTaskUndo={this.handleUndo}
+                        />
+                        <ControlArea
+                            addOneTask={this.addOneTask}
+                            deleteAllTask={this.deleteAllTask}
+                            loadDefaultTask={this.loadDefaultTask}
                         />
                     </div>
                 );
