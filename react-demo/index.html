@@ -347,24 +347,21 @@
                 tasks.splice(index, 1);
                 this.setState({
                     taskList: tasks
-                });
-                this.refreshLocalStorage();
+                }, this.refreshLocalStorage);
             },
             handleComplete: function(index){
                 var tasks = this.state.taskList;
                 tasks[index].alive = false;
                 this.setState({
                     taskList: tasks
-                });
-                this.refreshLocalStorage();
+                }, this.refreshLocalStorage);
             },
             handleUndo: function(index){
                 var tasks = this.state.taskList;
                 tasks[index].alive = true;
                 this.setState({
                     taskList: tasks
-                });
-                this.refreshLocalStorage();
+                }, this.refreshLocalStorage);
             },
             refreshLocalStorage: function(){
                 var str = JSON.stringify(this.state.taskList);
@@ -375,21 +372,18 @@
                 tasks.push(obj);
                 this.setState({
                     taskList: tasks
-                });
-                this.refreshLocalStorage();
+                }, this.refreshLocalStorage);
             },
             deleteAllTask: function(){
                 var tasks = [];
                 this.setState({
                     taskList: tasks
-                });
-                localStorage.setItem('task', '');
+                }, this.refreshLocalStorage);
             },
             loadDefaultTask: function(arr){
                 this.setState({
                     taskList: arr
-                });
-                this.refreshLocalStorage();
+                }, this.refreshLocalStorage);
             },
             handleUserAction: function(filterText, filterType){
                 this.setState({
