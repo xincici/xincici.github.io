@@ -97,13 +97,13 @@
         });
         var TaskLine = React.createClass({
             doComplete: function(){
-                this.props.onTaskComplete( this.props.index );
+                this.props.onTaskComplete( this.props.task );
             },
             doDelete: function(){
-                this.props.onTaskDelete( this.props.index );
+                this.props.onTaskDelete( this.props.task );
             },
             doUndo: function(){
-                this.props.onTaskUndo( this.props.index );
+                this.props.onTaskUndo( this.props.task );
             },
             fomatTime: function(ts){
                 var d = new Date(ts),
@@ -342,22 +342,25 @@
                     }
                 }
             },
-            handleDelete: function(index){
+            handleDelete: function(task){
                 var tasks = this.state.taskList;
+				var index = tasks.indexOf(task);
                 tasks.splice(index, 1);
                 this.setState({
                     taskList: tasks
                 }, this.refreshLocalStorage);
             },
-            handleComplete: function(index){
+            handleComplete: function(task){
                 var tasks = this.state.taskList;
+				var index = tasks.indexOf(task);
                 tasks[index].alive = false;
                 this.setState({
                     taskList: tasks
                 }, this.refreshLocalStorage);
             },
-            handleUndo: function(index){
+            handleUndo: function(task){
                 var tasks = this.state.taskList;
+				var index = tasks.indexOf(task);
                 tasks[index].alive = true;
                 this.setState({
                     taskList: tasks
