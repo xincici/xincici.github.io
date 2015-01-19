@@ -94,6 +94,7 @@
             },
             clearFilterText: function(){
                 this.props.onUserAction('', this.refs.filterTypeSelect.getDOMNode().value);
+                this.refs.filterTextInput.getDOMNode().focus();
             },
             render: function(){
                 return (
@@ -324,6 +325,7 @@
                 this.setState({
                     content: ''
                 });
+                this.refs.contentInput.getDOMNode().focus();
             },
             render: function(){
                 var addButtonDisabled = this.state.content.trim() === '' ? true : false;
