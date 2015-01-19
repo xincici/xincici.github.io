@@ -92,6 +92,9 @@
             handleChange: function(){
                 this.props.onUserAction(this.refs.filterTextInput.getDOMNode().value, this.refs.filterTypeSelect.getDOMNode().value);
             },
+            clearFilterText: function(){
+                this.props.onUserAction('', this.refs.filterTypeSelect.getDOMNode().value);
+            },
             render: function(){
                 return (
                     <div className="filter-area">
@@ -104,6 +107,11 @@
                                 ref="filterTextInput"
                                 onChange={this.handleChange}
                             />
+                            {
+                                this.props.filterObj.filterText !== ''?
+                                <em className="delete-icon" onClick={this.clearFilterText}></em>
+                                :''
+                            }
                         </div>
                         <select 
                             className="filter-select"
@@ -312,6 +320,11 @@
                     });
                 }
             },
+            clearContentInput: function(){
+                this.setState({
+                    content: ''
+                });
+            },
             render: function(){
                 var addButtonDisabled = this.state.content.trim() === '' ? true : false;
                 var delButtonDisabled = this.props.taskList.length === 0 ? true : false;
@@ -329,6 +342,11 @@
                                 ref="contentInput"
                                 placeholder="Enter Task Content..."
                             />
+                            {
+                                this.state.content !== ''?
+                                <em className="delete-icon" onClick={this.clearContentInput}></em>
+                                :''
+                            }
                         </div>
                         <div className="control-area">
                             <button
