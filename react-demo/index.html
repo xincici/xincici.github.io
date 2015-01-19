@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css" />
     <script src="/lib/jquery-2.1.3.min.js"></script>
     <script src="/bower_components/react/JSXTransformer.js"></script>
-    <script src="/bower_components/react/react.js"></script>
+    <script src="/bower_components/react/react-with-addons.js"></script>
     <style>
         html,body{font-size:13px;}
         body{background:url("bg.png");}
@@ -33,6 +33,29 @@
         .undo-task{margin-right:0px;}
 
         .task-no{background:#aa0; color:#ff4;}
+        .task-li.ng-enter,
+        .task-li.ng-leave{
+            transition : all 0.5s ease-in-out 0s;
+        }
+        .task-li.ng-enter{
+            opacity : 0;
+            height : 0;
+            overflow : hidden;
+        }
+        .task-li.ng-enter.ng-enter-active{
+            opacity : 1;
+            height : 32px;
+        }
+        .task-li.ng-leave{
+            opacity : 1;
+            height : 32px;
+            overflow : hidden;
+        }
+        .task-li.ng-leave.ng-leave-active{
+            opacity : 0;
+            height : 0px;
+            overflow : hidden;
+        }
 
         .filter-wrapper{display:inline-block; position:relative;}
         .filter-wrapper .delete-icon,
@@ -64,6 +87,7 @@
     </div>
     <script>var globalIndex = 1;</script>
     <script type="text/jsx">
+        var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
         var FilterArea = React.createClass({
             handleChange: function(){
                 this.props.onUserAction(this.refs.filterTextInput.getDOMNode().value, this.refs.filterTypeSelect.getDOMNode().value);
@@ -192,13 +216,15 @@
                 }.bind(this));
                 return (
                     <ul>
+                        <ReactCSSTransitionGroup transitionName="ng">
                         {
-                            arr.length != 0?
-                            arr : 
-                                this.props.filterObj.filterText == '' && this.props.filterObj.filterType == 'all'?
+                            this.props.taskList.length === 0?
                                 <li className="task-li task-no">No task now, add task or load default tasks first.</li> :
-                                <li className="task-li task-no">No such task found!</li>
+                                arr.length != 0?
+                                    arr : 
+                                    <li className="task-li task-no">No such task found!</li>
                         }
+                        </ReactCSSTransitionGroup>
                     </ul>
                 );
             }
