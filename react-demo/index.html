@@ -87,6 +87,7 @@
     </div>
     <script>var globalIndex = 1;</script>
     <script type="text/jsx">
+        var TASKMAXNUMBER = 26;
         var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
         var FilterArea = React.createClass({
             handleChange: function(){
@@ -276,7 +277,7 @@
                 }
             },
             doAddTask: function(){
-                if(this.props.taskList.length >= 26) return;
+                if(this.props.taskList.length >= TASKMAXNUMBER) return;
                 if(this.state.content.trim() !== ''){
                     this.props.addOneTask({
                         content: this.state.content,
@@ -328,10 +329,12 @@
                 this.refs.contentInput.getDOMNode().focus();
             },
             render: function(){
-                var addButtonDisabled = this.state.content.trim() === '' || this.props.taskList.length >= 26 ? true : false;
+                var contentInputDisabled = this.props.taskList.length >= TASKMAXNUMBER? true : false;
+                var addButtonDisabled = this.state.content.trim() === '' || this.props.taskList.length >= TASKMAXNUMBER ? true : false;
                 var delButtonDisabled = this.props.taskList.length === 0 ? true : false;
                 var loadStyle = this.state.loadClicked? {}: {display: "none"};
                 var deleteStyle = this.state.deleteClicked? {}: {display: "none"};
+                var limitStyle = this.props.taskList.length >= TASKMAXNUMBER? {}: {display: "none"};
                 return (
                     <div>
                         <div className="content-wrapper">
@@ -341,6 +344,7 @@
                                 value={this.state.content}
                                 onChange={this.handleContent}
                                 onKeyUp={this.handleKeyup}
+                                disabled={contentInputDisabled}
                                 ref="contentInput"
                                 placeholder="Enter Task Content..."
                             />
@@ -373,6 +377,7 @@
                         <div className="tips-area">
                             <p style={loadStyle}>Load default tasks will override current tasks, Please confirm!</p>
                             <p style={deleteStyle}>Are you sure to delete all the above tasks? Please confirm!</p>
+                            <p style={limitStyle}>26 tasks limit reached! Delete some tasks before add new one!</p>
                         </div>
                     </div>
                 );

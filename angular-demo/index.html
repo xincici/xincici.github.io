@@ -107,7 +107,7 @@
                     <li class="task-li task-no" ng-if="results.length==0 && taskList.length!=0">No such task found!</li>
                 </ul>
                 <div class="content-wrapper">
-                    <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
+                    <input class="input-area" type="text" ng-init="content=''" ng-model="content" ng-disabled="taskList.length>=26" ng-keyup="inputKeyup($event)" placeholder="{{'enter task content...' | capFirst}}" />
                     <em class="delete-icon" ng-click="content=''" ng-hide="content==''"></em>
                 </div>
                 <div class="control-area">
@@ -118,6 +118,7 @@
                 <div class="tips-area">
                     <p ng-show="loadClicked">Load default tasks will override current tasks, Please confirm!</p>
                     <p ng-show="deleteClicked">Are you sure to delete all the above tasks? Please confirm!</p>
+                    <p ng-show="taskList.length>=26">26 tasks limit reached! Delete some tasks before add new one!</p>
                 </div>
             </div>
         </div>
