@@ -276,8 +276,8 @@
                 }
             },
             doAddTask: function(){
+                if(this.props.taskList.length >= 26) return;
                 if(this.state.content.trim() !== ''){
-                    console.log('add task goes here');
                     this.props.addOneTask({
                         content: this.state.content,
                         ctime: +new Date(),
@@ -328,7 +328,7 @@
                 this.refs.contentInput.getDOMNode().focus();
             },
             render: function(){
-                var addButtonDisabled = this.state.content.trim() === '' ? true : false;
+                var addButtonDisabled = this.state.content.trim() === '' || this.props.taskList.length >= 26 ? true : false;
                 var delButtonDisabled = this.props.taskList.length === 0 ? true : false;
                 var loadStyle = this.state.loadClicked? {}: {display: "none"};
                 var deleteStyle = this.state.deleteClicked? {}: {display: "none"};
