@@ -4,6 +4,5 @@
 /GruntFile.js
 /dist/
 /node_modules/
-/package.json
 *.swp
 .DS_Store
