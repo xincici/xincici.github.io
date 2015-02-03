@@ -8,78 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/fonts/calluna-sans.css" />
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
-    <style>
-        html,body{font-size:13px;}
-        input,button,select,textarea{font-family:"Calluna Sans";}/* use new font */
-        body{background:url("bg.png");}
-        .wrapper{width:960px;margin:40px auto 0; text-align:center;}
-    
-        .filter-area{width:400px; margin:0 auto 10px;font-size:0px;}
-        .filter-area .filter-input{width:200px;text-indent:4px;margin-bottom:0px;font-size:14px;border:1px solid #c2c2c2;line-height:28px;}
-        .filter-area .filter-select{width:196px; margin-left:4px;margin-bottom:0px;font-size:14px;height:32px; line-height:32px; border:1px solid #c2c2c2;padding:1px;}
-
-        ul,li{list-style:none;}
-        ul{width:400px;margin:0 auto 10px;padding:0px;border:1px solid #c2c2c2;}
-        li{display:block;line-height:32px; padding:0px; margin:0px;text-align:left;text-indent:1em;}
-        li + li{border-top:1px solid #d1d1d1;}
-        .li-even{background:#f1f1f1;}
-        .task-content{display:inline-block;vertical-align:top;text-indent:0; max-width:180px; white-space:nowrap; text-overflow: ellipsis; overflow:hidden;}
-        .dead{background-color: #1aa;color:#fff;}
-        .dead .task-content{text-decoration: line-through;}
-        .create-time{font-size:12px;opacity:0.4;margin-left:8px;}
-        .delete-task,
-        .undo-task{margin-right:5px;cursor:pointer;float:right;text-indent:0px;width:20px; text-align:center;}
-        .delete-task:hover{font-size:18px; color:#e00;}
-        .undo-task:hover{font-size:18px; color:#0e0;}
-        .undo-task{margin-right:0px;}
-
-        .task-no{background:#aa0; color:#ff4;}
-        .task-li.ng-enter,
-        .task-li.ng-leave{
-            transition : all 0.5s ease-in-out 0s;
-        }
-        .task-li.ng-enter{
-            opacity : 0;
-            height : 0;
-            overflow : hidden;
-        }
-        .task-li.ng-enter.ng-enter-active{
-            opacity : 1;
-            height : 32px;
-        }
-        .task-li.ng-leave{
-            opacity : 1;
-            height : 32px;
-            overflow : hidden;
-        }
-        .task-li.ng-leave.ng-leave-active{
-            opacity : 0;
-            height : 0px;
-            overflow : hidden;
-        }
-
-        .filter-wrapper{display:inline-block; position:relative;}
-        .filter-wrapper .delete-icon,
-        .content-wrapper .delete-icon{display:inline-block; cursor:pointer; height:20px; width:20px; position:absolute; top:5px; right:5px; background:url("./delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0); opacity:0.6;}
-        .filter-wrapper .delete-icon:hover,
-        .content-wrapper .delete-icon:hover{opacity:1;}
-        .content-wrapper .input-area{width: 400px; text-indent: 4px; display: block; margin-bottom: 0px; line-height:28px; border:1px solid #c2c2c2; outline: 0 none;}
-        button{outline: 0 none;}
-        button:disabled{opacity:0.4;}
-
-        .content-wrapper{width:400px; margin:0 auto 10px; position:relative;}
-
-        .control-area{width:400px; margin:0 auto 10px; font-size:0;}
-        .control-area button{border:0 none; line-height:28px; font-size:14px;}
-        .control-area .add-button{display:block; width: 100%; margin-bottom:10px; background:#4a4; color:#fff;}
-        .control-area .add-button:hover:enabled{background:#5b5;}
-        .control-area .delete-button{width:198px; background:#a44;color:#fff; margin-left:4px;}
-        .control-area .delete-button:hover:enabled{background:#b55;}
-        .control-area .load-button{width:198px; background:#44a;color:#fff;}
-        .control-area .load-button:hover:enabled{background:#55b;}
-        .tips-area{width:400px; margin: 0 auto; font-size:14px; color:#b00;}
-        .tips-area i.fa{margin-right:4px;}
-    </style>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 <body>
 
