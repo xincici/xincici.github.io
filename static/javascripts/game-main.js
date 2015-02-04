@@ -1,5 +1,5 @@
 seajs.config({
-    base : "/modules/",
+    base : "/static/modules/",
     alias :{
         "sort" : "sort.js",
         "underscore" : "underscore.js"

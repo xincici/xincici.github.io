@@ -1,4 +1,5 @@
 $(function(){
+    // 上上下下左左右右BABA
 	var keystr = '383840403737393966656665';
 	var pressed = '';
     var shown = false;
