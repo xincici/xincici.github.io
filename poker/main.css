@@ -24,16 +24,9 @@ body{
 #list .hidden{
     color: #ffe;
 }
-#list .tonghuashun,
-#list .sitiao,
-#list .hulu,
-#list .shunzi,
-#list .tonghua,
-#list .santiao,
-#list .liangdui,
-#list .yidui{
-    line-height:25px;
-    margin:5px 0 0 18px;
+#list div{
+    line-height:31px;
+    padding-left:18px;
     font-weight:900;
 }
 #main{
@@ -59,6 +52,7 @@ body{
 }
 .money-area .btn{
     text-indent:0;
+    width: 35px;
 }
 .money-area .total{
     float:left;
@@ -87,7 +81,7 @@ body{
     width:100%;
 }
 .poker-area .back{
-    width:59px;
+    width:60px;
     height:88px;
     border:2px solid #e22;
     border-radius:3px 3px 3px 3px;
@@ -119,11 +113,11 @@ body{
 .judge-area .big,
 .judge-area .small{
     float: left;
-    height: 50px;
+    height: 60px;
     line-height: 50px;
     margin-left: 10px;
     margin-top: 4px;
-    width: 60px;
+    width: 75px;
 }
 .judge-area .result,
 .judge-area .win-lose{
@@ -131,15 +125,15 @@ body{
     height: 69px;
     line-height: 69px;
     margin-right: 15px;
-    width: 40px;
+    width: 50px;
 }
 .control-area{
     float:right;
 }
 .control-area .go,
 .control-area .get{
-    height: 50px;
+    height: 60px;
     line-height: 50px;
     margin: 4px;
-    width: 50px;
+    width: 75px;
 }

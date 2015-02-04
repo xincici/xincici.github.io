@@ -37,13 +37,13 @@ $(function(){
             _totalMoney = cookieValue.split('|')[0];
             _perMoney = cookieValue.split('|')[1];
         }else{
-                _totalMoney = 1000;
-                _perMoney = 20;
+            _totalMoney = 1000;
+            _perMoney = 20;
         }
         if( _totalMoney <= 100){
-                alert('资产只剩'+ _totalMoney +'了，快破产了啊！重新来过吧！');
-                _totalMoney = 1000;
-                _perMoney = 20;
+            alert('资产只剩'+ _totalMoney +'了，快破产了啊！重新来过吧！');
+            _totalMoney = 1000;
+            _perMoney = 20;
         }
         $('.total-num').html( _totalMoney );
         $('.down-num').html( _perMoney );
@@ -54,9 +54,9 @@ $(function(){
     }
     _init();
     var arr = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13',
-                         'r1','r2','r3','r4','r5','r6','r7','r8','r9','r10','r11','r12','r13',
-                         'm1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13',
-                         'f1','f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','f13'];
+               'r1','r2','r3','r4','r5','r6','r7','r8','r9','r10','r11','r12','r13',
+               'm1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13',
+               'f1','f2','f3','f4','f5','f6','f7','f8','f9','f10','f11','f12','f13'];
     //是否正在游戏
     var game = false;
     //是否正在显示牌背面
@@ -75,7 +75,7 @@ $(function(){
     var random_value = [];
     //帮助按钮被点击次数
     var count = 0;
-    $(document).delegate('#main .control-area', 'click', function(e){
+    $(document).on('click', '#main .control-area .btn', function(e){
         var el = $(e.target);
         if(!guess){
             //发牌
@@ -211,13 +211,13 @@ $(function(){
         }
     });
     //选择保留
-    $(document).delegate('#main .poker-area', 'click', function(e){
+    $(document).on('click', '#main .poker-area', function(e){
         var el = $(e.target);
         if(!dealing && fnum == 1 && el.hasClass('back')){
             el.toggleClass('hold');
         }
     });
-    $(document).delegate('#main .judge-area', 'click', function(e){
+    $(document).on('click', '#main .judge-area', function(e){
         var el = $(e.target);
         //猜大小结果判断
         if(guess && el.hasClass('big')){
@@ -259,7 +259,7 @@ $(function(){
         }
     });
     //赌注加大减小
-    $(document).delegate('#main .money-area .down', 'click', function(e){
+    $(document).on('click', '#main .money-area .down', function(e){
         var el = $(e.target);
         var num = parseInt($(this).find('.down-num').html());
         if(!game && el.hasClass('lower') && num > 1){
@@ -268,7 +268,7 @@ $(function(){
         else if(!game && el.hasClass('higher') && num < 99){
             $(this).find('.down-num').html(num + 1);
         }
-    }).delegate('#main .money-area .help', 'click', function(e){
+    }).on('click', '#main .money-area .help', function(e){
         if(count < 4){
             count ++;
             alert('点击开始按钮发牌，第一次发牌后点击牌可以选择保留该牌，再次点击发牌会替换掉未被保留的牌，形成最终牌型，'
