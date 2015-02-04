@@ -1,63 +1,16 @@
 <!DOCTYPE html>
 <html>
-@@include('./header.html')
+@@include('./part_header.html')
   <body>
-    <div id="skin" class="skin1">
-        <div class="rect"></div>
-        <ul class="skin_slide">
-            <li class="color0 current"></li>
-            <li class="color1" bcolor="#9d2932"></li>
-            <li class="color2" bcolor="#f0c238"></li>
-            <li class="color3" bcolor="#5b5138"></li>
-            <li class="color4" bcolor="#cca4e3"></li>
-            <li class="color5" bcolor="#ed5736"></li>
-            <li class="color6" bcolor="#d9b610"></li>
-            <li class="color7" bcolor="#a98273"></li>
-            <li class="color8" bcolor="#f8906d"></li>
-            <li class="color9" bcolor="#494264"></li>
-        </ul>
-    </div>
+@@include('./part_skin.html')
     <div id="wrapper">
-        <header>
-          <div class="container">
-            <div class="h-title clearfix">
-                <h1 class="">xincici github pages</h1>
-                <div class="title-nav">
-                    <ul class="clearfix">
-                        <li><a href="/">Home</a></li>
-                        <li class="sep"></li>
-                        <li class="cur"><a href="/about.html">About</a></li>
-                    </ul>
-                </div>
-            </div>
-            <section id="downloads">
-                <div class="h-sub-title"><h3>Only some demos of my own!</h3></div>
-                <!-- <a href="https://github.com/xincici" class="btn btn-github"><span class="icon"></span>View on GitHub</a> -->
-            </section>
-          </div>
-        </header>
+@@include('./part_top_nav.html', {
+    "index": "",
+    "about": "cur"
+})
         <div class="content">
           <div class="container clearfix">
-            <div class="left-content">
-                <div class="left-inner clearfix">
-                    <img class="face" src="/images/face.png" />
-                    <ul>
-                        <li>xincici</li>
-                        <li>zzu</li>
-                        <li>bupt</li>
-                        <li>sohu -> meituan</li>
-                        <li>front-end developer</li>
-                    </ul>
-                </div>
-                <div class="left-inner-2 clearfix">
-                    <ul class="clearfix">
-                        <li><a href="https://www.facebook.com/linye1987" target="blank" title="facebook"><img src="/images/facebook.png" /></a></li>
-                        <li><a href="https://twitter.com/linye1987" target="blank" title="twitter"><img src="/images/twitter.png" /></a></li>
-                        <li><a href="https://plus.google.com/111307553986790467583" title="google+"><img src="/images/googleplus.png" /></a></li>
-                        <li><a href="https://github.com/xincici" class="btn btn-github"><span class="icon"></span>View on GitHub</a></li>
-                    </ul>
-                </div>
-            </div>
+@@include('./part_left.html')
             <div class="right-content">
                 <div class="about">
                     <div class="about-block">
@@ -104,7 +57,7 @@
           </div>
         </div>
     </div>
-@@include('./footer.html')
+@@include('./part_footer.html')
   <link rel="stylesheet" type="text/css" href="/ydialog/css/yelin-dialog.css" />
   <script type="text/javascript" src="/ydialog/js/yelin-dialog.js"></script>
   <script type="text/javascript" src="/javascripts/egg.js"></script>
