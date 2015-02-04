@@ -75,7 +75,7 @@
 .skin_slide{list-style:none;width:150px;position:absolute;right:-170px;top:40px;padding:0;background-color:#aaa;transition:right 0.5s ease 0s;}
 .ulshown{right:-40px;transition:right 0.5s ease 0s;}
 .skin_slide li{list-style:none;width:144px;height:50px;margin:3px auto;border:1px solid none;border-radius:3px;}
-.color0{background:url("/images/bg.jpg") no-repeat 0 0 scroll transparent;}
+.color0{background:url("../images/bg.jpg") no-repeat 0 0 scroll transparent;}
 .color1{background-color:#9d2932;}
 .color2{background-color:#f0c238;}
 .color3{background-color:#5b5138;}
