@@ -12,7 +12,7 @@ $(function(){
 				title : 'download resume',
 				simple : true,
 				type : 'alert',
-				content : '<a target="blank" href="/staff/resume.pdf">click here to download resume</a>',
+				content : '<a target="blank" href="/resume/resume.pdf">click here to download resume</a>',
                 close : function(){
                     shown = false;
                 }
