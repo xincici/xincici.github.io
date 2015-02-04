@@ -1,94 +1,94 @@
 <!doctype html>
 <html>
-  <head>
-    <title>poker game</title>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="/static/lib/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="main.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-  <div class="wrapper">
-    <div id="list">
-      <div class="tonghuashun">
-        同花顺........250倍
-      </div>
-      <div class="sitiao">
-        四条...........60倍
-      </div>
-      <div class="hulu">
-        葫芦...........20倍
-      </div>
-      <div class="shunzi">
-        顺子...........10倍
-      </div>
-      <div class="tonghua">
-        同花............7倍
-      </div>
-      <div class="santiao">
-        三条............5倍
-      </div>
-      <div class="liangdui">
-        两对............2倍
-      </div>
-      <div class="yidui">
-        大于8一对.......1倍
-      </div>
+    <head>
+        <title>poker game</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="/static/lib/jquery-1.7.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="main.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+    <div class="wrapper">
+        <div id="list">
+            <div class="tonghuashun">
+                同花顺........250倍
+            </div>
+            <div class="sitiao">
+                四条...........60倍
+            </div>
+            <div class="hulu">
+                葫芦...........20倍
+            </div>
+            <div class="shunzi">
+                顺子...........10倍
+            </div>
+            <div class="tonghua">
+                同花............7倍
+            </div>
+            <div class="santiao">
+                三条............5倍
+            </div>
+            <div class="liangdui">
+                两对............2倍
+            </div>
+            <div class="yidui">
+                大于8一对.......1倍
+            </div>
+        </div>
+        <div id="main">
+            <div class="money-area">
+                <span class="total">现金:
+                    <b class="total-num"></b>
+                </span>
+                <span class="money">赢:
+                    <b class="money-num">0</b>
+                </span>
+                <span class="down">下注：
+                    <span class="btn btn-mini lower">-</span>
+                    <b class="down-num"></b>
+                    <span class="btn btn-mini higher">+</span>
+                </span>
+                <span class="helpbutton">
+                    <span class="btn btn-mini help">帮助</span>
+                </span>
+            </div>
+            <div class="poker-area">
+                <div class="pokers">
+                    <div class="card-1 back hold">
+                    </div>
+                    <div class="card-2 back hold">
+                    </div>
+                    <div class="card-3 back hold">
+                    </div>
+                    <div class="card-4 back hold">
+                    </div>
+                    <div class="card-5 back hold">
+                    </div>
+                </div>
+                <div class="win-result">
+                    您赢了！
+                </div>
+                <div class="lose-result">
+                    您输了！
+                </div>
+            </div>
+            <div class="judge-area">
+                <span class="btn big">大</span>
+                <span class="btn small">小</span>
+                <span class="win-lose"></span>
+                <span class="result"></span>
+            </div>
+            <div class="control-area">
+                <span class="btn go">开始</span>
+                <span class="btn get">结算</span>
+            </div>
+        </div>
     </div>
-    <div id="main">
-      <div class="money-area">
-        <span class="total">现金:  
-          <b class="total-num"></b>
-        </span>
-        <span class="money">赢:  
-          <b class="money-num">0</b>
-        </span>
-        <span class="down">下注：
-          <span class="btn btn-mini lower">-</span>
-          <b class="down-num"></b>
-          <span class="btn btn-mini higher">+</span>
-        </span>
-        <span class="helpbutton">  
-          <span class="btn btn-mini help">帮助</span>
-        </span>
-      </div>
-      <div class="poker-area">
-        <div class="pokers">
-          <div class="card-1 back hold">
-          </div>
-          <div class="card-2 back hold">
-          </div>
-          <div class="card-3 back hold">
-          </div>
-          <div class="card-4 back hold">
-          </div>
-          <div class="card-5 back hold">
-          </div>
-        </div>
-        <div class="win-result">
-          您赢了！
-        </div>
-        <div class="lose-result">
-          您输了！
-        </div>
-      </div>
-      <div class="judge-area">
-        <span class="btn big">大</span>
-        <span class="btn small">小</span>
-        <span class="win-lose"></span>
-        <span class="result"></span>
-      </div>
-      <div class="control-area">
-        <span class="btn go">开始</span>
-        <span class="btn get">结算</span>
-      </div>
+    <div id="p1" style="position:absolute; left:0px; bottom: 0px; width:344px; height:228px; background-repeat: no-repeat;">
     </div>
-  </div>
-  <div id="p1" style="position:absolute; left:0px; bottom: 0px; width:344px; height:228px; background-repeat: no-repeat;">
-  </div>
-  <div id="p2" style="position:absolute; left:0px; bottom: 0px; width:228px; height:344px; background-repeat: no-repeat;">
-  </div>
-  <button id="clear" style="display: none;">好了，我知道了！</button>
-  <body>
+    <div id="p2" style="position:absolute; left:0px; bottom: 0px; width:228px; height:344px; background-repeat: no-repeat;">
+    </div>
+    <button id="clear" style="display: none;">好了，我知道了！</button>
+    <body>
 </html>

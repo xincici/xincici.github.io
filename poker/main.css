@@ -1,28 +1,28 @@
 body{
-  font: 12px/1.6 Arial,Helvetica,sans-serif;
+    font: 12px/1.6 Arial,Helvetica,sans-serif;
 }
 .wrapper{
-  font-family: 隶书;
-  margin: 0 auto;
-  margin-top: 100px;
-  width:670px;
+    font-family: 隶书;
+    margin: 0 auto;
+    margin-top: 100px;
+    width:670px;
 }
 #clear{
-  position:absolute;
-  left:0;
-  top:0;
-  margin:5px 0 0 5px;
+    position:absolute;
+    left:0;
+    top:0;
+    margin:5px 0 0 5px;
 }
 #list{
-  width:169px;
-  height:250px;
-  border:1px solid #ccc;
-  border-right:none;
-  float:left;
-  border-radius: 5px 0 0 5px;
+    width:169px;
+    height:250px;
+    border:1px solid #ccc;
+    border-right:none;
+    float:left;
+    border-radius: 5px 0 0 5px;
 }
 #list .hidden{
-  color: #ffe;
+    color: #ffe;
 }
 #list .tonghuashun,
 #list .sitiao,
@@ -32,114 +32,114 @@ body{
 #list .santiao,
 #list .liangdui,
 #list .yidui{
-  line-height:25px;
-  margin:5px 0 0 18px;
-  font-weight:900;
+    line-height:25px;
+    margin:5px 0 0 18px;
+    font-weight:900;
 }
 #main{
-  float:left;
-  width:498px;
-  height:250px;
-  border:1px solid #ccc;
-  border-radius: 0 5px 5px 0;
+    float:left;
+    width:498px;
+    height:250px;
+    border:1px solid #ccc;
+    border-radius: 0 5px 5px 0;
 }
 #main button{
-  cursor:pointer;
-  font-family:隶书;
+    cursor:pointer;
+    font-family:隶书;
 }
 .money-area{
-  display:inline-block;
-  height:40px;
-  line-height:40px;
-  font-weight:900;
-  border-bottom: 1px solid #ddd;
-  width:100%;
-  vertical-align:middle;
-  text-indent:10px;
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    font-weight:900;
+    border-bottom: 1px solid #ddd;
+    width:100%;
+    vertical-align:middle;
+    text-indent:10px;
 }
 .money-area .btn{
-  text-indent:0;
+    text-indent:0;
 }
 .money-area .total{
-  float:left;
-  border-right:1px solid #ddd;
-  width:150px;
+    float:left;
+    border-right:1px solid #ddd;
+    width:150px;
 }
 .money-area .money{
-  float:left;
-  border-right:1px solid #ddd;
-  width:120px;
+    float:left;
+    border-right:1px solid #ddd;
+    width:120px;
 }
 .money-area .down{
-  border-right: 1px solid #DDDDDD;
-  float: left;
-  width: 160px;
+    border-right: 1px solid #DDDDDD;
+    float: left;
+    width: 160px;
 }
 .money-area .helpbutton{
-  float:right;
+    float:right;
 }
 .money-area .help{
-  margin-right:13px;
+    margin-right:13px;
 }
 .poker-area{
-  border-bottom: 1px solid #ddd;
-  height: 140px;
-  width:100%;
+    border-bottom: 1px solid #ddd;
+    height: 140px;
+    width:100%;
 }
 .poker-area .back{
-  width:59px;
-  height:88px;
-  border:2px solid #e22;
-  border-radius:3px 3px 3px 3px;
-  background-image:url("images/back.png");
-  float:left;
-  margin-top:30px;
-  margin-left:30px;
-  cursor:pointer;
-  opacity : 0.5;
+    width:59px;
+    height:88px;
+    border:2px solid #e22;
+    border-radius:3px 3px 3px 3px;
+    background-image:url("images/back.png");
+    float:left;
+    margin-top:30px;
+    margin-left:30px;
+    cursor:pointer;
+    opacity : 0.5;
 }
 .poker-area .hold{
-  border:2px solid #555;
-  opacity : 1;
+    border:2px solid #555;
+    opacity : 1;
 }
 .poker-area .win-result,
 .poker-area .lose-result{
-  display:none;
-  line-height:135px;
-  font-size:3em;
-  margin-left:140px;
+    display:none;
+    line-height:135px;
+    font-size:3em;
+    margin-left:140px;
 }
 .judge-area{
-  border-right: 1px solid #DDDDDD;
-  float: left;
-  font-size: 2em;
-  height: 69px;
-  width: 320px;
+    border-right: 1px solid #DDDDDD;
+    float: left;
+    font-size: 2em;
+    height: 69px;
+    width: 320px;
 }
 .judge-area .big,
 .judge-area .small{
-  float: left;
-  height: 50px;
-  line-height: 50px;
-  margin-left: 10px;
-  margin-top: 4px;
-  width: 60px;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 10px;
+    margin-top: 4px;
+    width: 60px;
 }
 .judge-area .result,
 .judge-area .win-lose{
-  float: right;
-  height: 69px;
-  line-height: 69px;
-  margin-right: 15px;
-  width: 40px;
+    float: right;
+    height: 69px;
+    line-height: 69px;
+    margin-right: 15px;
+    width: 40px;
 }
 .control-area{
-  float:right;
+    float:right;
 }
 .control-area .go,
 .control-area .get{
-  height: 50px;
-  line-height: 50px;
-  margin: 4px;
-  width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 4px;
+    width: 50px;
 }
