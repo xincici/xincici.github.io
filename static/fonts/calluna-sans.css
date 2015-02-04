@@ -2,29 +2,29 @@
     font-family:"Calluna Sans";
     font-style:normal;
     font-weight:400;
-    src:url(/fonts/calluna-sans-regular.eot);
-    src:url(/fonts/calluna-sans-regular.eot?#iefix) format("embedded-opentype"),url(/fonts/calluna-sans-regular.woff) format("woff"),url(/fonts/calluna-sans-regular.ttf) format("truetype")
+    src:url(./calluna-sans-regular.eot);
+    src:url(./calluna-sans-regular.eot?#iefix) format("embedded-opentype"),url(./calluna-sans-regular.woff) format("woff"),url(./calluna-sans-regular.ttf) format("truetype")
 }
 @font-face{
     font-family:"Calluna Sans";
     font-style:normal;
     font-weight:700;
-    src:url(/fonts/calluna-sans-bold.eot);
-    src:url(/fonts/calluna-sans-bold.eot?#iefix) format("embedded-opentype"),url(/fonts/calluna-sans-bold.woff) format("woff"),url(/fonts/calluna-sans-bold.ttf) format("truetype")
+    src:url(./calluna-sans-bold.eot);
+    src:url(./calluna-sans-bold.eot?#iefix) format("embedded-opentype"),url(./calluna-sans-bold.woff) format("woff"),url(./calluna-sans-bold.ttf) format("truetype")
 }
 @font-face{
     font-family:"Calluna Sans";
     font-style:italic;
     font-weight:400;
-    src:url(/fonts/calluna-sans-italic.eot);
-    src:url(/fonts/calluna-sans-italic.eot?#iefix) format("embedded-opentype"),url(/fonts/calluna-sans-italic.woff) format("woff"),url(/fonts/calluna-sans-italic.ttf) format("truetype")
+    src:url(./calluna-sans-italic.eot);
+    src:url(./calluna-sans-italic.eot?#iefix) format("embedded-opentype"),url(./calluna-sans-italic.woff) format("woff"),url(./calluna-sans-italic.ttf) format("truetype")
 }
 @font-face{
     font-family:"Calluna Sans black";
     font-style:normal;
     font-weight:400;
-    src:url(/fonts/calluna-sans-black.eot);
-    src:url(/fonts/calluna-sans-black.eot?#iefix) format("embedded-opentype"),url(/fonts/calluna-sans-black.woff) format("woff"),url(/fonts/calluna-sans-black.ttf) format("truetype")
+    src:url(./calluna-sans-black.eot);
+    src:url(./calluna-sans-black.eot?#iefix) format("embedded-opentype"),url(./calluna-sans-black.woff) format("woff"),url(./calluna-sans-black.ttf) format("truetype")
 }
 html,body{
     font-family:"Calluna Sans";
