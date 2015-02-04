@@ -123,28 +123,28 @@ $(function(){
                                             _win = setInterval(function(){
                                                 switch (_gResult){
                                                     case 250:
-                                                        $('#list .tonghuashun').toggleClass('hidden');
+                                                        $('#list .tonghuashun').toggleClass('invisible');
                                                         break;
                                                     case 60:
-                                                        $('#list .sitiao').toggleClass('hidden');
+                                                        $('#list .sitiao').toggleClass('invisible');
                                                         break;
                                                     case 20:
-                                                        $('#list .hulu').toggleClass('hidden');
+                                                        $('#list .hulu').toggleClass('invisible');
                                                         break;
                                                     case 10:
-                                                        $('#list .shunzi').toggleClass('hidden');
+                                                        $('#list .shunzi').toggleClass('invisible');
                                                         break;
                                                     case 7:
-                                                        $('#list .tonghua').toggleClass('hidden');
+                                                        $('#list .tonghua').toggleClass('invisible');
                                                         break;
                                                     case 5:
-                                                        $('#list .santiao').toggleClass('hidden');
+                                                        $('#list .santiao').toggleClass('invisible');
                                                         break;
                                                     case 2:
-                                                        $('#list .liangdui').toggleClass('hidden');
+                                                        $('#list .liangdui').toggleClass('invisible');
                                                         break;
                                                     case 1:
-                                                        $('#list .yidui').toggleClass('hidden');
+                                                        $('#list .yidui').toggleClass('invisible');
                                                         break;
                                                 }
                                             },400);
@@ -197,8 +197,8 @@ $(function(){
                 game = false;
                 fnum = 0;
                 clearInterval(_win);
-                if($('#list .hidden').length != 0){
-                    $('#list .hidden').removeClass('hidden');
+                if($('#list .invisible').length != 0){
+                    $('#list .invisible').removeClass('invisible');
                 }
                 $('#main .poker-area .win-result').fadeOut(50, function(){
                     $('#main .poker-area .back').fadeIn(200);
@@ -451,8 +451,8 @@ $(function(){
         guess = false;
         game = false;
         clearInterval(_win);
-        if($('#list .hidden').length != 0){
-            $('#list .hidden').removeClass('hidden');
+        if($('#list .invisible').length != 0){
+            $('#list .invisible').removeClass('invisible');
         }
         showBack();
         fnum = 0;
