@@ -10,7 +10,7 @@ gulp.task('html', function() {
     gulp.src('app/*.html')
     .pipe(fileinclude({
         prefix: '@@',
-        basepath: '@file'
+        basepath: 'app/part/'
     }))
     .pipe(gulp.dest(''));
 });
