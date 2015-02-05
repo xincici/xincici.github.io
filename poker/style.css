@@ -15,7 +15,7 @@ body{
     margin:5px 0 0 5px;
 }
 #list{
-    width:169px;
+    width:170px;
     height:250px;
     border:1px solid #ccc;
     border-right:none;
@@ -32,7 +32,7 @@ body{
 }
 #main{
     float:left;
-    width:498px;
+    width:500px;
     height:250px;
     border:1px solid #ccc;
     border-radius: 0 5px 5px 0;
@@ -115,7 +115,6 @@ body{
 .judge-area .small{
     float: left;
     height: 60px;
-    line-height: 50px;
     margin-left: 10px;
     margin-top: 4px;
     width: 75px;
@@ -134,7 +133,6 @@ body{
 .control-area .go,
 .control-area .get{
     height: 60px;
-    line-height: 50px;
     margin: 4px;
     width: 75px;
 }
