@@ -1,176 +1,51 @@
-html,body{
-    height:100%;
-}
-body{
-    background: url("../images/bg.jpg") repeat 0 0 scroll transparent;
-    font: 12px/1.8 "Droid Sans Mono",monospace;
-}
-#skin{
-    background: url("../images/skin.png") no-repeat scroll 0 0 transparent;
-    background-size: 100% 100%;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    margin: 8px 10px 0 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 10;
-}
-.hidden{
-    display:none;
-}
-.rect{
-    border-bottom: 10px solid #aaa;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    position: absolute;
-    right: -135px;
-    top: 30px;
-    width: 0;
-    transition:right 0.5s ease 0s;
-}
-.rectshown{
-    right:-5px;
-    transition:right 0.5s ease 0s;
-}
-.skin_box{
-    background-color: #336633;
-    border-radius: 5px 5px 5px 5px;
-    width: 109px;
-    height: 52px;
-    margin: 0;
-    padding: 5px;
-    position: absolute;
-    right: 0;
-    top: 40px;
-}
-.s1_mini,.s2_mini{
-    border: 1px solid #777777;
-    border-radius: 5px 5px 5px 5px;
-    float: left;
-    height: 50px;
-    width: 50px;
-}
-.s1_mini:before,.s2_mini:before{
-    content:"";
-}
-.s1_mini{
-    background-image:url("../images/s1_mini.jpg");
-    margin-right:5px;
-}
-.s2_mini{
-    background-image:url("../images/s2_mini.jpg");
-}
-#wrapper{
-    height:auto;
-    min-height:100%;
-}
-header{
-    margin-bottom:0;
-    min-width:1000px;
-    padding-top: 10px;
-    padding-bottom: 0px;
-    background:#333;
-    border-bottom:1px solid #3a3a3a;
-}
-header .h-title{
-    margin: 0 0 10px 0;
-    transition: text-indent .3s ease 0s;
-    border-bottom: 1px dotted #6a6a6a;
-}
-header .h-title-fixed{
-    background: none repeat scroll 0 0 #333;
-    height: 45px;
-    left: 0;
-    line-height: 45px;
-    margin: 0;
-    position: fixed;
-    text-indent: 4em;
-    top: 0;
-    width: 100%;
-    z-index: 5;
-    box-shadow: 0 3px 8px #000;
-    border-bottom: 0 none;
-}
-header .h-title h1{
-    text-shadow: 1px 1px 10px rgb(255, 255, 0);
-    float: left;
-}
-header .h-title .title-nav ul{
-    list-style:none;
-    padding-top:9px;
-}
-header .h-title .title-nav ul li{
-    float:left;
-    text-indent:0;
-}
-header .h-title .title-nav ul li.sep{
-    background: none repeat scroll 0 0 #6a6a6a;
-    display: inline-block;
-    height: 16px;
-    margin: 10px 0;
-    width: 2px;
-}
-header .h-title .title-nav{
-    float:left;
-    margin-left:100px;
-}
-header .h-title .title-nav a{
-    display: inline-block;
-    text-decoration: none;
-    height:36px;
-    line-height:36px;
-    padding: 0 20px;
-    color: #8a8a8a;
-    font-size:18px;
-    outline: 0 none;
-}
-header .h-title .title-nav .cur a,
-header .h-title .title-nav a:hover{
-    color : #aa0;
-}
-header section{
-    margin-bottom:10px;
-}
-header .h-sub-title h3{
-    font-size: 16px;
-    font-style : italic;
-    margin-bottom: 10px;
-}
-#downloads .btn{
-    background-color: #276617;
-}
-#downloads .btn:hover{
-    background-color: #20A715;
-}
-.content{
-    padding-top:10px;
-    padding-bottom:141px;
-}
-.content .btn{
-    border-radius:10px;
-    margin-bottom:10px;    
-}
-.note{
-    border-left:6px solid #e11;
-    background-color:#FFF1CE;
-    padding:6px 8px 6px 10px;
-    color:#aaa;
-}
-footer{
-    height:50px;
-    padding: 30px 0;
-    margin-top :-111px;
-    text-align:center;
-    border-top: 1px dashed rgb(181, 232, 83);
-    width:100%;
-    min-width:1000px;
-    font-size:14px;
-}
-footer a:hover{
-    color : #85e2f9;
-}
-a[href^="http://tongji.baidu.com"]{
-    display:none;
-}
+html { height: 100%; }
+
+body { height: 100%; background: url("../images/bg.jpg") repeat 0 0 scroll transparent; font: 12px/1.8 "Droid Sans Mono",monospace; }
+
+#skin { background: url("../images/skin.png") no-repeat scroll 0 0 transparent; background-size: 100% 100%; cursor: pointer; width: 30px; height: 30px; margin: 8px 10px 0 0; position: fixed; right: 0; top: 0; z-index: 10; }
+
+.hidden { display: none; }
+
+.rect { border-bottom: 10px solid #aaa; border-left: 20px solid transparent; border-right: 20px solid transparent; position: absolute; right: -135px; top: 30px; width: 0; transition: right 0.5s ease 0s; }
+
+.rectshown { right: -5px; transition: right 0.5s ease 0s; }
+
+.skin_box { background-color: #336633; border-radius: 5px 5px 5px 5px; width: 109px; height: 52px; margin: 0; padding: 5px; position: absolute; right: 0; top: 40px; }
+
+.s1_mini, .s2_mini { border: 1px solid #777777; border-radius: 5px 5px 5px 5px; float: left; height: 50px; width: 50px; }
+
+.s1_mini:before, .s2_mini:before { content: ""; }
+
+.s1_mini { background-image: url("../images/s1_mini.jpg"); margin-right: 5px; }
+
+.s2_mini { background-image: url("../images/s2_mini.jpg"); }
+
+#wrapper { height: auto; min-height: 100%; }
+
+header { margin-bottom: 0; min-width: 1000px; padding-top: 10px; padding-bottom: 0px; background: #333; border-bottom: 1px solid #3a3a3a; }
+header .h-title { margin: 0 0 10px 0; transition: text-indent .3s ease 0s; border-bottom: 1px dotted #6a6a6a; }
+header .h-title-fixed { background: none repeat scroll 0 0 #333; height: 45px; left: 0; line-height: 45px; margin: 0; position: fixed; text-indent: 4em; top: 0; width: 100%; z-index: 5; box-shadow: 0 3px 8px #000; border-bottom: 0 none; }
+header .h-title h1 { text-shadow: 1px 1px 10px yellow; float: left; }
+header .h-title .title-nav { float: left; margin-left: 100px; }
+header .h-title .title-nav ul { list-style: none; padding-top: 9px; }
+header .h-title .title-nav ul li { float: left; text-indent: 0; }
+header .h-title .title-nav ul li.sep { background: none repeat scroll 0 0 #6a6a6a; display: inline-block; height: 16px; margin: 10px 0; width: 2px; }
+header .h-title .title-nav a { display: inline-block; text-decoration: none; height: 36px; line-height: 36px; padding: 0 20px; color: #8a8a8a; font-size: 18px; outline: 0 none; }
+header .h-title .title-nav .cur a, header .h-title .title-nav a:hover { color: #aa0; }
+header section { margin-bottom: 10px; }
+header .h-sub-title h3 { font-size: 16px; font-style: italic; margin-bottom: 10px; }
+
+#downloads .btn { background-color: #276617; }
+#downloads .btn:hover { background-color: #20A715; }
+
+.content { padding-top: 10px; padding-bottom: 141px; }
+.content .btn { border-radius: 10px; margin-bottom: 10px; }
+
+.note { border-left: 6px solid #e11; background-color: #FFF1CE; padding: 6px 8px 6px 10px; color: #aaa; }
+
+footer { height: 50px; padding: 30px 0; margin-top: -111px; text-align: center; border-top: 1px dashed #b5e853; width: 100%; min-width: 1000px; font-size: 14px; }
+footer a:hover { color: #85e2f9; }
+
+a[href^="http://tongji.baidu.com"] { display: none; }
+
+/*# sourceMappingURL=custom.css.map */

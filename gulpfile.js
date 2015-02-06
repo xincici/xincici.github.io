@@ -14,5 +14,18 @@ gulp.task('html', function() {
     }))
     .pipe(gulp.dest(''));
 });
+
+// Styles
+gulp.task('css', function () {
+    return gulp.src('app/styles/*.scss')
+        .pipe($.rubySass({
+            style: 'compact',
+            precision: 3
+        }))
+        .pipe(gulp.dest('static/customstyle'))
+        .pipe($.size());
+});
+
+gulp.task('all', ['html', 'css']);
 // Default task
 gulp.task('default', ['html']);
