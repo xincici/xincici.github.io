@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW,GACP,KAAK,EAAE,KAAK;;AAGhB,aAAc,GACV,OAAO,EAAE,IAAI;;AAGjB,cAAe,GACX,WAAW,EAAE,GAAG;;AAGpB,cAAe,GACX,SAAS,EAAE,KAAK",
+"sources": ["../custom-little.scss"],
+"names": [],
+"file": "custom-little.css"
+}
