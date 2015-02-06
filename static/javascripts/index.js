@@ -81,11 +81,13 @@ document.ready(function(){
         var _currentEle = document.getElementsByClassName('current', _parentEle);
         rClass(_currentEle[0], 'current');
         aClass(ele, 'current');
+        /*
         if( ele.getAttribute('class').indexOf('color0') >= 0 ){
             document.body.style.backgroundImage = 'url("/static/images/bg.jpg")';
             cookieObj.setCookie('bgcolor', '');
             return;
         }
+        */
         var color = ele.getAttribute('bcolor');
         document.body.style.backgroundImage = 'none';
         document.body.style.backgroundColor = color;
