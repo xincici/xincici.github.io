@@ -22,7 +22,7 @@ gulp.task('css', function () {
             style: 'compact',
             precision: 3
         }))
-        .pipe(gulp.dest('static/customstyle'))
+        .pipe(gulp.dest('static/stylesheets'))
         .pipe($.size());
 });
 
