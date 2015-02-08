@@ -1,0 +1,125 @@
+body{
+    font: 12px/1.6 Arial,Helvetica,sans-serif;
+    background-image: url("bg.png");
+}
+.wrapper{
+    font-family: 隶书;
+    margin: 150px auto;
+    width:780px;
+}
+#clear{
+    position:absolute;
+    left:0;
+    top:0;
+    margin:5px 0 0 5px;
+}
+#list{
+    height:250px;
+    border:1px solid #ccc;
+    border-right:none;
+    float:left;
+    border-radius: 5px 0 0 5px;
+}
+#list .hidden{
+    color: #ffe;
+}
+#list div{
+    line-height:31px;
+    padding-left:18px;
+    font-weight:900;
+}
+#main{
+    float:left;
+    height:250px;
+    border:1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+}
+#main button{
+    cursor:pointer;
+    font-family:隶书;
+}
+.money-area{
+    height:40px;
+    line-height:40px;
+    font-weight:900;
+    border-bottom: 1px solid #ddd;
+    vertical-align:middle;
+    text-indent:10px;
+}
+.money-area .btn{
+    text-indent:0;
+    width: 35px;
+}
+.money-area .total{
+    border-right:1px solid #ddd;
+}
+.money-area .money{
+    border-right:1px solid #ddd;
+}
+.money-area .down{
+    border-right: 1px solid #DDDDDD;
+}
+.money-area .helpbutton{
+    float:right;
+}
+.money-area .help{
+    margin-right:13px;
+}
+.poker-area{
+    border-bottom: 1px solid #ddd;
+    height: 140px;
+}
+.poker-area .back{
+    width:63px;
+    height:92px;
+    border:2px solid #e22;
+    border-radius:3px 3px 3px 3px;
+    background-image:url("images/back.png");
+    float:left;
+    margin-top:26px;
+    margin-left:36px;
+    cursor:pointer;
+    opacity : 0.5;
+}
+.poker-area .hold{
+    border:2px solid #555;
+    opacity : 1;
+}
+.poker-area .win-result,
+.poker-area .lose-result{
+    display:none;
+    line-height:135px;
+    font-size:3em;
+    margin-left:140px;
+}
+.judge-area{
+    border-right: 1px solid #DDDDDD;
+    float: left;
+    font-size: 2em;
+    height: 69px;
+}
+.judge-area .big,
+.judge-area .small{
+    float: left;
+    height: 60px;
+    margin-left: 10px;
+    margin-top: 4px;
+    width: 75px;
+}
+.judge-area .result,
+.judge-area .win-lose{
+    float: right;
+    height: 69px;
+    line-height: 69px;
+    margin-right: 15px;
+    width: 50px;
+}
+.control-area{
+    float:right;
+}
+.control-area .go,
+.control-area .get{
+    height: 60px;
+    margin: 4px;
+    width: 65px;
+}

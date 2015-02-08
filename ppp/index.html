@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+    <head>
+        <title>poker game</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+    <div class="wrapper">
+		<div class="row">
+            <div id="list" class="col-lg-4">
+                <div class="tonghuashun">同花顺...................250倍</div>
+                <div class="sitiao">四条........................60倍</div>
+                <div class="hulu">葫芦........................20倍</div>
+                <div class="shunzi">顺子........................10倍</div>
+                <div class="tonghua">同花........................7倍</div>
+                <div class="santiao">三条........................5倍</div>
+                <div class="liangdui">两对........................2倍</div>
+                <div class="yidui">大于8一对................1倍</div>
+            </div>
+            <div id="main" class="col-lg-8">
+				<div class="money-area row">
+                    <div class="col-lg-3">
+                        <span class="total">现金:
+                            <b class="total-num"></b>
+                        </span>
+					</div>
+                    <div class="col-lg-3">
+                        <span class="money">赢:
+                            <b class="money-num">0</b>
+                        </span>
+					</div>
+                    <div class="col-lg-4">
+                        <span class="down">下注：
+                            <button class="btn btn-primary btn-xs lower">-</button>
+                            <b class="down-num"></b>
+                            <button class="btn btn-primary btn-xs higher">+</button>
+                        </span>
+					</div>
+                    <div class="col-lg-2">
+                        <span class="helpbutton">
+                            <button class="btn btn-primary btn-xs help">帮助</button>
+                        </span>
+                    </div>
+				</div>
+                <div class="poker-area row">
+                    <div class="pokers clearfix">
+                        <div class="card-1 back hold">
+                        </div>
+                        <div class="card-2 back hold">
+                        </div>
+                        <div class="card-3 back hold">
+                        </div>
+                        <div class="card-4 back hold">
+                        </div>
+                        <div class="card-5 back hold">
+                        </div>
+                    </div>
+                    <div class="win-result">
+                        您赢了！
+                    </div>
+                    <div class="lose-result">
+                        您输了！
+                    </div>
+                </div>
+				<div class="row">
+                    <div class="judge-area col-lg-8">
+                        <button class="btn btn-primary big">大</button>
+                        <button class="btn btn-primary small">小</button>
+                        <span class="win-lose"></span>
+                        <span class="result"></span>
+                    </div>
+                    <div class="control-area col-lg-4">
+                        <button class="btn btn-primary go">开始</button>
+                        <button class="btn btn-primary get">结算</button>
+                    </div>
+                </div>
+            </div>
+		</div>
+    </div>
+    <div id="p1" style="position:absolute; left:0px; bottom: 0px; width:344px; height:228px; background-repeat: no-repeat;">
+    </div>
+    <div id="p2" style="position:absolute; left:0px; bottom: 0px; width:228px; height:344px; background-repeat: no-repeat;">
+    </div>
+    <button id="clear" style="display: none;">好了，我知道了！</button>
+    <body>
+</html>
