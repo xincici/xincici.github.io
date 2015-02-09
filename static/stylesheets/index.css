@@ -18,7 +18,7 @@
 .left-content .left-inner-2 li { float: left; margin: 0 4px; }
 .left-content .left-inner-2 li a { display: inline-block; }
 .left-content .left-inner-2 li img { transition: all .5s ease-in 0s; }
-.left-content .left-inner-2 li img:hover { -moz-transform: rotate(405deg); -webkit-transform: rotate(405deg); -o-transform: rotate(405deg); -ms-transform: rotate(405deg); transform: rotate(405deg); }
+.left-content .left-inner-2 li img:hover { transform: rotate(405deg); }
 .left-content .left-inner-2 .btn-github { background: none repeat scroll 0 0 #262; border: 0 none; margin-bottom: 0; margin-top: 23px; padding: 8px 4px; }
 .left-content .left-inner-2 .btn-github:hover { background: none repeat scroll 0 0 #383; }
 .left-content .left-inner-2 .btn-github span.icon { margin: 0 4px 0 0; }
@@ -44,13 +44,6 @@
 .right-content .about-block .basic-info-ul .label, .right-content .about-block .basic-skills-ul .label { width: 100px; text-align: right; float: left; }
 .right-content .about-block .basic-info-ul .desc, .right-content .about-block .basic-skills-ul .desc { float: left; margin-left: 10px; }
 
-/*
-.link{list-style:none;margin:3px;width:150px;height:80px;float:left;background-color:#D64700;transition: background-color 1s ease 0s, text-indent 0.5s ease 0s;}
-.link a{display:block;text-decoration:none;text-align:center;float:left;width:150px;height:80px;line-height:80px;color:#fff;}
-.odd{background-color:#FF9311;}
-.link:hover{background:url("/images/pic.jpg") no-repeat scroll 0 0 transparent;background-color:#FF9311;text-indent:15px;animation:myfirst 1s;-webkit-animation:myfirst 1s;-o-animation:myfirst 1s;}
-.odd:hover{background:url("/images/pic_1.jpg") no-repeat scroll 0 0 transparent;background-color:#d64700;}
-*/
 .skin_slide { list-style: none; width: 150px; position: absolute; right: -170px; top: 40px; padding: 0; background-color: #aaa; transition: right 0.5s ease 0s; }
 .skin_slide:before, .skin_slide li:before { content: ""; }
 
