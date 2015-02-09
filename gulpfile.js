@@ -26,6 +26,5 @@ gulp.task('css', function () {
         .pipe($.size());
 });
 
-gulp.task('all', ['html', 'css']);
 // Default task
-gulp.task('default', ['html']);
+gulp.task('default', ['html', 'css']);
