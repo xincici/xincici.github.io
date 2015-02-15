@@ -72,9 +72,8 @@ body{
 .poker-area .pokers{
     display: flex;
     justify-content: space-between;
-    position: relative;
-    top: 50%;
-    transform: translate(0, -50%);
+    height: 140px;
+    align-items: center;
 }
 .poker-area .back{
     width:63px;
