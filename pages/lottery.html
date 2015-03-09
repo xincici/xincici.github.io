@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>lottery</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/bower_components/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/fonts/calluna-sans.css" />
+    <script src="/bower_components/underscore/underscore-min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/lottery.css" />
+</head>
+<body>
+
+    <div class="wrapper">
+        <div ng-app="myApp">
+            <div ng-controller="myCtrl">
+                <div class="ul-nav">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{active: listShow}" ng-click="listShow=true"><a href="javascript:;">user list</a></li>
+                        <li ng-class="{active: !listShow}" ng-click="listShow=false"><a href="javascript:;">lottery</a></li>
+                    </ul>
+                </div>
+                <div ng-show="listShow">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="add an user..." ng-init="newUser=''" ng-model="newUser" ng-keyup="inputKeyup($event)" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" ng-click="addUser()">Add User</button>
+                            <button class="btn btn-danger" ng-click="clearUser()">Clear All</button>
+                        </span>
+                    </div>
+                    <ul class="list-unstyled user-li-wrapper">
+                        <li class="user-li" ng-repeat="user in listUsers">
+                            <span class="user-name" title="{{user}}">{{user}}</span>
+                            <span class="del-icon" ng-click="delUser($index)" title="delete user"><i class="fa fa-close"></i></span>
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show="!listShow">
+                    <div class="lottery-wrapper">
+                        <p>total users number: <strong class="text-warning">{{listUsersLength}}</strong></p>
+                        <div>
+                            <span>result number: </span>
+                            <div class="btn-group btn-wrapper">
+                                <button class="btn btn-xs {{resultNum == 1? 'btn-primary':'btn-default'}}" ng-click="setNum(1)">1</button>
+                                <button class="btn btn-xs {{resultNum == 2? 'btn-primary':'btn-default'}}" ng-click="setNum(2)">2</button>
+                                <button class="btn btn-xs {{resultNum == 3? 'btn-primary':'btn-default'}}" ng-click="setNum(3)">3</button>
+                            </div>
+                        </div>
+                        <div class="result-wrapper">
+                            <div ng-repeat="user in resultArr track by $index" class="result-item">
+                                <span>{{user ? user : 'good luck'}}</span>
+                            </div>
+                        </div>
+                        <div class="control-wrapper">
+                            <button ng-init="rolling=false" class="btn btn-primary" ng-click="toggleRolling()">{{rolling? "stop":"let's rock"}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function(){
+        var app = angular.module('myApp', ['listAnimations']);
+        angular.module('listAnimations', ['ngAnimate']);
+        var myCtrl = app.controller('myCtrl', function($scope, $interval) {
+            $scope.listShow = true;
+            $scope.resultNum = 1;
+            $scope.resultArr = [''];
+            $scope.shuffledUsers = [];
+            $scope.listUsers = ['就是有钱', '就是任性', '有钱加任性', '少帮主', '二龙', '我就是土豪'];
+            $scope.listUsersLength = $scope.listUsers.length;
+            $scope.inputKeyup = function(e){
+                if(e.keyCode === 13){
+                    $scope.addUser();
+                }
+            };
+            $scope.addUser = function(){
+                var user = $scope.newUser.trim();
+                if(user !== ''){
+                    if($scope.listUsers.indexOf(user) >= 0){
+                        alert('user already exists!');
+                    }else{
+                        $scope.listUsers.push(user);
+                        $scope.newUser = '';
+                    }
+                }
+            };
+            $scope.delUser = function(index){
+                $scope.listUsers.splice(index, 1);
+            };
+            $scope.clearUser = function(){
+                $scope.listUsers = [];
+            };
+            $scope.setNum = function(num){
+                if($scope.rolling){
+                    return;
+                }
+                $scope.resultNum = num;
+                $scope.resultArr = new Array(num);
+            };
+            $scope.lotteryInterval = null;
+            $scope.toggleRolling = function(){
+                $scope.rolling = !$scope.rolling;
+                if($scope.rolling){
+                    $scope.resultArr = new Array($scope.resultNum);
+                    $scope.lotteryInterval = $interval($scope.roll, 150);
+                }else{
+                    $interval.cancel($scope.lotteryInterval);
+                    $scope.lotteryInterval = null;
+                }
+            };
+            $scope.roll = function(){
+                $scope.shuffledUsers = _.shuffle($scope.listUsers);
+                $scope.resultArr = $scope.shuffledUsers.slice(0, $scope.resultNum);
+            };
+            $scope.$watch('listUsers', function(){
+                $scope.listUsersLength = $scope.listUsers.length;
+            }, true);
+        });
+        myCtrl.$inject = ['$scope', '$interval'];
+    }());
+    </script>
+</body>
+</html>

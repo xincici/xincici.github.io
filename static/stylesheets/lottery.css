@@ -1,0 +1,27 @@
+body{background: url(/static/images/page_bg.png); font-size: 14px;}
+.wrapper{width: 640px; margin: 30px auto 0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 15px; background: #f1f1f1;}
+.ul-nav{text-align: center; border-bottom: 1px solid #ccc; margin-bottom: 10px;}
+.ul-nav .nav{display: inline-block;}
+.ul-nav .nav li+li{margin-left: 20px;}
+
+.user-li-wrapper{margin: 10px -1% 0;}
+.user-li{width:48%; height:40px; line-height:30px; font-size: 18px; display: inline-block; padding: 5px 10px; margin: 1px 1%; background: #31b0d5; color: #fff;}
+.user-li .user-name{display: inline-block; width: 230px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.user-li .del-icon{margin-right: 5px; float: right; color: #a00;}
+.user-li .del-icon:hover{margin-right: 5px; float: right; color: #a00; transform: scale(1.5); cursor: pointer;}
+
+.user-li.ng-enter,
+.user-li.ng-leave{transition: opacity 0.5s ease 0;}
+.user-li.ng-enter,
+.user-li.ng-leave.ng-leave-active{opacity: 0.1;}
+.user-li.ng-leave,
+.user-li.ng-enter.ng-enter-active{opacity: 1;}
+
+.lottery-wrapper{margin: 10px -1% 0;}
+.lottery-wrapper .btn-wrapper .btn{width: 60px; text-align:center;}
+
+.result-wrapper{text-align: center; margin: 20px 0;}
+.result-wrapper .result-item{width: 32.3%; margin: 0 0.5%; padding: 5px; font-size: 25px; font-style: bold; display: inline-block; background: #31b0d5; color: #fff; text-align: center; border-radius: 5px;}
+
+.control-wrapper{text-align: center;}
+.control-wrapper .btn{width: 100%;font-size: 18px;}
