@@ -69,7 +69,6 @@
             $scope.listShow = true;
             $scope.resultNum = 1;
             $scope.resultArr = [''];
-            $scope.shuffledUsers = [];
             $scope.listUsers = ['就是有钱', '就是任性', '有钱加任性', '少帮主', '二龙', '我就是土豪'];
             $scope.listUsersLength = $scope.listUsers.length;
             $scope.inputKeyup = function(e){
@@ -113,8 +112,7 @@
                 }
             };
             $scope.roll = function(){
-                $scope.shuffledUsers = _.shuffle($scope.listUsers);
-                $scope.resultArr = $scope.shuffledUsers.slice(0, $scope.resultNum);
+                $scope.resultArr = _.sample($scope.listUsers, $scope.resultNum);
             };
             $scope.$watch('listUsers', function(){
                 $scope.listUsersLength = $scope.listUsers.length;
