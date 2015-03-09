@@ -18,16 +18,16 @@
             <div ng-controller="myCtrl">
                 <div class="ul-nav">
                     <ul class="nav nav-pills">
-                        <li ng-class="{active: listShow}" ng-click="listShow=true"><a href="javascript:;">user list</a></li>
-                        <li ng-class="{active: !listShow}" ng-click="listShow=false"><a href="javascript:;">lottery</a></li>
+                        <li ng-class="{active: listShow}" ng-click="listShow=true"><a href="javascript:;">所有小伙伴</a></li>
+                        <li ng-class="{active: !listShow}" ng-click="listShow=false"><a href="javascript:;">现在去抽奖</a></li>
                     </ul>
                 </div>
                 <div ng-show="listShow">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="add an user..." ng-init="newUser=''" ng-model="newUser" ng-keyup="inputKeyup($event)" />
+                        <input type="text" class="form-control" placeholder="输入小伙伴的名字..." ng-init="newUser=''" ng-model="newUser" ng-keyup="inputKeyup($event)" />
                         <span class="input-group-btn">
-                            <button class="btn btn-success" ng-click="addUser()">Add User</button>
-                            <button class="btn btn-danger" ng-click="clearUser()">Clear All</button>
+                            <button class="btn btn-success" ng-click="addUser()">增加小伙伴</button>
+                            <button class="btn btn-danger" ng-click="clearUser()">清空全部</button>
                         </span>
                     </div>
                     <ul class="list-unstyled user-li-wrapper">
@@ -39,9 +39,9 @@
                 </div>
                 <div ng-show="!listShow">
                     <div class="lottery-wrapper">
-                        <p>total users number: <strong class="text-warning">{{listUsersLength}}</strong></p>
+                        <p>抽奖人数: <strong class="text-warning">{{listUsersLength}}</strong></p>
                         <div>
-                            <span>result number: </span>
+                            <span>中奖人数: </span>
                             <div class="btn-group btn-wrapper">
                                 <button class="btn btn-xs {{resultNum == 1? 'btn-primary':'btn-default'}}" ng-click="setNum(1)">1</button>
                                 <button class="btn btn-xs {{resultNum == 2? 'btn-primary':'btn-default'}}" ng-click="setNum(2)">2</button>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="result-wrapper">
                             <div ng-repeat="user in resultArr track by $index" class="result-item">
-                                <span>{{user ? user : 'good luck'}}</span>
+                                <span>{{user ? user : '恭喜发财'}}</span>
                             </div>
                         </div>
                         <div class="control-wrapper">
@@ -81,7 +81,7 @@
                 var user = $scope.newUser.trim();
                 if(user !== ''){
                     if($scope.listUsers.indexOf(user) >= 0){
-                        alert('user already exists!');
+                        alert('小伙伴名字已经存在了!');
                     }else{
                         $scope.listUsers.push(user);
                         $scope.newUser = '';
