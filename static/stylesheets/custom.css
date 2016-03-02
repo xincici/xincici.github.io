@@ -1,6 +1,7 @@
+@charset "UTF-8";
 html { height: 100%; }
 
-body { height: 100%; font: 12px/1.8 "Droid Sans Mono",monospace; background-color: #9d2932; }
+body { height: 100%; font: 12px/1.8 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, 'Lantinghei SC', 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif; text-rendering: geometricPrecision; background-color: #9d2932; }
 
 #skin { background: url("../images/skin.png") no-repeat scroll 0 0 transparent; background-size: 100% 100%; cursor: pointer; width: 30px; height: 30px; margin: 8px 10px 0 0; position: fixed; right: 0; top: 0; z-index: 10; }
 
