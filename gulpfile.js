@@ -11,7 +11,8 @@ gulp.task('html', function() {
         prefix: '@@',
         basepath: 'app/part/'
     }))
-    .pipe(gulp.dest(''));
+    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./'));
 });
 
 // Styles
